@@ -1,43 +1,69 @@
+{% load static %}
+
 <!DOCTYPE html>
-<html lang="en-us">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Activity 1: Basic HTML Bio</title>
+  <!-- Calling css -->
+  <link rel="stylesheet" type="text/css" href="{% static 'app1/myweb.css' %}">
+  <title>Want to hire me?</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
-  <h1>Haneul Kim</h1>
-  <img src="../Lesson 1/windmap.png" alt="pic from Lesson 1 folder">
+  <div class="container">
+    <nav class="navig">
+      <ul>
+        <li><a href="http://google.com">H</a></li>
+        <li><a href="http://google.com">A</a></li>
+        <li><a href="http://google.com">N</a></li>
+        <li><a href="http://google.com">E</a></li>
+        <li><a href="http://google.com">U</a></li>
+        <li><a href="http://google.com">L</a></li>
+      </ul>
+    </nav>
+    
+    <main>
+      <header>
+        <h2>H A N E U L &nbsp K I M</h2>
+        <p>Data Scientist |&nbsp Environmental Enthusiast | &nbsp Data Analyst
+        </p>
+      </header>
+    
+      <section>
+        <h3>Attention</h3>   
+        <div></div>
+        <div></div>
+        <div></div>      
+      </section>
 
-  <p>Data Scientist, Renewable energy researcher</p>
-  <br>
-  <p>Volunteer</p>
+      <section>
+        <h3>New</h3>  
+      </section>
 
-  <ul>
-    <li><a href="https://www.facebook.com/">facebook</a></li>
-    <li><a href="https://www.google.com/">instagram</a></li>
-  </ul>
+      <section>
+        <h3>Environment</h3>
+      </section>
 
-  <table>
-    <caption>My Hobbies</caption>
+      <section>
+        <h3>Unification</h3>
+      </section>
 
-    <thead>
-      <tr>
-        <th>Movies</th>
-        <th>Books</th>
-        <th>activities</th>
-      </tr>
-    </thead>
+      <section>
+        <h3>Link</h3>
+      </section>
+    </main>
 
-    <tbody>
-      <tr>
-        <td>Avengers</td>
-        <td>Machine Learning</td>
-        <td>Hiking</td>
-      </tr>
-    </tbody>
-  </table>
-  
+    <footer>
+      <div class="s_container">
+        <ul>
+          <li><a href="#">Software</a></li>
+          <li><a href="#">Environment</a></li>
+          <li><a href="#">Interests</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </footer>
+  </div>
+
 </body>
-
 </html>
