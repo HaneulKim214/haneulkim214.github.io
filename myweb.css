@@ -7,24 +7,28 @@ body {
 }
 
 
-
-
 /* Global */
 .container{
     margin: 200px 100px 100px 100px;
 }
 
 
-
-
 /*----------- navigation -------------*/
 
-.navig {
+.navig ul{
     display: flex;
-    justify-content: left;
-    align-items: center;
+    text-align: left;
+    list-style-type: none;
 }
-.navig a{
+
+.navig a {
+    display: block;
+    padding-left: 30px;
+    
+}
+
+
+/* .navig a{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -32,22 +36,14 @@ body {
     color:black;
     width: 50px;
     height: 50px;
-    /* border-radius: 50%; */
-} 
+    border-radius: 50%;
 .navig a:hover{
     color: aqua;
 }
+ */
 
-.navig li{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    list-style-type: none;
-}
 
 /*----------- naivg ends here---------- */
-
-
 
 
 main {
@@ -56,11 +52,15 @@ main {
     position: relative;
 }
 
-section {
-    margin-top: 300px;
+main header p {
+    padding-bottom: 100px;
 }
 
-
+section {
+    margin-top: 300px;
+    margin-bottom: 40%;
+    position: relative;
+}
 
 
 /* Footer */
@@ -90,8 +90,6 @@ footer ul{
     text-align: center;
     margin-left: 200px;
 }
-
-
 
 
 main header{
