@@ -1,5 +1,7 @@
 # Personal Website
 
+## Project Status: Finished (but will be improved)
+
 ### This repository is for my personal website to check it out, [CLICK HERE](https://haneulkim214.github.io/)
 
 What I've done so far:
