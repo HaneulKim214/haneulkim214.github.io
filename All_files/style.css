@@ -1,0 +1,196 @@
+/* Getting font from "google fonts" */
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
+html {
+  overflow-y: scroll;
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+body {
+  overflow: hidden;
+  font-family: "Lato", sans-serif;
+  color: #505962;
+}
+
+/* To cover space Navbar takes up */
+.offset:before {
+  display: block;
+  content:"";
+  height: 3.8rem;
+  margin-top: -3.8rem;
+}
+
+/*--- Navigations ---*/
+.navbar {
+  text-transform: uppercase;
+  font-size: 13.5px;
+  /* !important -> override previous features.*/
+  background: rgba(0,0,0,0.6)!important;
+}
+
+.navbar-nav li {
+  /* spread out navbars */
+  padding-right: 20px;
+}
+.navbar-dark .navbar-nav .nav-link {
+  color: white;
+  padding-top: .8rem;
+}
+
+.navbar-dark .navbar-nav .nav-link.active,
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: turquoise;
+}
+
+/* ------------ First Landing Page ----------------- */
+.home-inner {
+  /* dimming background */
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('../images/falling_star.jpg');
+}
+
+.caption {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  /* 42% down the page. */
+  top: 42%;
+  /* Display always on top of background image */
+  z-index: 1;
+  color: white;
+}
+.caption h1 {
+  /* pop out looking name */
+  text-shadow: .1rem .1rem .8rem black;
+
+  /* Thickness */
+  font-weight: 700;
+  letter-spacing: 0.3rem;
+  padding-bottom: 13px;
+}
+
+.caption h4 {
+  font-size: 1.2rem;
+  padding-bottom: 13px;
+}
+
+/*------------- About Me Page -----------------------*/
+.narrow {
+  /* Making it narrower. 
+     Margin: auto makes it center
+  */
+  width: 75%;
+  margin:1.5rem auto;
+  padding-top: 0rem;
+  border-radius: 0;
+}
+.narrow h3 {
+  font-size: 2.4rem;
+}
+
+/*---------------- Machine Learning Project Page -------------------*/
+.jumbotron {
+  /* to make it go straight to bg image */
+  margin-bottom: 0;
+  padding: 2rem 0 3.5rem 0;
+}
+
+h3.heading {
+  font-size: 1.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.heading-underline {
+  width: 3rem;
+  height: .2rem;
+  background-color: #1ebba3;
+  margin: 0 auto 2rem;
+}
+
+
+/*------------------- Fun Projects Page ----------------*/
+
+.fixed {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/할아버지.jpg');
+  /* make sure bg image is underneath (-1) 
+  z-index: -1;*/
+}
+
+.fp_font {
+  color: whitesmoke;
+}
+
+/* spacings for projects section */
+.space_top {
+  margin-top: 1.5rem;
+}
+
+
+/*--------------- Reference Page -------------------*/
+.quotes img {
+  width: 100%;
+  /* make quote image round */
+  border-radius: 50%;
+}
+
+
+/*---------------- Footer Section ----------------------*/
+footer {
+  background-color: #40474e;
+  color: white
+}
+footer a {
+  color: white;
+}
+
+
+/* Chaning color of Font Awesome icons */
+footer .fab {
+  font-size: 1.6rem;
+  margin: 1.2rem 0.5rem;
+}
+blockquote .fa-quote-left {
+  color: #1ebba3;
+}
+
+
+
+/*------------ Media Query --------------*/
+@media (max-width: 767px) {
+  .caption h1 {
+    letter-spacing: 0.15rem;
+    padding-bottom: 13px;
+  }
+  
+  .caption h4 {
+    font-size: 0.9rem;
+    padding-bottom: 13px;
+  }
+
+  .quotes img {
+    max-width: 50%;
+    /* make quote image round */
+    display: block;
+    margin: 0 auto;
+  }
+
+}
+
+/*============ BOOTSTRAP BREAK POINTS:
+
+Extra small (xs) devices (portrait phones, less than 576px)
+No media query since this is the default in Bootstrap
+
+Small (sm) devices (landscape phones, 576px and up)
+@media (min-width: 576px) { ... }
+
+Medium (md) devices (tablets, 768px and up)
+@media (min-width: 768px) { ... }
+
+Large (lg) devices (desktops, 992px and up)
+@media (min-width: 992px) { ... }
+
+Extra (xl) large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { ... }
+
+=============*/
