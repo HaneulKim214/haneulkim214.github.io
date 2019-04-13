@@ -4,7 +4,7 @@
 
 What I've done so far:
 
-I've studied basics of HTML5 and CSS3 then came across bootstrap4 framework which made it easier to create a website. It took me a while since I've tried to understand all different classes in bootstrap4 and how they work.
+- I've studied basics of HTML5 and CSS3 then came across bootstrap4 framework which made it easier to create a website. It took me a while since I've tried to understand all different classes in bootstrap4 and how they work.
 
 
 Improvements:
