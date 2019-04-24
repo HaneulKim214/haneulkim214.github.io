@@ -88,7 +88,7 @@ body {
   font-size: 2.4rem;
 }
 
-/*---------------- Machine Learning Project Page -------------------*/
+/*---------------- Projects Page -------------------*/
 .jumbotron {
   /* to make it go straight to bg image */
   margin-bottom: 0;
@@ -107,8 +107,17 @@ h3.heading {
   margin: 0 auto 2rem;
 }
 
+.project_name {
+  font-size: 1.4rem;
+  color: black;
+}
 
-/*------------------- Fun Projects Page ----------------*/
+div.project p {
+  padding-right: 4rem;
+  padding-left: 4rem;
+}
+
+/*------------------- Blogs Page ----------------*/
 
 .fixed {
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/할아버지.jpg');
@@ -124,6 +133,16 @@ h3.heading {
 .space_top {
   margin-top: 1.5rem;
 }
+
+.blogs h6 {
+  color: blanchedalmond;
+  font-size: 1.25rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+/* .blogs ul li {
+  list-style-type: None;
+} */
 
 
 /*--------------- Reference Page -------------------*/
