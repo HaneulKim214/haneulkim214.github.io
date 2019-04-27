@@ -1,0 +1,39 @@
+.project {
+    padding-top: 5%;
+}
+
+.side-bar {
+    margin-top: 30%;
+}
+.side-bar ul li {
+    list-style-type: None;
+    margin-top: 1rem;
+}
+.side-bar ul li a {
+    text-decoration: None;
+    color: black;
+}
+.side-bar ul li a:hover {
+    font-size: 120%;
+}
+
+.navbar {
+    text-transform: uppercase;
+    font-size: 13.5px;
+    /* !important -> override previous features.*/
+    background: rgba(0,0,0,0.6)!important;
+  }
+  
+  .navbar-nav li {
+    /* spread out navbars */
+    padding-right: 20px;
+  }
+  .navbar-dark .navbar-nav .nav-link {
+    color: white;
+    padding-top: .8rem;
+  }
+  
+  .navbar-dark .navbar-nav .nav-link.active,
+  .navbar-dark .navbar-nav .nav-link:hover {
+    color: turquoise;
+}
