@@ -3,6 +3,9 @@
   padding: 1rem;
 }
 
+html {
+  scroll-behavior: smooth;
+}
 /*--- Bootstrap Mobile Gutter Fix --*/
 .row, .container-fluid {
 margin-left: 0px!important;

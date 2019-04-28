@@ -118,6 +118,8 @@ div.project p {
   padding-left: 4rem;
 }
 
+
+
 /*------------------- Blogs Page ----------------*/
 
 .fixed {
@@ -171,6 +173,11 @@ footer .fab {
 }
 blockquote .fa-quote-left {
   color: #1ebba3;
+}
+
+.blogs ul li a {
+  text-decoration: None;
+  color:rgba(243, 245, 230, 0.973);
 }
 
 
