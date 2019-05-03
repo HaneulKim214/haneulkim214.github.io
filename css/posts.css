@@ -37,3 +37,16 @@
   .navbar-dark .navbar-nav .nav-link:hover {
     color: turquoise;
 }
+
+/* ---------------------- Box style for code snippets --------------- */
+/* .code-snippet {
+  background: rgb(179, 167, 167);
+}
+.code-snippet pre {
+  color: antiquewhite;
+} */
+
+pre {
+  background: rgba(0,0,0,.075);
+  color: rgb(54, 150, 94);
+}

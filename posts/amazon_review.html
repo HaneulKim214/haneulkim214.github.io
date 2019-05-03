@@ -27,28 +27,71 @@
 <div class="projects">
 
 <div class="row project">
-    <div class="col-md-3 side-bar">
-        <ul>
-            <li><b>Amazon review</b></li>
-            <li><a href="">blog2</a></li>
-            <li><a href="">blog3</a></li>
-            <li><a href="">blog4</a></li>
-            <li><a href="">blog5</a></li>
-        </ul>
-    </div>
-    <!-- ------------------------------ All Content goes here -------------------- -->
-    <div class="col-md-6">
-        <h2>Amazon review sentiment analysis: </h1>
-        <br>
-        <p>Resource: <a href="https://www.coursera.org/learn/python-text-mining/home/week/3">https://www.coursera.org/learn/python-text-mining/home/week/3</a></p>
-        <p>Goal of this section is to create bag of words from reviews on unlocked mobiles
-            on amazon to rate whether or not reviews are positive or negative.
-        </p>
-    </div>
+<div class="col-md-3 side-bar">
+    <ul>
+        <li><b>Amazon review</b></li>
+        <li><a href="">blog2</a></li>
+        <li><a href="">blog3</a></li>
+        <li><a href="">blog4</a></li>
+        <li><a href="">blog5</a></li>
+    </ul>
+</div>
 
-    <!-- ---------------------------- All Content End here -------------------------- -->
-    <div class="col-md-3">
-    </div>
+<!-- ------------------------------ All Content goes here -------------------- -->
+<div class="col-md-6">
+    <h2>Amazon review sentiment analysis: </h1>
+    <br>
+    <p>Resource: <a href="https://www.coursera.org/learn/python-text-mining/home/week/3">https://www.coursera.org/learn/python-text-mining/home/week/3</a></p>
+    
+    <p>To download the csv file you must log in to Coursera and register for this course and download. You can choose "audit only" to get free access.</p>
+    <p>We are going to perform sentiment analysis on amazon reviews using bag of words, TF-IDF, n-grams to set up vocabularies and logistic regression model to train the model and make predictions.
+        I am also going to check our model's accuracy using ROC and AUC curve.
+    </p>
+
+    <p>First we will import dependencies and csv file.</p>
+
+    <pre>
+    import pandas as pd
+    import numpy as np
+    import os
+    amazon_data_path = os.path.abspath(r'C:\Users\Desktop\Amazon_Unlocked_Mobile.csv')
+    df = pd.read_csv(amazon_data_path)
+
+    df = df.sample(frac=0.1, random_state=10)
+    df.tail(10)
+
+    <img src="../images/posts/amazon_review/dataframe.PNG" alt="">
+    </pre>
+
+    <p>frac=0.1 => randomly use 10% of data.</p>
+    <p>random_state=10 => giving a seed to random 10% of data so everytime random_stat=10 is called we use the same dataset</p>
+    <p>Next we want to drop any row that have null value, get rid of neutral rating 3, create new column that will have value of 1 if rating is above 3 and 0 if below 3.
+        This will be our target column.
+    </p>
+    <pre>
+    df.dropna(inplace=True)
+    df = df.loc[df["Rating"] != 3]
+    df["Positively Rated"] = np.where(df["Rating"]>3, 1, 0)    
+    df["Positively Rated"].mean()
+
+    >>> 0.74717766...
+    </pre>
+    <p>since positive reviews have value of 1 and negative reviews have value of 0
+        if we average sum of all values it will tell us skewness of our data. It
+        clearly tells us there are more positive reviews than negative.
+    </p>
+    <p>We are going to use "Reviews" column as our feature matrix and "Positively Rated" column
+        as target array. From this data split into train set and test set to avoid bias. This is critical step
+        since if we use same dataset for testing and training accuracy of prediction will be very biased, overfitted.
+        Sk
+    </p>
+
+
+</div>
+
+<!-- ---------------------------- All Content End here -------------------------- -->
+<div class="col-md-3">
+</div>
 
 </div>
 
