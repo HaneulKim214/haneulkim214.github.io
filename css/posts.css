@@ -7,7 +7,7 @@
 }
 .side-bar ul li {
     list-style-type: None;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
 }
 .side-bar ul li a {
     text-decoration: None;
@@ -48,5 +48,18 @@
 
 pre {
   background: rgba(0,0,0,.075);
-  color: rgb(54, 150, 94);
+  /* color: rgb(54, 150, 94); */
+  color: rgb(50, 50, 231);
+}
+
+.comments {
+  color: rgb(23, 187, 23);
+}
+
+body {
+  color:  #505962;
+}
+
+.col-md-6 pre {
+  padding-top: 0.5rem;
 }
