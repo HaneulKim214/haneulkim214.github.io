@@ -6,8 +6,8 @@
 	<title>Haneul Kim's - amazon review sentiment analysis</title>
 	<link rel="stylesheet" href="../bootstrap-4.1.3-dist/css/bootstrap.min.css">
 	<!-- <link rel="stylesheet" href="css/style.css"> -->
-    <link rel="stylesheet" href="../css/fixed.css">
-    <link rel="stylesheet" href="../css/posts.css">
+    <link rel="stylesheet" href="../static/css/fixed.css">
+    <link rel="stylesheet" href="../static/css/posts.css">
 	<!-- Font Awesome libarary -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
@@ -18,7 +18,7 @@
 
 <!-- Navbar -->
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-	<a class="navbar-brand" href="../index.html">
+	<a class="navbar-brand" href="index.html">
 		<!-- Logo -->
 		<!-- <img src="" alt=""> -->
 		please let me go back.
@@ -59,7 +59,7 @@
     df = df.sample(frac=0.1, random_state=10)
     df.tail(10)
 
-    <img src="../images/posts/amazon_review/dataframe.PNG" alt="">
+    <img src="../static/images/posts/amazon_review/dataframe.PNG" alt="">
     </pre>
 
     <p>frac=0.1 => randomly use 10% of data.</p>
@@ -94,7 +94,7 @@
     display_df = pd.DataFrame({"x_train": X_train,
                             "y_train": y_train})
     display_df.head(20)
-    <img src="../images/posts/amazon_review/trainset.PNG" alt="">
+    <img src="../static/images/posts/amazon_review/trainset.PNG" alt="">
     </pre>
     <p>By default, the testset is 25% of total data. The default will change in version 0.21. It will remain 0.25 only if train_size is unspecified,
          otherwise it will complement the specified train_size</p>
@@ -116,7 +116,7 @@
     vec = CountVectorizer().fit(X_train)
     vec.get_feature_names()[::2000]
 
-    <img src="../images/posts/amazon_review/every_2000_vocab.PNG" alt="">
+    <img src="../static/images/posts/amazon_review/every_2000_vocab.PNG" alt="">
     </pre>
     <p>grabbing every 2000th feature we can get some insight to what tokens are in our vocabulary. Now
         that we fitted our data using CountVectorizer we will create a sparce matrix.</p>

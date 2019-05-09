@@ -75,6 +75,59 @@ body {
   padding-bottom: 13px;
 }
 
+/* -----------------Typewriter effect */
+/* .line {
+  top:50%;
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;transform: translateY(~50%);
+}
+
+
+.typewriter {
+  animation: type 7s steps(35, end) 0.5s, 
+  blinkTextCursor 500ms steps(10) infinite normal;
+}
+
+@keyframes type {
+  from {
+    width:0%;
+  }
+  to {
+    width: 100%;
+  }
+} */
+
+.typewriter{
+  position:relative;
+  display: inline-block;
+}
+
+.typewriter h4, .typewriter h1 {
+ overflow: hidden;
+ white-space: nowrap;
+ margin: 0 auto;
+ letter-spacing: .15em;
+ animation: typing 3.5s steps(30, end), blink-caret .5s step-end infinite;
+}
+
+
+/* The typing effect */
+
+@keyframes typing {
+ from {
+   width: 0
+ }
+ to {
+   width: 100%
+ }
+}
+
+
+
+
 /*------------- About Me Page -----------------------*/
 .narrow {
   /* Making it narrower. 
