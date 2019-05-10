@@ -251,3 +251,63 @@ Extra (xl) large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) { ... }
 
 =============*/
+
+/* .trigger img{
+  position: relative;
+  width: 90%;
+  opacity: 0.8;
+}
+
+.trigger:hover img{
+  animation: myframes 1s ease 0s;
+}
+
+.trigger .info {
+  color: blanchedalmond;
+  padding: 0 3px;
+}
+
+@keyframes myframes{
+  from {
+    width: 90%;
+    height: 90%;
+  }
+  to {
+    width: 100%;
+    height: 100%;
+  }
+} */
+
+.container {
+  position: relative;
+}
+.container img{
+  width: 90%;
+  opacity: 0.8;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: 1s ease;
+  backface-visibility: hidden;
+}
+
+
+.middle {
+  transition: .5s ease;
+  color: #40474e;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.container:hover img {
+  opacity: 0.2;
+}
+
+.container:hover .middle {
+  opacity: 1;
+}
