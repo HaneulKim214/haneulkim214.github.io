@@ -144,52 +144,80 @@ h3.heading {
 }
 
 div.project p {
-  padding-right: 4rem;
-  padding-left: 4rem;
+  padding-right: 2rem;
+  padding-left: 2rem;
 }
 
 #projects img {
   border-radius: 10%;
 }
 
-.container img{
+/* -------------------- GIFs initially invisible, show up when hover ------------------- */
+
+.container .img-top{
   position: relative;
   width: 100%;
-  opacity: 0.8;
+  opacity: 0.6;
   display: block;
-  width: 100%;
   height: auto;
-  transition: 1s ease;
+  transition: 1s ease;  /* starts here. and when hover, takes 1s to ease in.*/
   backface-visibility: hidden;
 }
 
-
-/* Project description is not shown initially */
-.middle {
-  transition: .5s ease;
-  color: #40474e;
-  opacity: 0;
+.container .img-bot{
+  width: 100%;
+  height: 80%;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  text-align: center;
+  transition: all 1s ease-in-out;
+  opacity: 0;
+  top: 18%;
+  left: 0;
+  z-index: 1;
 }
 
-.container:hover img {
-  opacity: 0.2;
+.container:hover .img-top {
+  opacity: 0;
+}
+
+
+.container:hover .img-bot {
+  /* display:inline; */
+  opacity: 1;
 }
 
 /* When hovered, show project description */
 .container:hover .middle {
-  opacity: 1;
+  opacity: 0;
 }
 
-/* Bellybutton project img is bit bigger so, decrease height */
-.bellybutton img{
-  height: 94%;
+
+/* ----------- Customize height for each project images ---------- */
+#datajournalism {
+  height: 82%;
 }
+
+
+/* ----------- Customize text inside image for each project------------------ */
+
+
+/* Project description is not shown initially */
+.middle {
+  transition: 1.5s ease;
+  color: #40474e;
+  opacity: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+
+.container h3 {
+  padding-bottom: 20px;
+}
+
 
 /*------------------- Blogs Page ----------------*/
 
