@@ -170,7 +170,7 @@ div.project p {
   position: absolute;
   transition: all 1s ease-in-out;
   opacity: 0;
-  top: 18%;
+  top: 5%;
   left: 0;
   z-index: 1;
 }
@@ -191,6 +191,17 @@ div.project p {
 }
 
 
+.container .project-info p {
+  opacity: 1;
+  transition: all 1s ease-in-out;
+  color: #666c70;
+  font-size: 75%;
+}
+
+.container:hover .project-info p {
+  opacity: 0;
+}
+
 /* ----------- Customize height for each project images ---------- */
 #datajournalism {
   height: 82%;
@@ -208,7 +219,7 @@ div.project p {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -40%);
+  transform: translate(-50%, -100%);
   -ms-transform: translate(-50%, -50%);
   text-align: center;
 }
