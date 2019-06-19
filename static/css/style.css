@@ -202,14 +202,6 @@ div.project p {
   opacity: 0;
 }
 
-/* ----------- Customize height for each project images ---------- */
-#datajournalism {
-  height: 82%;
-}
-
-
-/* ----------- Customize text inside image for each project------------------ */
-
 
 /* Project description is not shown initially */
 .middle {
