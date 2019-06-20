@@ -34,11 +34,9 @@
 
 <!-- ------------------------------ All Content goes here -------------------- -->
 <div class="col-md-6">
-    <h2>Linear Regression: </h1>
+    <h2> Simple Linear Regression: </h1>
     <p class="date">date posted: 2019-06-20</p>
     <br>
-    <p>Resources: <a href="https://www.coursera.org/learn/python-text-mining/home/week/3" target="_blank">https://www.coursera.org/learn/python-text-mining/home/week/3</a></p>
-    
     <p>As you will start to study machine learning first thing you are going to notice if you had studied statistics or mathematics
         even in highschool is that most algorithms are based on those models we learned long time ago.
     </p>
@@ -46,8 +44,8 @@
         of basics before moving on.
     </p>
 
-    <p><b>Simply put:</b> longer time you spend time on studying, higher test score. <b>This is concept of linear regression.</b>
-    It is about finding a relationship between two variables.</p>
+    <p><b>Simply put:</b> longer time you spend time on studying, higher test score. <b>This is concept of simple linear regression.</b>
+    It is referred to as simple if there is only one feature(hours studied) to make prediction.</p>
     <img src="../../../static/images/posts/statistics/testVShours.png" alt="">
     <p>y = test score</p>
     <p>x = hours studied</p>
@@ -60,7 +58,34 @@
     </p>
 
     <p><b>Finding slope:</b></p>
-    <p></p>
+    <img src="../../../static/images/posts/statistics/slope_formula.png" alt="">
+    <br>
+    <br>
+    <p>m = mean(xy) - mean(x)mean(y) / mean(x^2) - mean(x)^2</p>
+    
+    <p><b>Finding Intercept:</b></p>
+    <p>b = mean(y) - (m * mean(x))</p>
+    <p>By finding m and b using the formula above we will find best fitting line which is referred to as 
+        regression line.
+    </p>
+    <p>for more dataset lets try to find slope, intercept and plot regression line.
+        This procedure is what is happenning behind machine learning linear regression model, it automatically
+        looks at dataset and creates regression line therefore we could make predictions on future data using that 
+        line.
+    </p>
+    <img src="../../../static/images/posts/statistics/findslope.png" alt="">
+    <p>manually creating regression line help us understand what is happening at the back therefore allow us to
+        manipulate our model for better accuracy.
+        Notice that on last line of code I am predicting y-variable for each x-variable using slope and intercept
+        I've received.
+    </p>
+    <img src="../../../static/images/posts/statistics/lin_reg_plot.png" alt="">
+    <p>blue dots are our actual data and green line created is our regression line.
+        Distance between actual data and green line is an error. Line with least 
+        mean of squared error is judged to be best fitting regression line.
+    </p>
+    <h2>Accuracy:</h2>
+
 </div> <!-- End of content -->
 
 <!-- ---------------------------- All Content End here -------------------------- -->
