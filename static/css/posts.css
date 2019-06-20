@@ -38,6 +38,17 @@
     color: turquoise;
 }
 
+.date {
+  text-align: right;
+  color: brown;
+}
+
+.other_blogs {
+  text-align: center;
+  margin-left: 30%;
+  color: white;
+}
+
 /* ---------------------- Box style for code snippets --------------- */
 /* .code-snippet {
   background: rgb(179, 167, 167);
