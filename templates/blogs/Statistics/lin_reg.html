@@ -47,6 +47,7 @@
     <p><b>Simply put:</b> longer time you spend time on studying, higher test score. <b>This is concept of simple linear regression.</b>
     It is referred to as simple if there is only one feature(hours studied) to make prediction.</p>
     <img src="../../../static/images/posts/statistics/testVShours.png" alt="">
+    figure 1.1
     <p>y = test score</p>
     <p>x = hours studied</p>
     <p>By looking at the line created we can easily assume if student studied x = 2hours than 
@@ -59,6 +60,7 @@
 
     <p><b>Finding slope:</b></p>
     <img src="../../../static/images/posts/statistics/slope_formula.png" alt="">
+    figure 1.2
     <br>
     <br>
     <p>m = mean(xy) - mean(x)mean(y) / mean(x^2) - mean(x)^2</p>
@@ -73,19 +75,50 @@
         looks at dataset and creates regression line therefore we could make predictions on future data using that 
         line.
     </p>
-    <img src="../../../static/images/posts/statistics/findslope.png" alt="">
+    <img src="../../../static/images/posts/statistics/findslope.png" alt=""> figure 1.3
     <p>manually creating regression line help us understand what is happening at the back therefore allow us to
         manipulate our model for better accuracy.
         Notice that on last line of code I am predicting y-variable for each x-variable using slope and intercept
         I've received.
     </p>
     <img src="../../../static/images/posts/statistics/lin_reg_plot.png" alt="">
+    figure 1.4
     <p>blue dots are our actual data and green line created is our regression line.
         Distance between actual data and green line is an error. Line with least 
         mean of squared error is judged to be best fitting regression line.
     </p>
     <h2>Accuracy:</h2>
+    <p>From figure 1.4 most datas are not exact fit to the line. Our goal is to create a regression line that has 
+        highest accuracy. Measuring accuracy is important since we get a sense of how our model is and allow us 
+        to improve on our accuracy either by getting more features or scaling data. 
+    </p>
 
+    <p><b>First</b> considering regression line calculate squared error for each data point and sum them. Error is 
+        distance from data point to regression line.
+    The reason for squaring error is since some errors are positive and some are negative we would want
+    to consider them equally. It can be done by applying absolute value however we want to give more weight
+    on errors therefore square it.
+    </p>
+    <img src="../../../static/images/posts/statistics/SSE.png" alt=""> figure 1.5
+    <p>y` is regression line and y is actual value.</p>
+
+    <p><b>Second</b>consider mean(y) which would be a straight line going horizontally at y-variable = mean(y).
+    Similarily lets calculated sqaured error from mean(y).</p>
+    <img src="../../../static/images/posts/statistics/SST.png" alt="">
+    <p>You will notice if you divide this formula by n = number of data point, it is a variance.</p>
+
+    <p style="background-color: thistle;"><b>Now</b> SSE/SST explains % of variation that is not described by the regression line. Meaning
+    if it has 20%, implies that 20% of data set cannot be predicted using regression line.
+    </p>
+    <p>Finally since SSE/SST explains % variation that is <b>NOT</b> described by regression line, 1 - SSE/SST would be 
+    the % of variation that <b>IS</b> described by the regression line.
+    </p>
+    <p>
+        <b style="background-color: thistle;">1 - SSE/SST = Rsquared = coefficient of determination </b>
+    </p>
+    <p>They all mean the same thing and they are used to measure accuracy of simple linear regression!</p>
+
+    <div style="margin-bottom: 100px;"></div>
 </div> <!-- End of content -->
 
 <!-- ---------------------------- All Content End here -------------------------- -->
