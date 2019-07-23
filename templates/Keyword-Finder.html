@@ -258,8 +258,8 @@
     freq = nltk.FreqDist(lemmatized_list)
     most_freq_words = freq.most_common(100)
     most_freq_words
-    <img src="../images/posts/keyword-finder/most-freq-word-1.PNG" alt="">
-    <img src="../images/posts/keyword-finder/most-freq-word-2.PNG" alt="">
+    <img src="../static/images/posts/keyword-finder/most-freq-word-1.PNG" alt="">
+    <img src="../static/images/posts/keyword-finder/most-freq-word-2.PNG" alt="">
     </pre>
 
     <p>We can see words like "statistical", "data", "python", "computer", and "algorithms". Even though
@@ -300,7 +300,7 @@ and more. In the output we can see "data", "machine", "big" however that does no
     <p>Then we create dataframe using tuple for easy view.</p>
     <pre>
     top2_df.head(15)
-    <img src="../images/posts/keyword-finder/2-gram-df.PNG" alt="">
+    <img src="../static/images/posts/keyword-finder/2-gram-df.PNG" alt="">
     </pre>
     <p>Few important words to consider, "scikit-learn"and "problem solving". Even though
         it doesn't do a good job of extracting technical keywords we can get information about
@@ -321,7 +321,7 @@ and more. In the output we can see "data", "machine", "big" however that does no
         g.set_title("1,2-gram words")
         g.set_xticklabels(g.get_xticklabels(), rotation=30);
     </pre>
-    <img src="../images/posts/keyword-finder/vis-1.PNG" alt="">
+    <img src="../static/images/posts/keyword-finder/vis-1.png" alt="">
 
     <p>Finally there are many corpus such as <a href="https://cso.kmi.open.ac.uk/home">CSO</a> which consists of 14k technical words in computer science field.
     Find a corpus that contain all technical skills of job you are looking for and filter. Just as how we filtered stopwords using 
@@ -329,9 +329,12 @@ and more. In the output we can see "data", "machine", "big" however that does no
     
     <hr>
     <hr>
-    I will work to refine this project in order to perfectly serve my laziness. Thank you and give me 
-    a feedback.
-
+    <p>
+        I will work to refine this project in order to perfectly serve my laziness. Thank you and give me 
+        a feedback.
+    </p>
+    <br>
+    <p>full code: <a href="https://github.com/HaneulKim214/Keyword-Finder">https://github.com/HaneulKim214/Keyword-Finder</a></p>
 </div>
 
 <!-- ---------------------------- All Content End here -------------------------- -->
