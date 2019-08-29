@@ -1,6 +1,6 @@
 # Personal Website
 
-## Project Status: Finished (but will be improved)
+## Project Status: Always On-going
 
 ### This repository is for my personal website to check it out, [CLICK HERE](https://haneulkim214.github.io/)
 
