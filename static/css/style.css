@@ -360,33 +360,6 @@ Extra (xl) large devices (large desktops, 1200px and up)
   margin-top: 5%;
 }
 
-.my_brain .heading, .my_brain .heading-underline2 {
-  opacity: 0.8;
-}
-
-.arrow-1 {
-  margin-top: 3%;
-}
-
-.blog .left-1{
- font-size: 3rem; 
- transform: rotate(45deg);
- margin-right: 12%;
- margin-left: 0.5%;
-}
-
-.blog .right-1{
-  font-size: 3rem; 
-  transform: rotate(-45deg);
- }
-
-.child-1 {
-  margin-top: 2%;
-  font-size: 120%;
-}
-.child-1 .left{
-   transform: translateX(25%);
- }
-.child-1 .right{
-  transform: translateX(-22%);
+.my_brain h5:hover {
+  color: #1ebba3;
 }
