@@ -261,6 +261,13 @@ div.project p {
   color: wheat;
 }
 
+.heading-underline-blog {
+  width: 3rem;
+  height: .2rem;
+  background-color: #1ebba3;
+  margin: 0 auto 1rem;
+}
+
 
 /*--------------- Reference Page -------------------*/
 .quotes img {
