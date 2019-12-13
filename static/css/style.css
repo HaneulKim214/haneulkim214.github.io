@@ -262,6 +262,26 @@ div.project p {
 }
 
 
+/* ---------------------------- Algorithms --------------------------- */
+.panel-group .panel .panel-title a{
+  text-decoration: none;
+  color: rgba(243, 245, 230, 0.973);
+}
+.panel-group .panel .panel-title a:hover{
+  text-decoration: none;
+  color: blanchedalmond;
+}
+
+.panel-group .panel .panel-footer a{
+  text-decoration: none;
+  color: rgba(243, 245, 230, 0.973);
+}
+.panel-group .panel .panel-footer a:hover{
+  text-decoration: none;
+  color: blanchedalmond;
+}
+
+
 /*--------------- Reference Page -------------------*/
 .quotes img {
   width: 100%;
@@ -354,6 +374,7 @@ Extra (xl) large devices (large desktops, 1200px and up)
 
 .my_brain {
   margin-top: 5%;
+  color:#4e555c;
 }
 
 .my_brain .heading, .my_brain .heading-underline2 {
@@ -366,7 +387,7 @@ Extra (xl) large devices (large desktops, 1200px and up)
 
 .my_brain .blg ul li a{
   text-decoration: None;
-  color:#40474e;
+  color:#4e555c;
 }
 .my_brain {
   position: relative;
@@ -375,4 +396,10 @@ Extra (xl) large devices (large desktops, 1200px and up)
 
 .my_brain .blg ul li a:hover {
   color: wheat;
+}
+
+.my_brain .blg h6 {
+  font-size: 120%;
+  font-weight: bold;
+
 }
