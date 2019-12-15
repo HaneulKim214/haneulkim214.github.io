@@ -102,22 +102,12 @@ body {
  }
 }
 
-
-
-
-/*------------- About Me Page -----------------------*/
-.narrow {
-  /* Making it narrower. 
-     Margin: auto makes it center
-  */
-  width: 75%;
-  margin:1.5rem auto;
-  padding-top: 0rem;
-  border-radius: 0;
+/* Word of the day */
+#word-of-the-day {
+  margin-bottom: 20%;
 }
-.narrow h3 {
-  font-size: 2.4rem;
-}
+
+
 
 /*---------------- Projects Page -------------------*/
 .jumbotron {
@@ -229,7 +219,7 @@ div.project p {
 }
 
 
-/*------------------- Blogs Page ----------------*/
+/*------------------- Hobbies Page ----------------*/
 
 .fixed {
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/할아버지.jpg');
@@ -239,46 +229,6 @@ div.project p {
 
 .fp_font {
   color: whitesmoke;
-}
-
-.blogs ul li a {
-  text-decoration: None;
-  color:rgba(243, 245, 230, 0.973);
-}
-
-/* spacings for projects section */
-.space_top {
-  margin-top: 1.5rem;
-}
-
-.blogs h6 {
-  color: blanchedalmond;
-  font-size: 1.25rem;
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-.blogs ul li a:hover {
-  color: wheat;
-}
-
-
-/* ---------------------------- Algorithms --------------------------- */
-.panel-group .panel .panel-title a{
-  text-decoration: none;
-  color: rgba(243, 245, 230, 0.973);
-}
-.panel-group .panel .panel-title a:hover{
-  text-decoration: none;
-  color: blanchedalmond;
-}
-
-.panel-group .panel .panel-footer a{
-  text-decoration: none;
-  color: rgba(243, 245, 230, 0.973);
-}
-.panel-group .panel .panel-footer a:hover{
-  text-decoration: none;
-  color: blanchedalmond;
 }
 
 
@@ -370,7 +320,7 @@ Extra (xl) large devices (large desktops, 1200px and up)
 
 
 
-/* -------------------- Blog Experimentation --------------------- */
+/* -------------------- My Brain --------------------- */
 
 .my_brain {
   margin-top: 5%;
@@ -389,6 +339,11 @@ Extra (xl) large devices (large desktops, 1200px and up)
   text-decoration: None;
   color:#4e555c;
 }
+
+.my_brain .blg ul li{
+  list-style-type: none;
+}
+
 .my_brain {
   position: relative;
   z-index: 2;
@@ -402,4 +357,23 @@ Extra (xl) large devices (large desktops, 1200px and up)
   font-size: 120%;
   font-weight: bold;
 
+}
+
+/* ---------------------------- Algorithms --------------------------- */
+.panel-group .panel .panel-title a{
+  text-decoration: none;
+  color: #505962;
+}
+.panel-group .panel .panel-title a:hover{
+  text-decoration: none;
+  color: blanchedalmond;
+}
+
+.panel-group .panel .panel-footer a{
+  text-decoration: none;
+  color: #505962;
+}
+.panel-group .panel .panel-footer a:hover{
+  text-decoration: none;
+  color: blanchedalmond;
 }

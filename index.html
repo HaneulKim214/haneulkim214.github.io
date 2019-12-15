@@ -45,19 +45,19 @@
 				<!-- active class makes current location brighter -->
 				<li class="nav-item">
 				<!-- #home goes to <div id="home">  -->
-				<a class="nav-link" href="#home">Home</a>
+				  <a class="nav-link" href="#home">Home</a>
 				</li>
 				<li class="nav-item">
-				<a class="nav-link" href="#about_me">About Me</a>
+					<a class="nav-link" href="#my-brain">Brain</a>
 				</li>
 				<li class="nav-item">
-				<a class="nav-link" href="#projects">Projects</a>
+				  <a class="nav-link" href="#projects">Projects</a>
 				</li>
 				<li class="nav-item">
-				<a class="nav-link" href="#References">References</a>
+				  <a class="nav-link" href="#hobbies">Hobbies</a>
 				</li>
 				<li class="nav-item">
-				<a class="nav-link" href="#contact">Contact</a>
+				  <a class="nav-link" href="#contact">Contact</a>
 				</li>
 			</ul>
 		</div>
@@ -74,14 +74,16 @@
 	</div>
 	<div class="caption text-center">
 		<div class="line typewriter">
-			<h1> Haneul Kim</h1>
+			<!-- Data Scientist who loves to experience new things both mentally and physically.<br>
+			Take your time to learn about concepts in Science, tech that interests me.<br> -->
+			<!-- <h1> Haneul Kim</h1> -->
 			<h4>Data Scientist | Environmental Enthusiast | &nbsp Traveller</h4>
-			<a class="btn btn-outline-light btn-lg" href="#about_me"><span>What do I know?</span></a>
+			<a class="btn btn-outline-light btn-lg" href="#my-brain"><span>What's on my head?</span></a>
 		</div>
 	</div>
 </div>
 <!-- ---------------------- Blog Experiment ---------------------- -->
-	<div class="col-12 my_brain">
+	<div class="col-12 my_brain" id="my-brain">
 		<h2 class="heading text-center" data-aos='fade-up' data-aos-duration="2000" >My Brain</h2>
 		<div class="heading-underline2"></div>
 
@@ -92,27 +94,40 @@
 					<ul>
 						<li><a href="templates/amazon_review.html">Amazon reviews sentiment analysis</a></li>
 						<li><a href="templates/Keyword-Finder.html">Web scraping glassdoor/nlp</a></li>
-						<li><a href="#">Feature Scaling</a></li>
+						<!-- <li><a href="#">Feature Scaling</a></li> -->
 					</ul>
 				</div>
 				<div class="col-md-2">
 					<h6>Statistics (ML focused)</h6>
 					<ul>
 						<li><a href="templates/blogs/Statistics/lin_reg.html">Linear Regression</a></li>
-						<li><a href="#">Logistic Regression</a></li>
+						<!-- <li><a href="#">Logistic Regression</a></li> -->
 					</ul>
 				</div>
 				<div class="col-md-2">
 					<h6>Algorithms</h6>
-					<ul>
-						<li><a href="#">Vectors</a></li>
-						<li><a href="#">Matrices</a></li>
-					</ul>
+					<div class="container">
+						<div class="panel-group">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+								<div class="panel-title">
+									<a data-toggle="collapse" href="#collapse1">Sorting</a>
+								</div>
+								</div>
+								<div id="collapse1" class="panel-collapse collapse">
+								<div class="panel-footer"><a href="#">Bubble sort</a></div>
+								<div class="panel-footer"><a href="#">Merge sort</a></div>
+								<div class="panel-footer"><a href="#">Quick sort</a></div>
+								<div class="panel-footer"><a href="#">Radix sort</a></div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 				<div class="col-md-2">
 					<h6>SQL</h6>
 					<ul>
-						<li>MySQL</li>
+						<!-- <li>MySQL</li> -->
 					</ul>
 				</div>
 				<div class="col-md-2">
@@ -123,8 +138,8 @@
 				<div class="col-md-2">
 					<h6>ELK</h6>
 					<ul>
-						<li>Elasticsearch</li>
-						<li>Kibana</li>
+						<!-- <li>Elasticsearch</li>
+						<li>Kibana</li> -->
 					</ul>
 				</div>
 			</div>
@@ -245,80 +260,23 @@
 
 
 <!-------------- BLOG Section ------------->
-<div id="blog" class="offset fp_font">
+<div id="hobbies" class="offset fp_font">
 	<div class="fixed-background">
 		<div class="row dark">
 			<div class="col-12 text-center">
-				<h3 class="heading space_top">Blogs</h3>
-				<div class="heading-underline"></div>
-				<p>This Blog is for keeping track of my progress and organizing what I've learned.
-					ML/DL will be focused on practical examples whereas Statistics and Mathematics will be focused on the 
-					concepts and models that are used in ML/DL.
-					</p>
 			<div class="row blogs blogs">
-			<div class="col-md-2">
-				<h6>Machine/Deep Learning</h6>
-				<ul>
-					<li><a href="templates/amazon_review.html">Amazon reviews sentiment analysis</a></li>
-					<li><a href="templates/Keyword-Finder.html">Web scraping glassdoor/nlp</a></li>
-					<!-- <li><a href="#">Feature Scaling</a></li> -->
-				</ul>
-			</div>
-			<div class="col-md-2">
-				<h6>Statistic Concepts</h6>
-				<ul>
-					<li><a href="templates/blogs/Statistics/lin_reg.html">Linear Regression</a></li>
-					<!-- <li><a href="#">Logistic Regression</a></li> -->
-				</ul>
-			</div>
-			<div class="col-md-2">
-				<h6>Algorithms</h6>
-				<div class="container">
-					<div class="panel-group">
-						<div class="panel panel-default">
-						  <div class="panel-heading">
-							<div class="panel-title">
-							  <a data-toggle="collapse" href="#collapse1">Sorting</a>
-							</div>
-						  </div>
-						  <div id="collapse1" class="panel-collapse collapse">
-							<div class="panel-footer"><a href="#">Bubble sort</a></div>
-							<div class="panel-footer"><a href="#">Merge sort</a></div>
-							<div class="panel-footer"><a href="#">Quick sort</a></div>
-							<div class="panel-footer"><a href="#">Radix sort</a></div>
-						  </div>
-						</div>
-					</div>
-				</div>				
-			</div>
-			<div class="col-md-2">
-				<h6>SQL</h6>
-				<ul>
-					<li>MySQL</li>
-				</ul>
-			</div>
-			<div class="col-md-2">
-				<h6>NoSQL</h6>
-				<ul>
-					<li></li>
-				</ul>
-			</div>
-			<div class="col-md-2">
-				<h6>ELK</h6>
-				<ul>
-					<li>Elasticsearch</li>
-					<li>Kibana</li>
-				</ul>
-			</div>
+
+				<div class="col-md-6">
+					<h4>Books</h4>
+
+				</div>
+				<div class="col-md-6">
+					<h4>Movies</h4>
+				</div>
 			</div>
 
 			</div>
 		</div>
-	    <!--***** within this background image block we can add x-column layout
-		<div class="row">
-			<div class="col-x">
-			</div>
-		</div> *****-->
 		<div class="fixed-wrap">
 			<div class="fixed">
 			</div>
@@ -334,7 +292,7 @@
 		<div class="row justify-content-center">
 			<div class="col-md-5 text-center">
 				<strong>Contact Info</strong>
-				<p>(010) 7588-7897<br>haneulkim214@gmail.com</p>
+				<p>(010) 7588-secret<br>haneulkim214@gmail.com</p>
 				<a href="https://github.com/HaneulKim214" target="_blank"><i class="fab fa-github"></i></a>
 				<a href="" target="_blank"><i class="fab fa-instagram"></i></a>
 				<a href="https://www.linkedin.com/in/haneul-kim-8b8720164/" target="_blank"><i class="fab fa-linkedin"></i></a>
