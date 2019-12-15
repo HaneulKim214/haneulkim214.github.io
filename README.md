@@ -12,5 +12,3 @@ What I've done so far:
 Improvements:
 
 - I am going to use Flask with python to create backend part of my website also try to create repeating grids like col-md-4 by using for loop thus save more time.
-
-:bear:
