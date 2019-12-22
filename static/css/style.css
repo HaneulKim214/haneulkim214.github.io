@@ -378,4 +378,12 @@ Extra (xl) large devices (large desktops, 1200px and up)
   color: blanchedalmond;
 }
 
+.panel-title {
+  font-weight: bold;
+}
+
+.panel-footer{
+  font-size: 80%;
+}
+
 /* --------------------------- Books and Movies ------------------------- */
