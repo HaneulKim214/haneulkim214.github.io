@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="bootstrap-4.1.3-dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="static/css/style.css">
 	<link rel="stylesheet" href="static/css/fixed.css">
+	<!-- <link rel="stylesheet" href="static/css/carousel.css"> -->
 
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -84,11 +85,10 @@
 </div>
 <!-- ---------------------- Blog Experiment ---------------------- -->
 	<div class="col-12 my_brain" id="my-brain">
-		<h2 class="heading text-center" data-aos='fade-up' data-aos-duration="2000">My Brain</h2>
+		<h2 class="heading text-center" data-aos='fade-down' data-aos-duration="2000">My Brain</h2>
 		<div class="heading-underline2"></div>
 
-		<div class="text-center">Feel free to correct me if any of my information is incorrect!</div>
-		<div class="text-center">Any improvements I could make on my website to be more pleasing, Please give opinions!</div>
+		<div class="text-center">I'm very open to feedbacks, both blogs and on the website. Please help me improve!</div>
 		<div class="text-center">Contact me through <b><a href="#contact">Email</a></b></div>
 
 		<div class="col-12 text-center blg">
@@ -295,7 +295,7 @@
 	<!-- Project Ends -->
 
 
-<!-------------- BLOG Section ------------->
+<!-------------- Hobbies Section ------------->
 <div id="hobbies" class="offset fp_font">
 	<div class="fixed-background">
 		<div class="row dark">
@@ -304,8 +304,42 @@
 
 				<div class="col-md-6">
 					<h4>Books</h4>
-
+					<div id="carousel">
+					   <div class="hideLeft">
+						 <img src="static/images/Books/Theory_that_would_not_die.jpg">
+					   </div>
+				 
+					   <div class="prevLeftSecond">
+						 <img src="static/images/Books/Lady_tasting_tea.jpg">
+					   </div>
+				 
+					   <div class="prev">
+						 <img src="static/images/Books/crawdad.jpg">
+					   </div>
+				 
+					   <div class="selected">
+						 <img src="https://i1.sndcdn.com/artworks-000062423439-lf7ll2-t500x500.jpg">
+					   </div>
+				 
+					   <div class="next">
+						 <img src="https://i1.sndcdn.com/artworks-000028787381-1vad7y-t500x500.jpg">
+					   </div>
+				 
+					   <div class="nextRightSecond">
+						 <img src="https://i1.sndcdn.com/artworks-000108468163-dp0b6y-t500x500.jpg">
+					   </div>
+				 
+					   <div class="hideRight">
+						 <img src="https://i1.sndcdn.com/artworks-000064920701-xrez5z-t500x500.jpg">
+					   </div>
+					</div>
+					
+				<div class="buttons">
+					<button id="prev">Prev</button>
+					<button id="next">Next</button>
 				</div>
+				</div>
+
 				<div class="col-md-6">
 					<h4>Movies</h4>
 				</div>
@@ -360,6 +394,7 @@
 <script> AOS.init()</script>
 
 <script src="static/js/fontawesome-all.min.js"></script>
+<script src="static/js/carousel.js"></script>
 </body>
 
 </html>
