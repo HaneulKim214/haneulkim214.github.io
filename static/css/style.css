@@ -76,6 +76,13 @@ body {
   padding-bottom: 13px;
 }
 
+/* Word of the day */
+.caption #word-of-day {
+  
+}
+
+
+
 /* -----------------Typewriter effect */
 
 .typewriter{
