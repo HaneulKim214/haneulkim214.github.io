@@ -34,79 +34,53 @@
 <!-- ------------------------------ All Content goes here -------------------- -->
 <div class="col-md-6">
     <h2> Insertion Sort: </h1>
-    <p class="date">date posted: 2019-12-22</p>
+    <p class="date">date posted: 2019-12-25</p>
     <br>
-    <p>One of simplest algorithms thus quick to implement. Starting from first element in a list, you simply compare
-        with adjacent element and swap positions accordingly. Move on until you get the largest element at the end of 
-        the list and repeat this process until all elements are sorted. Similarily if you want to sort in reverse order 
-        start from last element.
+    <p> Very similar to bubble sort in terms of complexity of creating it and how to derive time complexity.
+        One main difference is that in insertion sort at each iteration, one more element will be added to compare.
     </p>
-
-    <p>There isn't much with Bubble sort therefore let's get straight into example:
-        <br> We are going to sort a list = [6, 4, 1, 2, 5]
-
+    <p>
+        Say we want a list [25, 17, 31, 13, 2]
         <ol>
-            <li>We pick our first element, 6. Compare it with its adjacent element 4. Since 6 is greater
-                than 4 we switch positions. Now we have 6 in second position thus compare it with its adjacent element which is now 1.
-                Again since 6 > 1 we switch positions. Repeat this process and we 6 will be positioned at the end of list, our first iterations is done.
+            <li>Starting from first element, treat it as new list with one element. As you can see 
+                in the drawing below, now you have one list [25], we will call it sorted list and other one
+                unsorted list.<0/li>
+            <li>Our goal is "insert" each element from unsorted list into sorted list appropriately. Starting from
+                first element in unsorted list 17 compare it with <b>last</b> element in sorted list 25. Since 17 < 25
+                move 25 to its right and insert 17 into newly opened position.
             </li>
-            <li>
-                In second iterations we repeat same process as before but now since 6 has been sorted from
-                above iteration our list to sort is [4, 1, 2, 5]. Now with smaller list repeat the process.
-                One thing to note, in 3rd comparision, comparing
-                4 with its adjacent element 5. They are already in proper position, in such case keep the position and 
-                now your comparing element becomes 5 thus next step is to compare 5 with its adjacent element which is 6.
-                Again it is in proper position thus our second iteration has finished as well.
+            <li> Now compare first element from unsorted list with last element in sorted list. Since 
+                25 < 35 and we know that sorted list's last element is highest, insert 31 in last position.
             </li>
-            <li>Repeat above process until list to sort becomes length of one.</li>
+            <li>Now we have sorted list with 3 elements, repeat this process until all elements in unsorted lists are 
+                inserted into sorted list.
+            </li>
         </ol>
     </p>
-    <img src="photos/bubble-sort.png" width="90%" alt=""><br><br>
+
+    <img src="../photos/Insertion_sort.png" alt="">
+
 
     <p><b>Time Complexity:</b></p>
-    <p>It is important to know how fast your algorithm is and even better if you know how to prove it.</p>
-    <p>From above example we start from list of 5 elements. In bubble sort we compare pick first element and 
-        compare it with all the elements, if that element is sorted repeat process but now ignore sorted elements thus there are 
-        one less elements to compare.
-    </p>
-    <p>Starting from 5 element list, first there are 5-1 elements we need to compare. Then 4-1, 3-1 and so on...</p>
-    <p>let n = length of list. Now for each iteration we compare n-1, n-2, n-3, ...., 2, 1 elements. thus number of comparison in total will be 
-        (n-1) + (n-2) + .... + 3 + 2 + 1.
-    </p>
-    <p>Thanks to gauss we know that 1 + 2 + ... + (n-2) + (n-1) + n = n(n+1)/2</p>
-    <p>In our case we have up to (n-1) thus our formula becomes</p>
-    <p>(n-1)(n-1+1)/2 = n(n-1)/2</p> 
-    <p>Therefore our Time complexity is n^2/2 - n/2. But as data gets infinitely large n^2 will increase in 
-        such faster pace that n/2 will have no effect in our formula so finally our
-         <nobr style="background-color: thistle;">Time complexity is O(n) = n^2
-        </nobr>
-    </p>
 
-    <p><b>Proof:</b></p>
-    <p>Understanding how a formula is derived is key when learning something. It will not only stay intact for a longer time 
-        however you will start to appreciate mathematics and enjoy it.
+    <p>If you want how to prove time complexity, check out bubble sort, here I will just explain
+        time complexity.
     </p>
-
-    <p>We want to prove how (n-1) + (n-2) + ... + 2 + 1 = n(n-1)/2.</p>
-    <p>First let f(n) = (n-1) + (n-2) + ... + 2 + 1, which is simply formula for adding 1 through n-1</p>
-    <p>Add exactly same formula so it become 2f(n) but place them in opposite order. <br>
-        So one <b>1.</b> f(n) = 1+ 2+..+(n-1) and<br>
-         another <b>2.</b> f(n) = (n-1) + (n-2) ... +2 + 1</p>
-    <p> They are exactly same formula but ordered differently right?</p>
-
-    <p><b>Here is the fun part:</b>
-        <ul>
-            <li>Add those formulas together. </li>
-            <li>adding first elements together, 1 + (n-1) = n. </li>
-            <li>add next elements and again you get, 2 + (n-2) = n. </li>
-            <li>if you repeat the process it becomes n+ n + n ... + n</li>
-            <li>In each formula there are n-1 elements so n+n+n+...+n = n(n-1).</li>
-            <li>since we got that by adding two f(n), 2f(n) = n(n-1).</li>
-        </ul>
-        <b>Now</b> to get divide both sides by 2 and you will get: <br>
-        <nobr style="background-color: thistle;">
-            f(n) = n(n-1)/2.
-        </nobr>
+    <p>Using our example up top, when we get list with five elements we start by inserting an element in sorted list.
+        Now we compare elements from unsorted list with element in sorted list.
+    </p>
+    <p>First, there is one element in sorted list thus only one comparison can be done.</p>
+    <p>Next, there are two elements and in worst case where element from unsorted list is smaller than 
+        both elements in sorted list there has to be 2 comparision.
+    </p>
+    <p>Each time if you think about worst case (element from unsorted list having lowest number)
+        number of comparison increase by 1. At the end you will compare 4 elements (n-1). So in our example,
+        each time you compare 1, 2, 3, and 4 times. Say you get n length list then number of comparisons will be
+        1, 2, 3, ... , n-1
+    </p>
+    <p>This is exact opposite of bubble sort which is n-1, n-2, ..., 3, 2, 1. 
+        Thus there time complexity are exactly the same in worst case scenario.
+        <b style="background-color: thistle;">O(n) = n^2</b>
     </p>
 
 </div>
