@@ -46,8 +46,8 @@ html, body, main {
 }
 
 #carousel div.prev {
-	z-index: 5;
-	left: 30%;
+	z-index: 1;
+	left: 25%;
 	transform: translateY(50px) translateX(-50%);
 }
 
@@ -56,7 +56,7 @@ html, body, main {
 }
 
 #carousel div.prevLeftSecond {
-	z-index: 4;
+	z-index: 1;
 	left: 15%;
 	transform: translateY(50%) translateX(-50%);
 	opacity: .7;
@@ -83,7 +83,7 @@ html, body, main {
 }
 
 #carousel div.nextRightSecond {
-	z-index: 4;
+	z-index: 2;
 	left: 85%;
 	transform: translateY(50%) translateX(-50%);
 	opacity: .7;

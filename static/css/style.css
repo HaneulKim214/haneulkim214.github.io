@@ -76,13 +76,6 @@ body {
   padding-bottom: 13px;
 }
 
-/* Word of the day */
-.caption #word-of-day {
-  
-}
-
-
-
 /* -----------------Typewriter effect */
 
 .typewriter{
@@ -238,12 +231,10 @@ div.project p {
 .fp_font {
   color: whitesmoke;
 }
-#hobbies #carousel #crawdad{
-  height: 20%;
-}
+
 #hobbies #carousel img{
   width: 40%;
-  height: 300x;
+  /* height: 200px; */
 }
 
 #carousel {
@@ -251,7 +242,7 @@ div.project p {
 	height: 400px;
 	/* width: 50%; */
 	top: 50%;
-	transform: translateY(-40%);
+	transform: translateY(-50%);
 	overflow: hidden;
 }
 
@@ -269,7 +260,7 @@ div.project p {
 #carousel div.hideLeft {
 	left: 0%;
 	opacity: 0;
-	transform: translateY(50%) translateX(-50%);
+	transform: translateY(-10%) translateX(-50%);
 }
 
 #carousel div.hideLeft img {
@@ -287,9 +278,10 @@ div.project p {
 }
 
 #carousel div.prev {
-	z-index: 5;
-	left: 30%;
-	transform: translateY(50px) translateX(-50%);
+	z-index: 1;
+	left: 27%;
+  transform: translateY(20%) translateX(-50%);
+  opacity: 0.7;
 }
 
 #carousel div.prev img {
@@ -299,8 +291,8 @@ div.project p {
 #carousel div.prevLeftSecond {
 	z-index: 4;
 	left: 15%;
-	transform: translateY(50%) translateX(-50%);
-	opacity: .7;
+	transform: translateY(6%) translateX(-50%);
+	opacity: .5;
 }
 
 #carousel div.prevLeftSecond img {
@@ -308,13 +300,14 @@ div.project p {
 }
 
 #carousel div.selected {
+  width: 55%;
 	z-index: 10;
 	left: 50%;
-	transform: translateY(0px) translateX(-50%);
+	transform: translateY(30%) translateX(-50%);
 }
 
 #carousel div.next {
-	z-index: 5;
+	z-index: 1;
 	left: 70%;
 	transform: translateY(50px) translateX(-50%);
 }
@@ -326,7 +319,7 @@ div.project p {
 #carousel div.nextRightSecond {
 	z-index: 4;
 	left: 85%;
-	transform: translateY(50%) translateX(-50%);
+	transform: translateY(80%) translateX(-70%);
 	opacity: .7;
 }
 
