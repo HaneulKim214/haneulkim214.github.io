@@ -32,80 +32,58 @@
 <!-- ------------------------------ All Content goes here -------------------- -->
 <div class="col-md-6">
     <h2> Sequential Search: </h1>
-    <p class="date">date posted: 2019-12-22</p>
+    <p class="date">date posted: 2020-01-06</p>
     <br>
-    <p>One of simplest algorithms thus quick to implement. Starting from first element in a list, you simply compare
-        with adjacent element and swap positions accordingly. Move on until you get the largest element at the end of 
-        the list and repeat this process until all elements are sorted. Similarily if you want to sort in reverse order 
-        start from last element.
-    </p>
-
-    <p>There isn't much with Bubble sort therefore let's get straight into example:
-        <br> We are going to sort a list = [6, 4, 1, 2, 5]
-
-        <ol>
-            <li>We pick our first element, 6. Compare it with its adjacent element 4. Since 6 is greater
-                than 4 we switch positions. Now we have 6 in second position thus compare it with its adjacent element which is now 1.
-                Again since 6 > 1 we switch positions. Repeat this process and we 6 will be positioned at the end of list, our first iterations is done.
+    <div class="toc">
+        <h5>Contents</h5>
+        <ul>
+            <li>
+                <a href="#Sequential_search"><slot name='h-1'>Sequential Search</slot></a>
             </li>
             <li>
-                In second iterations we repeat same process as before but now since 6 has been sorted from
-                above iteration our list to sort is [4, 1, 2, 5]. Now with smaller list repeat the process.
-                One thing to note, in 3rd comparision, comparing
-                4 with its adjacent element 5. They are already in proper position, in such case keep the position and 
-                now your comparing element becomes 5 thus next step is to compare 5 with its adjacent element which is 6.
-                Again it is in proper position thus our second iteration has finished as well.
+                <a href='#self_org'><slot name='h-2'>Self-organizing Sequential Search</slot></a>
+                <ul>
+                    <a href="#"><li><slot name='h-2-1'>Move To Front</slot></li></a>
+                    <a href=""><li><slot name='h-2-2'>Transpose</slot></li></a>
+                    <a href=""><li><slot name='h-2-3'>Frequency Count</slot></li></a>
+                </ul>
             </li>
-            <li>Repeat above process until list to sort becomes length of one.</li>
-        </ol>
-    </p>
-
-    <p><b>Time Complexity:</b></p>
-    <p>It is important to know how fast your algorithm is and even better if you know how to prove it.</p>
-    <p>From above example we start from list of 5 elements. In bubble sort we compare pick first element and 
-        compare it with all the elements, if that element is sorted repeat process but now ignore sorted elements thus there are 
-        one less elements to compare.
-    </p>
-    <p>Starting from 5 element list, first there are 5-1 elements we need to compare. Then 4-1, 3-1 and so on...</p>
-    <p>let n = length of list. Now for each iteration we compare n-1, n-2, n-3, ...., 2, 1 elements. thus number of comparison in total will be 
-        (n-1) + (n-2) + .... + 3 + 2 + 1.
-    </p>
-    <p>Thanks to gauss we know that 1 + 2 + ... + (n-2) + (n-1) + n = n(n+1)/2</p>
-    <p>In our case we have up to (n-1) thus our formula becomes</p>
-    <p>(n-1)(n-1+1)/2 = n(n-1)/2</p> 
-    <p>Therefore our Time complexity is n^2/2 - n/2. But as data gets infinitely large n^2 will increase in 
-        such faster pace that n/2 will have no effect in our formula so finally our
-         <nobr style="background-color: thistle;">Time complexity is O(n) = n^2
-        </nobr>
-    </p>
-
-    <p><b>Proof:</b></p>
-    <p>Understanding how a formula is derived is key when learning something. It will not only stay intact for a longer time 
-        however you will start to appreciate mathematics and enjoy it.
-    </p>
-
-    <p>We want to prove how (n-1) + (n-2) + ... + 2 + 1 = n(n-1)/2.</p>
-    <p>First let f(n) = (n-1) + (n-2) + ... + 2 + 1, which is simply formula for adding 1 through n-1</p>
-    <p>Add exactly same formula so it become 2f(n) but place them in opposite order. <br>
-        So one <b>1.</b> f(n) = 1+ 2+..+(n-1) and<br>
-         another <b>2.</b> f(n) = (n-1) + (n-2) ... +2 + 1</p>
-    <p> They are exactly same formula but ordered differently right?</p>
-
-    <p><b>Here is the fun part:</b>
-        <ul>
-            <li>Add those formulas together. </li>
-            <li>adding first elements together, 1 + (n-1) = n. </li>
-            <li>add next elements and again you get, 2 + (n-2) = n. </li>
-            <li>if you repeat the process it becomes n+ n + n ... + n</li>
-            <li>In each formula there are n-1 elements so n+n+n+...+n = n(n-1).</li>
-            <li>since we got that by adding two f(n), 2f(n) = n(n-1).</li>
         </ul>
-        <b>Now</b> to get divide both sides by 2 and you will get: <br>
-        <nobr style="background-color: thistle;">
-            f(n) = n(n-1)/2.
-        </nobr>
+    </div>
+    
+    <br>
+    <br>
+    <h5 id="Sequential_search">Sequential Search</h5>
+    <p>As you can tell by its name it is simply searching algorithm that searches for a value starting from either ends of a
+        list and moving towards the opposite end. Move only in one direction hence called "Linear Search".
     </p>
+    <p>Since it searches sequentially one by one it has terrible performance however it is <b>only</b> way to search 
+    for a value when list is unsorted.</p>
+    <p>Furthermore just like any other terrible performance algorithms it is very easy to implement therefore
+        a lot of people still implement sequential search when len(list) isn't too large and you do not need exceptional performance.
+     </p>
 
+     <h5 id="self_org">Self-organizing Sequential Search</h5>
+     <p>Main goal of self-organinzing search is it self-organizes list by placing recently searched value into desired position.
+         It is like cache in our computer. Main goal is to organize frequently searched value to front of list to increase efficiency, 
+         there are three main ways.
+     </p>
+     <h6>1. Move To Front</h6>
+        <p>Name itself if self-explantory... Searched value goes to the front of a list.</p>
+        <p>This method can be efficient when there are subsets of data that are being searched very often. However if 
+            a data that has not been called before are trying to be searched, it will take a while since it will likely be near the end.
+        </p>
+     <h6>2. Transpose</h6>
+        <p>Starting from first element in a list, when your value is searched simply switch place with previous value.</p>
+        <p>ex: search for value = 4. [1,3,6,5, 4]</p>
+        <p>checking 1, 3, 6, 5, when 4 is searched switch position with previous element which is 5. so list =[1, 3, 6, 4, 5]</p>
+        <p>Thus if 4 is called multiple times, each time it will get closer hence as an element gets searched more often it will be found more easily.
+        </p>
+    
+    <h6>3. Frequency count</h6>
+        <p>First, count frequency for each element and store it in alternative memory.</p>
+        <p>Second, re-organize by placing in order of most frequently appearing element to least.</p>
+        <p>Drawback, it needs extra memory to store frequency count and extra time to sort according to frequency count. </p>
 </div>
 
 </div>
