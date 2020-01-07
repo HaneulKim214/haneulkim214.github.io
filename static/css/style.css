@@ -386,8 +386,7 @@ Extra (xl) large devices (large desktops, 1200px and up)
 }
 
 #hobbies #carousel img{
-  width: 40%;
-  /* height: 200px; */
+  width: 36%;
 }
 
 #carousel {
@@ -395,7 +394,7 @@ Extra (xl) large devices (large desktops, 1200px and up)
 	height: 400px;
 	/* width: 50%; */
 	top: 50%;
-	transform: translateY(-50%);
+	transform: translateY(-55%);
 	overflow: hidden;
 }
 
@@ -453,7 +452,7 @@ Extra (xl) large devices (large desktops, 1200px and up)
   z-index: 6;
   opacity: 0.7;
 	left: 70%;
-	transform: translateY(15%) translateX(-50%);
+	transform: translateY(25%) translateX(-52%);
 }
 
 #carousel div.nextRightSecond {
@@ -464,7 +463,8 @@ Extra (xl) large devices (large desktops, 1200px and up)
 	opacity: .7;
 }
 .buttons {
-	/* position: fixed; */
+  /* position: fixed; */
+  margin-top: 2rem;
 	left: 2%;
 	transform: translateX(-0%);
 	bottom: 100px;
