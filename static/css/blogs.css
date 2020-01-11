@@ -74,3 +74,10 @@ body {
 .col-md-6 pre {
   padding-top: 0.5rem;
 }
+
+/* Table of contents */
+
+.toc li a{
+  list-style: none;
+  color: #505962;
+}
