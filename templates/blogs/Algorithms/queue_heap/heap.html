@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Haneul Kim's - Binary Search</title>
+	<link rel="stylesheet" href="../../../../bootstrap-4.1.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../../static/css/fixed.css">
+    <link rel="stylesheet" href="../../../../static/css/blogs.css">
+	<!-- Font Awesome libarary -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+
+<body data-spy="scroll" data-target="#navbarResponsive">
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+	<a class="navbar-brand" href="../../../../index.html#my-brain">
+		Take me back.
+    </a>
+</nav>
+<div class="projects">
+
+<div class="row project">
+<div class="col-md-3 side-bar">
+    <ul>
+        <li><b>Heap</b></li>
+        <li><a href="priority_queue.html">Priority queue</a></li>
+    </ul>
+</div>
+    
+<!-- ------------------------------ All Content goes here -------------------- -->
+<div class="col-md-6">
+    <h2> Heap: </h1>
+    <p class="date">date posted: 2020-01-12</p>
+    <br>
+    <div class="toc">
+        <h5>Contents</h5>
+        <ul>
+            <li>
+                <a href="#what_is_heap"><slot name='h-1'>What is Heap?</slot></a>
+            </li>
+            <li><a href="#heapify">Heapify</a></li>
+            <li>
+                <a href='#time_comp'>Time complexity</a>
+            </li>
+            <li><a href="#reference">References</a></li>
+        </ul>
+    </div>
+    
+    <br>
+    <br>
+    <h5 id="what_is_heap">What is Heap?</h5>
+    <p>
+        Heap is a data structure that is complete binary tree with one more additional property. Where parent node 
+        has to be either greater or less than their child.
+        <ul>
+            <li>Max-heap: Complete binary tree where parent node has to be greater then child nodes</li>
+            <li>Min-heap: Complete binary tree where parent node has to be smaller then child nodes</li>
+        </ul>
+    </p>
+    <p>A binary tree is a tree where each node consists maximum of 2 nodes. Complete binary tree is a binary tree
+        with one additional condition being that all child tree must be filled up from left to right.
+    </p>
+    <p>looking at image below we can see:
+        <ol>
+            <li>All node has maximum of 2 child thus it satisfies condition of being binary tree.</li>
+            <li>Looking at lowest part of the tree we can see leaf nodes are filled up from left to right thus it
+                satisfies condition of being <b>complete</b> binary tree
+            </li>
+        </ol>
+    </p>
+    <img src="../photos/heap_1.png" alt="">
+    <br><br>
+    <p>What about this tree below?</p>
+    <ol>
+        <li>Just like above tree, all nodes have maximum of 2 child thus it is a binary tree</li>
+        <li>Looking at the lowest part, going left to right we see empty spaces(childs for node 7 is missing) and
+            then more child nodes therefore it is <b>not complete </b>binary tree.
+        </li>
+    </ol>
+    <img src="../photos/heap_2.png" alt="">
+    <br><br>
+    <p>Lastly, looking at the tree below
+        <ol>
+            <li>It's a binary tree</li>
+            <li>lowest part are filled from left to right. <b>But</b> before adding 2, 4 as a child node of 8. To be
+            complete binary tree within lowest level it has to go from left to right. So if 2,4 were consequtively inserted
+            into our tree, it would have to be like tree on the right to be complete binary tree.
+            </li>
+        </ol>
+    </p>
+    <img src="../photos/heap_3.png" alt=""> <img src="../photos/heap_4.png" alt="">
+    <p>For me, I like to understand the reason for additional conditions. For example from 
+        binary tree why did concept of complete binary tree arise and then max/min heaps?
+    </p>
+    <p>From binary tree, adding addtional condition to create complete binary tree has many implementations
+        and makes our lives easier.
+    </p>
+    <p>Say you want to implement binary tree in your code using a list. You will need to have rules that
+        assign each node to certain position in a list.
+    </p>
+    <p>Instead, why not just create a complete binary tree and simply store starting from root node and 
+        moving left to right? Using our initial graph of complete binary tree, root node will go in as first element
+        then 14 as second element, 10 as third, 8 as fourth and so on... Finaly looking like [16, 14, 10, 8, 7, 9
+        3, 2, 4, 1]
+    </p>
+    <p>Now by adding additional condition we can implement in our code much easier. Furthermore adding
+        additional condition either Max/Min heap orders the list either in ascending or descending order
+        therefore if you always know that first element of max-heap would be highest element in the list. Therefore
+        heap data structures is used in sorting algorithms(heap sort), priority queue, graph algorithms, etc...
+    </p>
+
+    <br><br>
+    <h5 id="heapify">Heapify</h5>
+    <p>When you have heap data structure it makes your life easier. However you need to give effort in
+        maintaining its strucutre, we call it heapify. Max-heapify for maintaining max-heap data structure
+        and Min-heapify for min-heap.
+    </p>
+    <p>For Max-Heapify if you have a parent that has smaller value then their child, simply switch places
+        with bigger child. Repeat this step until no more comparison can be made or max-heap structure is
+        met.
+    </p>
+    <p>For Min-Heapify if parent has greater value than child switch places with smaller child, and so on...</p>
+    
+    <p>For clarity let's look at below example and perform max-heapify.
+         We can see it is a complete binary tree but not a Max-heap since bottom node 4 is smaller than
+        both of their child. Following steps explained above.
+        <ol>
+            <li>switch place with bigger child, 14.</li>
+            <li>Again, on second picture 8 > 4. So again switch place with bigger child.</li>
+        </ol>
+    </p>
+    <img src="../photos/heap_5.png" alt="">
+    <p>Now You've just maintained Max-heap structure.</p>
+    <p>Let's write it in Python.</p>
+    <pre>
+        def max_heapify(lst, length_of_list, i):
+            largest = i
+            
+            l_child = (2*i)+1 
+            r_child = (2*i)+2
+            
+            if l_child < length_of_list and lst[i] < lst[l_child]:
+                largest = l_child
+            
+            if r_child < length_of_list and lst[largest] < lst[r_child]:
+                largest = r_child
+            
+            if largest != i:
+                lst[i], lst[largest] = lst[largest], lst[i]
+                
+                max_heapify(lst,length_of_list, largest)
+                
+            return lst
+
+        lst = [16, 4, 10, 14, 7, 9, 3, 2, 8, 1]
+        length_of_list = len(lst)
+        for i in range(length_of_list, -1, -1):
+            max_heap = max_heapify(lst, length_of_list, i)
+        print(max_heap)
+
+        >>> [16, 14, 10, 8, 7, 9, 3, 2, 4, 1]
+    </pre>
+    <h5 id="time_comp">Time Complexity</h5>
+    <p>Each time heap structure is not satisfies, just need to move down the binary tree.
+        When heap has n nodes it will have depth of log(n) therefore for n node heap
+        there will be maximum of log(n) heapify. Therefore Time complexity = 
+        <nobr style="background-color: thistle;">O(log(n))</nobr>.
+    </p>
+
+    <div id='reference' class="references">
+        <h6>References</h6>
+        <ul>
+           <li><a href="https://www.youtube.com/watch?v=ehNVf2Bcm2Q&list=PL9mhQYIlKEhdvKFh-wVpDuihNQv6C1gSy&index=7&t=0s">https://www.youtube.com/watch?v=ehNVf2Bcm2Q&list=PL9mhQYIlKEhdvKFh-wVpDuihNQv6C1gSy&index=7&t=0s</a></li>
+           <li><a href="https://stackoverflow.com/questions/2603692/what-is-the-difference-between-tree-depth-and-height">https://stackoverflow.com/questions/2603692/what-is-the-difference-between-tree-depth-and-height</a></li>
+           <li><a href="https://www.geeksforgeeks.org/heap-data-structure/">https://www.geeksforgeeks.org/heap-data-structure/</a></li>
+           <li><a href="https://www.geeksforgeeks.org/binary-heap/">https://www.geeksforgeeks.org/binary-heap/</a></li>
+           <li><a href="https://www.geeksforgeeks.org/heap-sort/">https://www.geeksforgeeks.org/heap-sort/</a></li>
+        </ul>
+
+    </div>
+</div>
+
+</div>
+</body>
+
+</html>
