@@ -455,6 +455,7 @@ Extra (xl) large devices (large desktops, 1200px and up)
 	transform: translateY(25%) translateX(-52%);
 }
 
+
 #carousel div.nextRightSecond {
   width: 40%;
 	z-index: 1;
@@ -470,13 +471,54 @@ Extra (xl) large devices (large desktops, 1200px and up)
 	bottom: 100px;
 }
 /* ------------------- Book Description ------------------ */
-/* #hobbies #carousel .selected .book_description {
+
+#hobbies #carousel .selected .book_description {
   position: absolute;
   text-align: center;
-  margin-left: 50%;
-  margin-right: 9%;
-  transform: translateY(-110%) translateX(-50%);
-} */
+  margin-left: 50%; 
+  margin-right: 12%; 
+  transform: translateY(-120%) translateX(-50%);
+  opacity: 0;
+}
+
+/* 텍스트 opacity 도 같이 바뀐다... */
+#carousel div.selected:hover {
+  width: 60%;
+	z-index: 10;
+	left: 50%;
+  transform: translateY(15%) translateX(-50%);
+  opacity:0.4;
+}
+#hobbies #carousel .selected .book_description:hover {
+  position: absolute;
+  text-align: center;
+  margin-left: 50%; 
+  /* margin-right: 9%; */ 
+  transform: translateY(-120%) translateX(-50%);
+  opacity: 1;
+  font-weight: bold;
+  color: white;
+}
+
+
+#hobbies #carousel .hideLeft .book_description{
+  opacity:0;
+}
+#hobbies #carousel .prevLeftSecond .book_description{
+  opacity:0;
+}
+#hobbies #carousel .prev .book_description{
+  opacity:0;
+}
+#hobbies #carousel .next .book_description{
+  opacity:0;
+}
+#hobbies #carousel .nextRightSecond .book_description{
+  opacity:0;
+}
+#hobbies #carousel .hideRight .book_description{
+  opacity:0;
+}
 
 
 /*------------------- Movies ----------------*/
