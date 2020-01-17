@@ -32,33 +32,82 @@
 <!-- ------------------------------ All Content goes here -------------------- -->
 <div class="col-md-6">
     <h2> Priority Queue: </h1>
-    <p class="date">date posted: 2020-01-12</p>
+    <p class="date">date posted: 2020-01-15</p>
     <br>
     <div class="toc">
         <h5>Contents</h5>
         <ul>
             <li>
-                <a href="#Binary_search"><slot name='h-1'>Binary Search</slot></a>
+                <a href="#1"><slot name='h-1'>Priority Queue</slot></a>
             </li>
-            <li><a href="#python_imp">Python implementation</a></li>
+            <li><a href="#2">Applications</a></li>
             <li>
-                <a href='#time_comp'>Time complexity</a>
+                <a href='#3'>Time complexity</a>
             </li>
-            <li><a href="#reference">References</a></li>
+            <li><a href="#4">References</a></li>
         </ul>
     </div>
     
     <br>
     <br>
 
-    
+    <h5 id="1">Priority Queue</h5>
+    <p>There isn't really much to talk about.</p>
+    <p>As the name speaks for itself it is a Queue that has priorities.</p>
+    <p>Queue is a data structure that holds FIFO or LILO principle, simply think of it as a 
+        line for the bathroom. If your first in line you will get stuff out first.
+    </p>
+
+    <p>Now lets add some extra properties
+        <ol>
+            <li>there exists priority(rank) for all elements</li>
+            <li>Higher priority gets our first.</li>
+            <li>if elements have same priorities, element which came first gets out first.</li>
+            <li>elements musts be comparable</li>
+        </ol>
+    </p>
+
+    <p>Now we know what Priority Queue is, what can it do?</p>
+    <p>It has 3 operations:</p>
+    <ul>
+        <li>Insert</li>
+        <li>get highest priority</li>
+        <li>delete highest priority</li>
+    </ul>
+
+    <p>Priority Queue can be implements using a list.<br>
+        for example: [5, 2, 6, 1, 8].<br>
+        greater the number higher the prioirty.
+    </p>
+    <p>when we want insert new element, say new_element = 10 no matter its prioirty we append it to
+        end of the list therefore [5, 2, 6, 1, 8, 10] so no matter what O(n) = 1, perfect!
+    </p>
+    <p>Now we say we want to delete or look for highest prioirty, then notice since 10 is at the 
+        end of the list we have to do a linear search... giving us O(n) = n.
+    </p>
+    <p>Reason we use prioirty queue is to get element with highest prioirty as fast as we can but using 
+        a list does not seem to help us reach our goal hence Heap is introduced.
+    </p>
+    <p>Now by storing elements into Max-heap or Min-heap structure we know that our first value (root node)
+        has the highest priority. I will cover Heap in next section as it is separate data structure that has
+        many applications other than for prioirty queues.
+    </p>
+
+    <h5 id='2'>Applications</h5>
+    <ol>
+        <li>CPU scheduling</li>
+        <li>In Dijkstra's shortest path algorithm</li>
+        <li>Huffman coding</li>
+        <li>Best First Search</li>
+        <li>Minimum spanning Tree algorithms</li>
+        <li>Load balancing on servers</li>
+    </ol>
+
     <div id='reference' class="references">
         <h6>References</h6>
         <ul>
-           <li><a href=""></a></li>
-           <li><a href=""></a></li>
-           <li><a href=""></a></li>
-           <li><a href=""></a></li>
+           <li><a href="https://www.geeksforgeeks.org/priority-queue-set-1-introduction/">https://www.geeksforgeeks.org/priority-queue-set-1-introduction/</a></li>
+           <li><a href="https://www.youtube.com/watch?v=wptevk0bshY">https://www.youtube.com/watch?v=wptevk0bshY</a></li>
         </ul>
 
     </div>
