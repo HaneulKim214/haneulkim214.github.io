@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Haneul Kim's - Hash Table</title>
+	<link rel="stylesheet" href="../../../../bootstrap-4.1.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../../static/css/fixed.css">
+    <link rel="stylesheet" href="../../../../static/css/blogs.css">
+	<!-- Font Awesome libarary -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+
+<body data-spy="scroll" data-target="#navbarResponsive">
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+	<a class="navbar-brand" href="../../../../index.html#my-brain">
+		Take me back.
+    </a>
+</nav>
+<div class="projects">
+
+<div class="row project">
+<div class="col-md-3 side-bar">
+    <ul>
+        <li><a href="heap.html">Heap</a></li>
+        <li><a href="priority_queue.html">Priority Queue</a></li>
+        <li><b>Hash Table</b></li>
+    </ul>
+</div>
+    
+<!-- ------------------------------ All Content goes here -------------------- -->
+<div class="col-md-6">
+    <h2> Hash Table: </h1>
+    <p class="date">date posted: 2020-01-19</p>
+    <br>
+    <div class="toc">
+        <h5>Contents</h5>
+        <ul>
+            <li>
+                <a href="#1">What is Hash Table?
+                    <ul>
+                        <li><a href="#1-1">Chaining</a></li>
+                        <li><a href="#1-2">Open addressing</a>
+                            <ul>
+                                <li><a href="#1-2-1">Linear Probing</a></li>
+                                <li><a href="#1-2-2">Quadratic Probing</a></li>
+                                <li><a href="#1-2-3">Double Hashing</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </a>
+            </li>
+            <li><a href="#reference">References</a></li>
+        </ul>
+    </div>
+    
+    <br>
+    <br>
+
+    <h5 id="1">What is Hash Table?</h5>
+    For me, I find it easy to learn a concept and keep it intact in my memory 
+    if I know full story and their applications. So let's begin why Hash table
+    were invented.
+    <br><br>
+    <p>Invented to improve from deficiency that <b>Direct Access Tables</b> were facing.
+        <br>
+        Direct access table is a table with indexes therefore desired data could be directly
+        reached with O(1) time complexity. For example, for each of your friend if you enter their name on your directory
+        all their informations show up, this is direct access table.
+        <br>
+        In mathematical terms its an injective function or one-on-one mapping.
+    </p>
+    <p>You can easily see that since each index is used to get their data, 
+        operations like inserting, deleting, searching all
+        have time complexity of O(1). <br>
+        Then why not just use direct access table? 
+    </p>
+    <p>Even though all operations have exceptional small time complexity, it suffers largely 
+        from space complexity. Since for each friend there must be extra space for each index that 
+        points to information. In practice as list of friends become larger space that are
+         being wasted grows.
+    </p>
+    <p> Say there are 100 students in a school where on average 50% of students study in the library, 
+        you want to create a library 100 seats for each
+        students most of the seats will not be occupied. On average less than half will not be used and in break times 
+        none of them will be used. Now to avoid this problem where most desks space are unused arise Hash Table.
+    </p>
+    <p> Using the same analogy, you might assign 2 student per desk therefore you only need 50 desks instead of creating 100.
+        From student_1 to student_100, we use a function called hash function to efficiently assign two students to one desk.
+        In this case we will use modular arithmetics and create hash function denoted h(x) where x represents student number.
+    </p>
+    <p>h(x) = x mod 50, which returns what is left after dividing x by 50.</p>
+    <ul>
+        <li>when x = 1, h(1) = 1 mod 50 = 1 => student_1 gets assigned to desk_1</li>
+        <li>when x = 2, h(2) = 2 mod 50 = 2 => student_2 gets assigned to desk_2</li>
+        .<br>.<br>.
+        <li>when x = 51, h(51) = 51 mod 50 = 1 => student_51 gets assigned to desk_1</li>
+    </ul> 
+
+    <p>So by using this hash function we are able to save our school from spending extra money on 50 desks.</p>
+
+    <p>Hash table's time complexity thus depends on its hash function, if hash function map multiple key into same
+        position then when calling that index multiple values will be returned and from there you must search for 
+        your desired result. This phenomenon is referred to as collision. When this happens there is two ways of 
+        handling them:
+        <ol>
+            <li id="1-1"><b>Chaining:</b> Creating a linked list whenever collision happens. Therefore when trying to search it
+                will have time complexity of O(len(linked_list)).<br>
+                <u>benefits:</u>
+                <ul>
+                    <li>Easy implementation</li>
+                    <li>When you do not know how many key will be inserted or deleted.</li>
+                </ul>
+                 <u>disadvantages:</u>
+                <ul>
+                    <li>Since it uses linked list data structure lacks cache performance</li>
+                    <li>Maybe some parts of hash are not used => space complexity increase w/o being used.</li>
+                    <li>When all key collide then search time becomes O(n).</li>
+                </ul>
+            </li>
+            <li id="1-2"><b>Open addressing:</b> When collision happens, look for next empty space for stroing key as index of hash table and insertion takes place. 
+                <br>
+                When searching, first goto assigned index then keep moving onto next hash table's index until wanted index is reached or until there is 
+                empty hash index (information of that key doesn't exist).
+                <br><br>
+                One thing to note is its deletion operation. When a key is deleted, its index in hash table is
+                marked as "deleted". Insertion can happen in "deleted" index however when searching instead of 
+                stopping since it is empty it ignores it and goes onto search next index.
+                <br><br>
+                <p>There are two types of Open addressing: Linear probing and Quadratic probing.</p>
+                <b id='1-2-1'>Linear Probing:</b> basically what I've described above. I will give an example for clarity.
+                <p>
+                    Until I buy digital pen, lets suffer together...
+                    <br>
+                    Looking at image below: We are passing keys: 3, 4, 7, 10 through hash function h(x) to hash table.
+                    <p>
+                        <ol>
+                            <li>key = 3, h(3) = 3 mod 3 = 0 so it gets assigned to 0th index. All is good.</li>
+                            <li>key = 4, h(4) = 4 mod 3 = 1, gets assigned to 1st index. All is good.</li>
+                            <li>key = 7, h(7) = 7 mod 3 = 1, gets assigned to 1st index. Uh oh, collision! 
+                                Move to next empty index. All is good.
+                            </li>
+                            <li>key = 10, h(10), 10 mod 3 = 1, gets assigned to 1st index. Uh oh, collision!
+                                Move to next index. Uh on #2, collsion! Now it gets assgined to index 3.
+                            </li>
+                        </ol>
+                    </p>
+                    <p>As you can see if all keys maps to index 1. Time complexity of inserting becomes linear which is
+                        never good. This is main problem with linear probing and this phenomenon is known as 
+                        <nobr style="color: green;">Clustering</nobr>.
+                    </p>
+                    <img src="../photos/hash_1.png" alt="">
+                </p>
+                <p id='1-2-2'><b>Quadratic Probing:</b> 
+                    <nobr style="color: green;"><b>h(x) = (x + i^2) mod k</b></nobr>
+                    , where i = number of collison.</p>
+                <p>For simplicity, lets use quadratic probing on example from linear probing.
+                    <ol>
+                        <li>h(3) = (3 + (0)^2) mod 3 = 3 mod 3 = 0. Notice since no collision i = 0. Assigned to 0th index.</li>
+                        <li>skip key=4, we are at key=7, h(7) = (7 + (0)^2) mod 3 = 1. Collsion happens so 
+                            our formula becomes h(7) = (7 + 1^2) mod 3 = 8 mod 3 = 2. Gets assinged to index 2.
+                        </li>
+                        <li>key =10, collision at index 1. So h(10) = (10 + 1^2) mod 3 = 11 mod 3 = 2. Uh oh! Second collision.
+                            Now our formula become h(10) = (10 + 2^2) mod 3 = 14 mod 3 = 2. Again we have 3rd collision (I didn't expect this...)
+                            <br>
+                            Now, h(10) = (10 + 3^2) mod 3 = 19 mod 3 = 1. Another collsion... But you get the point. You keep
+                            adding (number_of_collision)^2 to key value.
+                        </li>
+                    </ol>
+                    We've just suffered from quadratic probing. It is because quadratic must 
+                    satisfy some requirements to assign key every spot. The requirement is that
+                    the table size must be:
+                    <ul>
+                        <li>Prime number</li>
+                        <li>never be more than half full</li>
+                    </ul>
+                </p>
+                <p>
+                </p>
+
+                <p id='1-2-3'><b>Double Hashing:</b></p>
+                <p>Similar to quadratic probing however here, replace quadratic with 
+                    another hash function.
+                    <nobr style="color: green;"><b> h(x) = (x + (i x h2(x)) mod k)</b></nobr>, i = number of collision and 
+                    h2(x) is another hash function.
+                </p>
+            </li>
+        </ol>
+    </p>
+
+    <p> In summary, to avoid space complexity we use hash table <b>but</b> time complexity increase as collision happens so 
+    final goal is to crease hash table with hash function that minimize collisions.</p>
+    <p>Material is longer than I've expected so we will cover implementation in python and more in next blog.</p>
+    <p>Thanks.</p>
+    
+
+    <div id='reference' class="references">
+        <h6>References</h6>
+        <ul>
+           <li><a href="https://www.tutorialspoint.com/data_structures_algorithms/hash_data_structure.htm" target="_blank">Hash Table</a></li>
+           <li><a href="https://www.youtube.com/watch?v=9YfCORwU9Uc&list=PL9mhQYIlKEhdvKFh-wVpDuihNQv6C1gSy&index=11&t=0s" target="_blank">Hash Table lecture by SKplanet</a></li>
+           <li><a href="https://www.geeksforgeeks.org/hashing-set-2-separate-chaining/" target="_blank">Chanining</a></li>
+           <li><a href="https://www.geeksforgeeks.org/hashing-set-3-open-addressing/" target="_blank">Open addressing</a></li>
+           <li><a href="https://www.youtube.com/watch?v=BoZbu1cR0no" target="_blank">Quadratic Probing</a></li>
+           <li><a href="https://cathyatseneca.gitbooks.io/data-structures-and-algorithms/content/tables/quadratic_probing_and_double_hashing.html" target="_blank">More Quadratic Probing</a></li>
+        </ul>
+
+    </div>
+</div>
+
+</div>
+</body>
+
+</html>
