@@ -61,14 +61,15 @@
 
     <h5 id="1">What is Hash Table?</h5>
     For me, I find it easy to learn a concept and keep it intact in my memory 
-    if I know full story and their applications. So let's begin why Hash table
+    if I know its full story and their applications. So let's begin with why Hash table
     were invented.
     <br><br>
-    <p>Invented to improve from deficiency that <b>Direct Access Tables</b> were facing.
+    <p>They were invented to improve from deficiency that <b>Direct Access Tables</b> were facing.
         <br>
-        Direct access table is a table with indexes therefore desired data could be directly
-        reached with O(1) time complexity. For example, for each of your friend if you enter their name on your directory
-        all their informations show up, this is direct access table.
+        Direct access table is a table where each data has associated index therefore desired data could
+         be directly reached with O(1) time complexity.
+          For example, for each of your friend if you enter their name on your directory
+        all their informations show up, this is direct access table where name is the index.
         <br>
         In mathematical terms its an injective function or one-on-one mapping.
     </p>
@@ -80,16 +81,19 @@
     <p>Even though all operations have exceptional small time complexity, it suffers largely 
         from space complexity. Since for each friend there must be extra space for each index that 
         points to information. In practice as list of friends become larger space that are
-         being wasted grows.
+         being wasted grows since you are not always looking for all your friends at once.
     </p>
     <p> Say there are 100 students in a school where on average 50% of students study in the library, 
-        you want to create a library 100 seats for each
-        students most of the seats will not be occupied. On average less than half will not be used and in break times 
-        none of them will be used. Now to avoid this problem where most desks space are unused arise Hash Table.
+        if you want to create a library of 100 seats for each
+        students, half of the seats will not be occupied.
+         On average less than half will not be used and in break times 
+        none of them will be used.
+         Now to avoid this problem where most desks space are unused arise Hash Table.
     </p>
-    <p> Using the same analogy, you might assign 2 student per desk therefore you only need 50 desks instead of creating 100.
+    <p> Using the same analogy, you might assign 2 student per desk therefore you only need 50 desks instead of 100.
         From student_1 to student_100, we use a function called hash function to efficiently assign two students to one desk.
-        In this case we will use modular arithmetics and create hash function denoted h(x) where x represents student number.
+        In this case we will use modular arithmetics (hash function may not be modular arithmetics)
+         and create hash function denoted h(x) where x represents student number.
     </p>
     <p>h(x) = x mod 50, which returns what is left after dividing x by 50.</p>
     <ul>
@@ -100,41 +104,49 @@
     </ul> 
 
     <p>So by using this hash function we are able to save our school from spending extra money on 50 desks.</p>
+    <p>The reason it is called a hash table is because original key is transformed via hash function which is 
+        now a key(index) of new table, hash table.
+    </p>
 
-    <p>Hash table's time complexity thus depends on its hash function, if hash function map multiple key into same
+    <p>Hash table's time complexity thus depends on its hash function thus main goal of using hash table 
+        is to use hash function that distribute original keys equally into hash table.
+         If hash function map multiple key into same
         position then when calling that index multiple values will be returned and from there you must search for 
         your desired result. This phenomenon is referred to as collision. When this happens there is two ways of 
         handling them:
         <ol>
-            <li id="1-1"><b>Chaining:</b> Creating a linked list whenever collision happens. Therefore when trying to search it
-                will have time complexity of O(len(linked_list)).<br>
+            <li id="1-1"><b>Chaining:</b> Creating a linked list whenever collision happens. 
+                Therefore when trying to search it will have time complexity of O(len(linked_list)).<br>
                 <u>benefits:</u>
                 <ul>
                     <li>Easy implementation</li>
-                    <li>When you do not know how many key will be inserted or deleted.</li>
+                    <li>You don't have to know how many keys will be inserted or deleted.</li>
                 </ul>
                  <u>disadvantages:</u>
                 <ul>
                     <li>Since it uses linked list data structure lacks cache performance</li>
-                    <li>Maybe some parts of hash are not used => space complexity increase w/o being used.</li>
-                    <li>When all key collide then search time becomes O(n).</li>
+                    <li>Maybe some parts of hash table are not used => space complexity increase w/o being used.</li>
+                    <li>In worst case, all key collide leading to O(n) search time.</li>
                 </ul>
             </li>
-            <li id="1-2"><b>Open addressing:</b> When collision happens, look for next empty space for stroing key as index of hash table and insertion takes place. 
+            <li id="1-2"><b>Open addressing:</b> When collision happens, look for next empty space for storing 
+                index. 
                 <br>
-                When searching, first goto assigned index then keep moving onto next hash table's index until wanted index is reached or until there is 
-                empty hash index (information of that key doesn't exist).
+                When searching, first goto assigned index then keep moving onto next hash table's index until 
+                wanted index is reached or until there is empty index (information of that index doesn't exist).
                 <br><br>
                 One thing to note is its deletion operation. When a key is deleted, its index in hash table is
                 marked as "deleted". Insertion can happen in "deleted" index however when searching instead of 
-                stopping since it is empty it ignores it and goes onto search next index.
+                stopping it skips "deleted" and keep searching.
                 <br><br>
                 <p>There are two types of Open addressing: Linear probing and Quadratic probing.</p>
-                <b id='1-2-1'>Linear Probing:</b> basically what I've described above. I will give an example for clarity.
+                <b id='1-2-1'>Linear Probing:</b> basically what I've described above. 
+                I will give an example for clarity.
                 <p>
-                    Until I buy digital pen, lets suffer together...
+                    Until I buy digital drawing pad, lets suffer together...
                     <br>
-                    Looking at image below: We are passing keys: 3, 4, 7, 10 through hash function h(x) to hash table.
+                    Looking at image below: We are passing keys: 3, 4, 7, 10 through hash function h(x) to
+                     hash table.
                     <p>
                         <ol>
                             <li>key = 3, h(3) = 3 mod 3 = 0 so it gets assigned to 0th index. All is good.</li>
@@ -190,10 +202,8 @@
         </ol>
     </p>
 
-    <p> In summary, to avoid space complexity we use hash table <b>but</b> time complexity increase as collision happens so 
+    <p> In summary, to avoid space complexity we use hash functions <b>but</b> time complexity increase as collision happens so 
     final goal is to crease hash table with hash function that minimize collisions.</p>
-    <p>Material is longer than I've expected so we will cover implementation in python and more in next blog.</p>
-    <p>Thanks.</p>
     
 
     <div id='reference' class="references">
