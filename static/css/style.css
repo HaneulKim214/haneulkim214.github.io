@@ -416,12 +416,13 @@ Extra (xl) large devices (large desktops, 1200px and up)
 	transform: translateY(-10%) translateX(-50%);
 }
 
-#carousel div.hideRight {
-	left: 100%;
-	opacity: 0;
-	transform: translateY(-10%) translateX(-50%);
+#carousel div.prevLeftSecond {
+  width: 40%;
+	z-index: 4;
+	left: 15%;
+	transform: translateY(1%) translateX(-50%);
+	opacity: .5;
 }
-
 
 #carousel div.prev {
   width: 45%;
@@ -429,15 +430,6 @@ Extra (xl) large devices (large desktops, 1200px and up)
 	left: 27%;
   transform: translateY(15%) translateX(-50%);
   opacity: 0.7;
-}
-
-
-#carousel div.prevLeftSecond {
-  width: 40%;
-	z-index: 4;
-	left: 15%;
-	transform: translateY(1%) translateX(-50%);
-	opacity: .5;
 }
 
 #carousel div.selected {
@@ -463,6 +455,13 @@ Extra (xl) large devices (large desktops, 1200px and up)
 	transform: translateY(20%) translateX(-70%);
 	opacity: .7;
 }
+
+#carousel div.hideRight {
+	left: 100%;
+	opacity: 0;
+	transform: translateY(-10%) translateX(-50%);
+}
+
 .buttons {
   /* position: fixed; */
   margin-top: 2rem;
@@ -470,6 +469,7 @@ Extra (xl) large devices (large desktops, 1200px and up)
 	transform: translateX(-0%);
 	bottom: 100px;
 }
+
 /* ------------------- Book Description ------------------ */
 
 #hobbies #carousel .selected .book_description {
@@ -522,107 +522,6 @@ Extra (xl) large devices (large desktops, 1200px and up)
 
 
 /*------------------- Movies ----------------*/
-
-#hobbies #carousel_movies img{
-  width: 40%;
-  /* height: 200px; */
-}
-
-#carousel_movies {
-	position: relative;
-	height: 400px;
-	/* width: 50%; */
-	top: 50%;
-	transform: translateY(-50%);
-	overflow: hidden;
-}
-
-#carousel_movies div {
-	position: absolute;
-	transition: transform 1s, left 1s, opacity 1s, z-index 0s;
-	opacity: 1;
-}
-
-#carousel_movies div img {
-	width: 200px;
-	transition: width 1s;
-}
-
-#carousel_movies div.hideLeft_movies {
-	left: 0%;
-	opacity: 0;
-	transform: translateY(-10%) translateX(-50%);
-}
-
-#carousel_movies div.hideLeft_movies img {
-	width: 100px;
-}
-
-#carousel_movies div.hideRight_movies {
-	left: 100%;
-	opacity: 0;
-	transform: translateY(50%) translateX(-50%);
-}
-
-#carousel_movies div.hideRight_movies img {
-	width: 100px;
-}
-
-#carousel_movies div.prev_movies {
-	z-index: 1;
-	left: 27%;
-  transform: translateY(20%) translateX(-50%);
-  opacity: 0.7;
-}
-
-#carousel_movies div.prev_movies img {
-	width: 150px;
-}
-
-#carousel_movies div.prevLeftSecond_movies {
-	z-index: 4;
-	left: 15%;
-	transform: translateY(6%) translateX(-50%);
-	opacity: .5;
-}
-
-#carousel_movies div.prevLeftSecond_movies img {
-	width: 100px;
-}
-
-#carousel_movies div.selected_movies {
-  width: 55%;
-	z-index: 10;
-	left: 50%;
-	transform: translateY(30%) translateX(-50%);
-}
-
-#carousel_movies div.next_movies {
-	z-index: 1;
-	left: 70%;
-	transform: translateY(50px) translateX(-50%);
-}
-
-#carousel_movies div.next_movies img {
-	width: 150px;
-}
-
-#carousel_movies div.nextRightSecond_movies {
-	z-index: 4;
-	left: 85%;
-	transform: translateY(80%) translateX(-70%);
-	opacity: .7;
-}
-
-#carousel_movies div.nextRightSecond_movies img {
-	width: 100px;
-}
-.buttons_movies {
-	/* position: fixed; */
-	left: 2%;
-	transform: translateX(-0%);
-	bottom: 100px;
-}
 
 @media (max-width: 767px) {
   #hobbies #carousel img{
