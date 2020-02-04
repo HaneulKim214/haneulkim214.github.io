@@ -54,7 +54,6 @@
     <p>By definition topological sort is linear ordering of vertices such that for every directed edge (u,v),
         vertex u must come before v in the ordering.
     </p>
-    <p>It is simply ordering of vertices so that edges point from lower order to higher order.</p>
     <p>One simple analogy is taking courses in University. Most courses have pre-requisites therefore
         you must satisfy all pre-requisites before taking more advanced course. Topological sort would
         be used for ordering courses so that pre-requisites would be met. 
@@ -94,79 +93,24 @@
     <p><b>5.</b> Since H do not have any out-going edge insert into stack.</p>
     <img src="../photos/top_sort_5.png" alt="">
     <p>Now j has no out-going edge so insert it to stack
-        <img src="../photos/top_sort_6.png" alt="">
     </p>
+    <img src="../photos/top_sort_6.png" alt="">
     <p>Keep moving backwards and insert into stack accordingly thus left with vertex E and F.</p>
-    <p><b>6.</b> Repeating steps above we now start with vertex E(lower in-degree) giving us</p>
+    <p><b>6.</b> Repeating steps on remaining graph.</p>
+    <img src="../photos/top_sort_7.png" alt="">
+    <p><b>1.</b> Vertex E has 0 in-degree and F has 1 in-degree. Start from vertex E, mark it visited and move on.
+    Since F is last vertex with no out going edge stop there and move backwards inserting F then E into the stack.</p>
+    <img src="../photos/top_sort_8.png" alt="">
+    <p>We are done ordering vertices. Since it is in stack data structure we need to </p>
+
     <h5 id="2">Python Implementation</h5>
     
-    <h5 id="3">Graph representation</h5>
-    <p>Finally we are done with terminologies lets see how to represent graph data structures.</p>
-
-    <b id="3-1">Adjacency list</b>
-    <p>
-        For each vertex it has a list associated with it where elements represent vertex that it 
-        points to. In Python dictionary of lists are used to represent this, each key is a vertex and 
-        value is list of vertices that key(vertex) is pointing to (directly).
-    </p>
-    <pre>
-    adj_list = {
-        1: [2, 4],
-        2: [5],
-        3: [6,5],
-        4: [2],
-        5: [4],
-        6: [6]
-    }
-    </pre>
-    <p>Code above represent below picture.</p>
-    <p>Looking at vertex 1, we can see there are two edges going out to vertex 2 and 4 thus adj_list[1] = [2,4]</p>
-    <p>In undirected graph since vertex 1 contains [2,4] vertex 2 and 4 will contain 1 thus adj_list[2] = [1,4,5] and 
-        adj_list[4] = [1, 2, 5]. Note that order of vertex do not matter, adj_list[4] = [2,1,5] is okay as well.
-    </p>
-    <p>As graph becomes dense, number of edges increase approaching |E| = |V^2| using adjacency list becomes slow
-        since it require twice more space for edges going back and forth. For example if vertex 1 is connected to
-        all 2, 3, 4, 5, 6 then we require twice more space since we need to create list for 2 going to 1, 3 going to 1,
-        and so on...
-    </p>
-    <img src="../photos/graph_ds_6.png" alt="">
-    <p> For weighted graph using adjacency list take up one extra place for storing weight of edges.
-        If edge connecting A -> B has weight of 7, store it beside the vertex <pre>{A: [[B,7], [C, weight]]}</pre>
-    </p>
-    <p>Taking up extra space for weights.</p>
-    <br>
-
-    <b id="3-2">Adjacency matrix</b>
-    <p>As graph become dense it is more efficient to use adjacency matrix.</p>
-    <p>Below matrix represents graph in above example. Vertical axis represents vertex and horizontal
-        axis represents vertices that vertical axis' vertex points to.
-    </p>
-    <p>Vertex 1 points to 2 and 4 thus in adjacency matrix adj_matrix[1][2] = 1 and adj_matrix[1][4] = 1. All
-        other columns are set to 0 since vertex 1 do not point to them.
-    </p>
-    <p>Looking at vertex 2, it only points to vertex 5 therefore adj_matrix[2][5] = 1 and all other are 0.</p>
-
-    <p>It is very straight forward and you can see that no matter it is directed or undirected graph its space
-        complexity will always be V^2. 
-    </p>
-    <p> So for dense graphs adjacency matrix is more suitable and more sparse matrix using adjacency list would 
-        be suitable.
-    </p>
-    <img src="../photos/graph_ds_7.png" alt="">
-    <p>For weighted graphs replace 1 with appropriate weights</p>
-    <br><br>
 
 
     <div id='reference' class="references">
         <h5>References:</h5>
         <ul>
-            <li><a href="https://en.wikipedia.org/wiki/Graph_theory">History of graph theory</a></li>
-            <li><a href="https://en.wikipedia.org/wiki/Seven_Bridges_of_K%C3%B6nigsberg">Konigsberg bridge problem</a></li>
-            <li><a href="https://www.geeksforgeeks.org/graph-and-its-representations/">Graph representation</a></li>
-            <li><a href="https://www.youtube.com/watch?v=HDUzBEG1GlA">Graph representation + python implementation</a></li>
-            <li><a href="https://www.youtube.com/watch?v=VSgI2cr-f28&list=PL9mhQYIlKEhdvKFh-wVpDuihNQv6C1gSy&index=13">Graph representation (In korean)</a></li>
-            <li><a href="https://www.youtube.com/watch?v=G86PQ1OeNqg&list=PL9mhQYIlKEhdvKFh-wVpDuihNQv6C1gSy&index=13&t=0s">Terminologies (In korean)</a></li>
-            <li><a href="https://www.programiz.com/dsa/graph-adjacency-list">Adjacency list</a></li>
+
         </ul>
 
     </div>
