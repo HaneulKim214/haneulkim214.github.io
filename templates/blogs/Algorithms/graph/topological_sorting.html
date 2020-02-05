@@ -25,6 +25,7 @@
 <div class="col-md-3 side-bar">
     <ul>
         <li><a href="graph_data_structure.html">Graph Introduction</a></li>
+        <li><a href="dfs_bfs.html">Depth/Breadth First Search</a></li>
         <li><b>Topological Sorting</b></li>
         <li><a href="minimal_spanning_trees.html">Minimal Spanning Trees</a></li>
         <li><a href="shortest_path.html">Shortest Path Algorithms</a></li>
@@ -41,6 +42,11 @@
         <ul>
             <li>
                 <a href="#1">Topological Sort</a>
+                <ul>
+                    <li><a href="#1-1">List method</a></li>
+                    <li><a href="#1-2">Depth First Search method</a></li>
+                    <li><a href="#1-3">difference between two methods</a></li>
+                </ul>
             </li>
             <li><a href="#2">Python Implementation</a></li>
             <li><a href="#reference">References</a></li>
@@ -58,50 +64,52 @@
         you must satisfy all pre-requisites before taking more advanced course. Topological sort would
         be used for ordering courses so that pre-requisites would be met. 
     </p>
-    <p>Before moving on to an example note that topological sort only works when graph is directed acyclic graph (DAG).</p>
+    <p>Before moving on to an example note that topological sort only works when graph is <b>directed acyclic graph (DAG)</b>.</p>
     <p>Let's go through an example. Looking at graph below we notice that it is directed and acyclic.</p>
     <p>lets think of each vertex as courses we need to take in order to graduate, course B and E needs 
         A as pre-requisite and C need B as pre-requisite and so on...
     </p>
-    <p>So our goal is to order courses so that unsatisfied pre-requisite problem never arise.</p>
-    <img src="../photos/top_sort_1.png" alt="">
-    <p>There are two ways of performing topological sort which are by using:
+    <p>Topological sort has lots of applications in real world, some of them are build systems, advanced-packaging tools, task scheduling, pre-requisite
+        problems and anything that need an ordering where previous jobs must be done to move on.
+    </p>
+
+    <p>Now we know what topological sort is, lets talk about how it is done. There are two different methods
+        of performing topological sort, first we will use lists and second use Depth First Search.
+    </p>
+    <h6 id="1-1">Lists method</h6><nober style="color:red">What is the proper name for list method??</nober>
+
+    <p>
+        Topological sort using a list follows simple 3 steps:
         <ol>
-            <li>Stack</li>
-            <li>Queue</li>
+            <li>Create a list for storing vertices</li>
+            <li>Insert vertex with 0 in-degree(no incoming edge) into list and delete vertex and its edges(out-going edge since we pick vertex with no incoming edge).
+            </li>
+            <li>Repeat step 2 for all vertex until no more vertex is left in a graph.</li>
         </ol>
     </p>
-    <p>First we will go over above example by using stack data structure following steps below:</p>
+
+    <p>Pretty simple right? Lets clarify our understanding by going over simple example.</p>
+    
+    <h6 id="1-2">Depth First Search methods</h6>
+    <p>
+        For those of you needing quick recap on what DFS is, check out <a href="dfs_bfs.html">Depth/Breadth First Search</a> before
+        moving on.
+    </p>
+    <p>Assuming you know <b>exactly</b> what DFS is lets use it to perform topological sort. Similar to using list method
+    there are simple 3 steps:
     <ol>
-        <li>Find a starting point, vertex with lowest in-degree.</li>
-        <li>mark starting point as "visited" and go to next neighbour.</li>
-        <li>now mark 2nd vertex as "visited" and move to its neighour</li>
-        <li>follow these steps until vertex with no out-going edge is found</li>
-        <li>input vertex with no out-going edge into the stack and move backwards</li>
-        <li>repeat above steps until no more vertices are left.</li>
+        <li>Create a list</li>
+        <li>Perform DFS on vertex with no incoming edge, upon DFS if you are at a vertex with no adjacent vertex to 
+            goto, insert that vertex into list.
+        </li>
+        <li>Repeat step 2 until no more vertex to visit.</li>
     </ol>
-    <p>
-    <b>1.</b>Vertex with lowest in-degree is vertex A. So mark A visited and move onto its neighbour,
-        either B or E does not matter.<br>
-        <img src="../photos/top_sort_2.png" alt="">
     </p>
-    <p>
-        <b>2.Goto next neighbour vertex B, mark it "visited" and move on</b><br>
-        <b>3,4.Visit neighbours until vertex has no out-going edge.</b>
-        <img src="../photos/top_sort_4.png" alt="">
-    </p>
-    <p><b>5.</b> Since H do not have any out-going edge insert into stack.</p>
-    <img src="../photos/top_sort_5.png" alt="">
-    <p>Now j has no out-going edge so insert it to stack
-    </p>
-    <img src="../photos/top_sort_6.png" alt="">
-    <p>Keep moving backwards and insert into stack accordingly thus left with vertex E and F.</p>
-    <p><b>6.</b> Repeating steps on remaining graph.</p>
-    <img src="../photos/top_sort_7.png" alt="">
-    <p><b>1.</b> Vertex E has 0 in-degree and F has 1 in-degree. Start from vertex E, mark it visited and move on.
-    Since F is last vertex with no out going edge stop there and move backwards inserting F then E into the stack.</p>
-    <img src="../photos/top_sort_8.png" alt="">
-    <p>We are done ordering vertices. Since it is in stack data structure we need to </p>
+    <p>Let's go through an example to understand more deeply.</p>
+
+    <h6 id="1-3">difference between two methods</h6>
+
+    
 
     <h5 id="2">Python Implementation</h5>
     
