@@ -35,7 +35,7 @@
 <!-- ------------------------------ All Content goes here -------------------- -->
 <div class="col-md-6">
     <h2> Topological Sort: </h1>
-    <p class="date">date posted: 2020-02-02</p>
+    <p class="date">date posted: 2020-02-09</p>
     <br>
     <div class="toc">
         <h5>Contents</h5>
@@ -60,21 +60,22 @@
     <p>By definition topological sort is linear ordering of vertices such that for every directed edge (u,v),
         vertex u must come before v in the ordering.
     </p>
-    <p>One simple analogy is taking courses in University. Most courses have pre-requisites therefore
-        you must satisfy all pre-requisites before taking more advanced course. Topological sort would
-        be used for ordering courses so that pre-requisites would be met. 
-    </p>
-    <p>Before moving on to an example note that topological sort only works when graph is <b>directed acyclic graph (DAG)</b>.</p>
-    <p>Let's go through an example. Looking at graph below we notice that it is directed and acyclic.</p>
-    <p>lets think of each vertex as courses we need to take in order to graduate, course B and E needs 
-        A as pre-requisite and C need B as pre-requisite and so on...
-    </p>
     <p>Topological sort has lots of applications in real world, some of them are build systems, advanced-packaging tools, task scheduling, pre-requisite
         problems and anything that need an ordering where previous jobs must be done to move on.
     </p>
+    <p> One common analogy could be getting ready to go outside. A person needs to 1. take a shower 2. put on underwear 3. pants and so on...
+        This is an example of topological sort where each activity such as shower, underwear, pants can be 
+        thought of as a vertex and edge that allow the person to go from shower then underwear. Topological
+        sort is used to order activities that need specific execution order. 
+    </p>
+
+    <p>Before moving on to an example note that topological sort only works when graph is <b>directed acyclic graph (DAG)</b>.
+        It is very intuitive, if you would have a cycle then you would be stuck taking shower -> putting on underwear -> shower
+        on and on thus it wouldn't be possible.
+    </p>
 
     <p>Now we know what topological sort is, lets talk about how it is done. There are two different methods
-        of performing topological sort, first we will use lists and second use Depth First Search.
+        of performing topological sort.
     </p>
     <h6 id="1-1">Lists method</h6><nober style="color:red">What is the proper name for list method??</nober>
 
@@ -82,30 +83,88 @@
         Topological sort using a list follows simple 3 steps:
         <ol>
             <li>Create a list for storing vertices</li>
-            <li>Insert vertex with 0 in-degree(no incoming edge) into list and delete vertex and its edges(out-going edge since we pick vertex with no incoming edge).
+            <li>Find vertex with 0 in-degree(no incoming edge) then insert
+                 into list. Delete inserted vertex from graph and its
+                  edges(out-going edge since we pick vertex with no incoming edge).
             </li>
             <li>Repeat step 2 for all vertex until no more vertex is left in a graph.</li>
         </ol>
     </p>
 
     <p>Pretty simple right? Lets clarify our understanding by going over simple example.</p>
+    <p>Below graph is directed and has no cycles therefore lets perfrom topological sort!</p>
+    <img src="../photos/topo_sort_1png.png" alt="">
+
+    <p>There are two vertex that have 0 in-degree. Doesn't matter which one we choose first so
+        let's just go on and pick vertex A. Delete vertex and edges and insert vertex into a list.
+    </p>
+    <img src="../photos/topo_sort_2.png" alt="">
+    <p>Now vertex B and D have 0 in-degree, this time let's pick B.</p>
+    <img src="../photos/topo_sort_3.png" alt="">
+
+    <p>Next lets choose Vertex E.</p>
+    <img src="../photos/topo_sort_4.png" alt="">
+
+    <p> Choose D.</p>
+    <img src="../photos/topo_sort_5.png" alt="">
+    <p>You get the point... Now I will choose G, C, F, lastly H giving us list = [A, B, E, D, G, C, F, H].
+        Now we are done! If you check the list we've just created they are ordered so that for every directed
+        edge (u,v) vertex u comes before v in the ordering.
+    </p>
     
     <h6 id="1-2">Depth First Search methods</h6>
     <p>
         For those of you needing quick recap on what DFS is, check out <a href="dfs_bfs.html">Depth/Breadth First Search</a> before
         moving on.
     </p>
-    <p>Assuming you know <b>exactly</b> what DFS is lets use it to perform topological sort. Similar to using list method
-    there are simple 3 steps:
+    <p>Assuming you know <b>exactly</b> what DFS is lets use it to perform topological sort.
+         Similar to using list method there are 3 simple steps:
     <ol>
         <li>Create a list</li>
-        <li>Perform DFS on vertex with no incoming edge, upon DFS if you are at a vertex with no adjacent vertex to 
-            goto, insert that vertex into list.
+        <li>Perform DFS on vertex with no incoming edge, while performing DFS
+             if you reach vertex with no adjacent vertex, insert that vertex into list and mark it as "visited"
         </li>
         <li>Repeat step 2 until no more vertex to visit.</li>
     </ol>
     </p>
     <p>Let's go through an example to understand more deeply.</p>
+    <p>I will use same example as before however I will choose vertex B first and perform DFS.
+        B - C - F - H since H has no adjacency vertex, not G because vertex G and H has path (G,H).<br>
+        Insert H into our list and mark H as visited.
+    </p>
+    <img src="../photos/topo_sort_6.png" alt="">
+    
+    <p>Now going backwards we visit vertex F. Its only adjacency vertex is H however it is "visited" therefore
+        it has same as having no adjacency vertex. Insert vertex F into our list and mark it "visited". Do the same
+        for vertex C, now we are at vertex B. It has two adjacency vertex C and E but since C is visited
+        lets move down B - E - G.
+    </p>
+    <img src="../photos/topo_sort_7.png" alt="">
+    <p>Vertex G has one adjacency vertex H, it has been visited already so insert G into our list. 
+        Moving back to vertex E it has adjacency vertex G but has been visited so insert E into our list.
+        We are back to vertex B which had two adjacency vertices but both are visited therefore insert B into
+        our list.
+    </p>
+    <img src="../photos/topo_sort_8.png" alt="">
+    <p>We have list = [H, F, C, G, E, B] so far.
+    </p>
+
+    <p>Repeating step 2 only unvisited vertex with no incoming edge is vertex B.
+        There are two paths but only unvisited path is A - D moving down its path we stop at vertex D
+        since its adjacency vertices are visted therefore insert D into our list. Finally insert vertex A
+        into our list. As you can see now we have visited all vertices and left with 
+        list = [H, F, C, G, E, B, D, A].
+    </p>
+    <img src="../photos/topo_sort_9.png" alt="">
+
+    <p> NOTE: since list is in reverse order, reverse it.<br>
+        Finally reversted_list = [A, D, B, E, G, C, F, H] correctly sorted all vertices so that
+        for every directed edge (u,v) vertex u comes first in the list.  
+    </p>
+    <p>Some people probably realized that two different method output different ordering. It is not because
+        of difference in methods however topological sort can have multiple sorting order. <br>
+        In our case we could've started with vertex A or B which will give two different sorted list.
+    </p>
 
     <h6 id="1-3">difference between two methods</h6>
 
@@ -118,7 +177,10 @@
     <div id='reference' class="references">
         <h5>References:</h5>
         <ul>
-
+            <li><a href="https://www.geeksforgeeks.org/topological-sorting/">Intro to topological sorting</a></li>
+            <li><a href="https://www.youtube.com/watch?v=AfSk24UTFS8">Intro, MIT lecture (from 42:00)</a></li>
+            <li><a href="https://m.blog.naver.com/PostView.nhn?blogId=ndb796&logNo=221236874984&proxyReferer=https%3A%2F%2Fwww.google.com%2F">toplogical sorting with example (in korean)</a></li>
+            <li><a href="https://www.youtube.com/watch?v=HyVI8-nHgEg">DFS method video</a></li>
         </ul>
 
     </div>
