@@ -35,7 +35,7 @@
 <!-- ------------------------------ All Content goes here -------------------- -->
 <div class="col-md-6">
     <h2> DFS and BFS: </h1>
-    <p class="date">date posted: 2020-02-02</p>
+    <p class="date">date posted: 2020-02-10</p>
     <br>
     <div class="toc">
         <h5>Contents</h5>
@@ -50,18 +50,130 @@
     
     <br>
     <br>
+    <p>There are two main methods when it comes to searching graph data structures, trees, string, and much more which
+        are 
+        <b>depth first search</b> and <b>breadth first search</b>. 
+    </p>
 
     <h5 id="1">Depth First Search</h5>
+    <p>DFS for short uses stack data structure(LIFO) and it is edge based technique. Its goal is to find 
+        unvisited vertex then go down deep until no more vertex to visit then move backwards until there
+        is another vertex to visit that has not been visited already.
+    </p>
+    <p>
+        In real life it is like hiking a trail with multiple split trail. You would  
+        make a choice at each split trail until you meet a dead end, and at that time you would go backwards
+        to previous split way and from there you would goto other way if that way was not visited already.
+    </p>
     
+    <p>Lets go through DFS using a graph below by following:
+        <ol>
+            <li>Find a vertex to perform DFS, mark it as visited, insert into the stack and if it is visited
+                we output it.</li>
+            <li>Goto adjacency vertex and repeat step 1.</li>
+            <li>Repeat step 2 until no adjacency vertex or adjacency vertex has been visited already, 
+                pop that vertex out of stack and move backwards until there is another vertex to visit.
+            </li>
+            <li>While going back if vertex has vertex to visit repeat steps 1~3 else pop it from stack. If stack is empty 
+                we are done. </li>
+        </ol>
+    </p>
+    <img src="../photos/dfs_1.png" alt="">
+    <p>
+        <b>1.</b> choose a vertex to perfrom DFS, I will choose vertex A. Mark it visited, output it and 
+        insert into a stack.
+    </p>
+    <img src="../photos/dfs_2.png" alt="">
+    <p>
+        <b>2.</b> There are two adjacency vertex that have not been visited, you could pick either one but 
+        I will go ahead in alphabetical order and choose vertex B. <br>
+        <b>3.</b> following step 2 we get B -> D -> E -> G.
+    </p>
+    <img src="../photos/dfs_3.png" alt="">
+
+    <p>
+        <b>4.</b> Now since G has no adjacency vertex we pop it and go back its path.
+    </p>
+    <img src="../photos/dfs_4.png" alt="">
+
+    <p>
+       Now we are at vertex E. Its only adjacency vertex is G but has been visited already so pop it.<br>
+       Similiary pop vertex D, B.
+    </p>
+    <img src="../photos/dfs_5.png" alt="">
+
+    <p>Now since vertex A has unvisited adjacency vertex C repeat steps 1~3.<br>
+        <b>1.</b> Goto vertex C, mark it visited, insert to stack and output it.<br>
+        <b>2.</b> We are at vertex C. Since D has been visited we go down to F. <br>
+        <b>3.</b> We are at vertex F. No vertex to visit so time to go backwards.
+    </p>
+    <img src="../photos/dfs_6.png" alt="">
+
+    <p><b>4.</b> Pop F, C. Now we are left with vertex A its adjacency vertex all been visited so pop it.</p>
+    <img src="../photos/dfs_7.png" alt="">
+
+    <p>You can see that our stack is empty which implies that all vertices has been visited thus we just 
+        successfully finished depth first search.
+    </p>
 
     <h5 id="2">Breadth First Search</h5>
-    
+    <p>BFS is often used for finding shortest path, or whether or not there exists path between two verticies.
+        It is vertex based technique and uses queue data structure.
+    </p>
+    <p>
+        Unlike DFS where it goes deep down into one path BFS searches layer by layer, considering all
+        other possibilities before going deeper down. One application of BFS can be seen in social network where your direct friends
+         would be considered layer 1 and friends of friend are in layer 2 because you cannot reach them directly but
+         through your link(friend) and so on...
+    </p>
+    <p>For simplicity we will use same graph from DFS example and perfrom BFS this time by following following
+        steps:
+        <ol>
+            <li>Find starting point mark it as visited and insert into queue.</li>
+            <li>Following FIFO delete first item(vertex) in queue. Insert deleted vertex's adjacent 
+                vertex into queue and mark them as visited.
+            </li>
+            <li>Repeat step 2 until queue is empty.</li>
+        </ol>
+    </p>
 
+    <p><b>1.</b> Choose starting point, vertex A. Mark it visited and insert into queue.</p>
+    <img src="../photos/bfs_1.png" alt="">
+    <p><b>2.</b> delete first item in queue which is vertex A and insert all its adjacency vertex and mark them
+    as visited. Doesn't matter which vertex to insert first but we will just follow alphabetical order and insert
+    vertex B first.</p>
+    <img src="../photos/bfs_2.png" alt="">
+    <p>
+        Now first item in queue is B. Delete it and insert its adjacent vertices into the queue and mark them visited.
+    </p>
+    <img src="../photos/bfs_3.png" alt="">
+    <p>Repeating the steps, we will delete vertex C from queue and insert its adjacent vertices but since
+        D is already visited, just insert F. <br>
+        Do the same for vertex D: since E is visited insert G into the queue.
+    </p>
+    <img src="../photos/bfs_4.png" alt="">
+    <p>Now we have delete E, F, G in order and since all of them have no unvisited adjacent vertex
+        nothing to insert to queue and it becomes empty.
+    </p>
+    <img src="../photos/bfs_5.png" alt="">
+    <p>Now we have successfully done breadth first search. If you at deleted vertex we can see that 
+        they are in order of their depth, vertex A have depth 0, {B,C} have depth = 1, {D, E, F} have depth = 2,
+        and finally {G} has depth =3. <br>
+
+        So we searched all friends first, then friend's friends, and so on...
+    </p>
+    <!-- <p>Choosing the starting point depends on what problem you are using BFS to solve for example if you want to
+        find shortest path between two path, in directed graph (u, v) vertex U would be the starting point.
+    </p> -->
 
     <div id='reference' class="references">
         <h5>References:</h5>
         <ul>
-
+            <li><a href="https://www.youtube.com/watch?v=TIbUeeksXcI">DFS Vs. BFS video.</a></li>
+            <li><a href="https://www.youtube.com/watch?v=AfSk24UTFS8">DFS MIT lecture.</a></li>
+            <li><a href="https://www.youtube.com/watch?v=s-CYnVz-uh4">BFS MIT lecture.</a></li>
+            <li><a href="https://stackoverflow.com/questions/60145739/how-to-choose-starting-point-in-breadth-first-search">How to choose starting point in BFS</a></li>
+            
         </ul>
 
     </div>
