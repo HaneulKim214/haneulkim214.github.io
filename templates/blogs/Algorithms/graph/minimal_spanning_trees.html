@@ -35,15 +35,16 @@
 <!-- ------------------------------ All Content goes here -------------------- -->
 <div class="col-md-6">
     <h2> Minimal Spanning Tree: </h1>
-    <p class="date">date posted: 2020-02-02</p>
+    <p class="date">date posted: 2020-02-</p>
     <br>
     <div class="toc">
         <h5>Contents</h5>
         <ul>
             <li>
-                <a href="#1">Topological sorting</a>
+                <a href="#1">What is Minimal Spanning Tree?</a>
             </li>
-            <li><a href="#2">Python Implementation</a></li>
+            <li><a href="#2">Kruskal's Algorithm</a></li>
+            <li><a href="#3">Prim's Algorithm</a></li>
             <li><a href="#reference">References</a></li>
         </ul>
     </div>
@@ -51,143 +52,42 @@
     <br>
     <br>
 
-    <h5 id="1">Graph Theory</h5>
-    <p><b>History alert!</b> Graph data structure originated from graph theory which is branch of 
-    Mathematics. Leonhard Euler, one of great mathematician
-     had published a paper in 1736 about Seven bridges of Konigsberg which is 
-    considered first paper of graph theory. Around that time seven bridge of Konigsberg was a notable 
-    problem in Mathematics, where the goal of the problem was to find a path that allow you to 
-    cross all bridges once and only once.</p>
-    <p>Below picture shows actual map of city of Konigsberg in Prussia, now Kaliningrad, Russia.</p>
-    <img src="../photos/graph_ds_1.png" alt="">
-    <p>In Leonhard Euler's paper he had proved with mathematic rigor that it was not possible to cross each
-        bridge once and only once.
-    </p>
-    <p>This is the beginning of graph theory and stepping stone for other branch of mathematics such as Topology.</p>
-    
-    <h5 id="2">Graph data structure</h5>
-    <p>Graph data structure consists of two elements called vertex and edge. Two main type of graphs, which are 
-        undirected graphs where edges have no direction and directed graph where edges have a direction.
-    </p>
-    <p>Using map of Konigsberg, bridges are considered edges and each land is considered a vertex and since 
-        you can cross each bridges in either direction this is an example of undirected graphs.
-    </p>
-    <p>map of Konigsberg would look like picture below if it is converted to vertices and edges.</p>
-    <img src="../photos/graph_ds_2.png" alt="">
-
-    <p>Using the picture above lets go over basic terminologies:</p>
-    <div>
-        <ul>
-            <li><b>Degree</b>: number of edges connected to a vertex. So vertex 1 would have degree 4 and all other vertices will have
-                degree 3. However in directed graphs there are two degree one going out called out-degree and coming in called 
-                in-degree.
-            </li>
-            <li><b>Path</b>: When going from vertex 1 to vertex 3, there are many different ways and each of them are
-            called paths. You could go 1 -> 3 or 1 ->2 ->3 or 1 -> 4 -> 3. They are all paths.</li>
-            <li><b>Simple Path</b>: path that crosses least edge, in our case 1 -> 3.</li>
-            <li><b>Cycle</b>: when start vertex and end vertex are the same it creates a cycle. So 1 -> 4 -> 1 is a cycle. 
-            Simple cycle is when there are no overlapping vertex in a cycle.</li>
-            <li><b>Acyclic graph</b>: graph with no cycles. Our graph is undirected cyclic graph since edges have no
-            directions and there are many cycles 1 -> 2 ->1, 1 ->4 -> 3 -> 2 -> 1 and more.</li>
-            <li><b>Connected graph</b>: A graph is said to be connected if any two vertex have path that connect them.</li>
-            <li><b>Connected componenets</b>: Subgraph where any two vertices are connected to eath other but not connected
-            to additional vertices in whole graph. Lets look at the picture below to clarify our understanding. Graph below
-            is <b>Not</b> connected since if you chose vertex 1, 9 they are not connected. From one whole graph there
-            are 3 subgraphs that are connected, our first subgraph consisting of vertices 1,2,3,4 are connected since any
-            two vertex you choose there exists a path between them. Same goes for subgraph 5,6,7 and 8,9. Graph is not connected
-            however it has 3 connected components(subgraphs).</li>
-            <img src="../photos/graph_df_3.png" alt="">
-            <li><b>Strongly connected</b>: In directed graph, if two vertex point to each other, it is called "strongly connected".
-            there are 3 subgraphs belows, 1 -> 2 is a connected graph however not strongly connected since 2 does not point to 1.
-            Second subgraph 3 -> 4, 4 -> 3 is a strongly connected graph since two vertex point to each other.<br>
-            Lastly, 5 -> 6 -> 7 -> 8 is also strongly connected graph, why? because if you pick vertex 5 and 7, vertex 5 points to 7
-            by using 6, 5 -> 6 -> 7. Similarily 7 points to vertex 5 by using 8, 7 -> 8 -> 5 therefore any two vertex you choose
-            they will point to each other with the help of other vertex (there exists path).
-            </li>
-            <li><b>Strongly connected components</b>: Similar to connected components, it is subgraphs that are strongly connected
-            so in our case there exists two strongly connected components.</li>
-            <img src="../photos/graph_ds_4.png" alt="">
-            <li><b>Complete graph</b>: Any vertex can be reached by only crossing one edge, in other words all vertices are
-            directly connected to each other.</li>
-            <li><b>Forest</b>: Acyclic undirected graphs</li>
-            <li><b>Tree</b>: connected Acyclic undirected graphs, or forest that is connected.</li>
-            <br>
-            <p>Starting from left, it is acyclic, undirected therefore satisfy condition to be a Forest. It is 
-                also connected thus it is both Forest and a Tree.
-            </p>
-            <p>Second, It is Acyclic and undirected however it is not connected thus it is only a Forest.</p>
-            <p>Lastly, there exist a pentagon in the middle forming a cycle thus it does not satisfy either one.</p>
-        </ul>
-        <img src="../photos/graph_ds_5.png" alt="">
-    </div>
-
-    <h5 id="3">Graph representation</h5>
-    <p>Finally we are done with terminologies lets see how to represent graph data structures.</p>
-
-    <b id="3-1">Adjacency list</b>
+    <h5 id="1">What is Minimal Spanning Tree?</h5>
     <p>
-        For each vertex it has a list associated with it where elements represent vertex that it 
-        points to. In Python dictionary of lists are used to represent this, each key is a vertex and 
-        value is list of vertices that key(vertex) is pointing to (directly).
+        Just by the name Minimal Spanning Tree it explains everything. We've already learned that tree is an acyclic
+        undirected graph if you are familiar with graph terminologies I recommend you to check out 
+        <a href="graph_data_structure.html">graph introduction</a>.
     </p>
-    <pre>
-    adj_list = {
-        1: [2, 4],
-        2: [5],
-        3: [6,5],
-        4: [2],
-        5: [4],
-        6: [6]
-    }
-    </pre>
-    <p>Code above represent below picture.</p>
-    <p>Looking at vertex 1, we can see there are two edges going out to vertex 2 and 4 thus adj_list[1] = [2,4]</p>
-    <p>In undirected graph since vertex 1 contains [2,4] vertex 2 and 4 will contain 1 thus adj_list[2] = [1,4,5] and 
-        adj_list[4] = [1, 2, 5]. Note that order of vertex do not matter, adj_list[4] = [2,1,5] is okay as well.
+    <p>
+        Spanning Tree of a graph G is a tree that spans G => include every vertex in G and is a subgraph of G. Spanning tree
+        of a graph must include all vertices but not edges, it can contain all edges or subset of edges.
     </p>
-    <p>As graph becomes dense, number of edges increase approaching |E| = |V^2| using adjacency list becomes slow
-        since it require twice more space for edges going back and forth. For example if vertex 1 is connected to
-        all 2, 3, 4, 5, 6 then we require twice more space since we need to create list for 2 going to 1, 3 going to 1,
-        and so on...
+    <p>
+        Minimal Spanning Tree is a spanning tree that have lowest cost => sum of edges' weight are the lowest among other
+        spanning trees.
     </p>
-    <img src="../photos/graph_ds_6.png" alt="">
-    <p> For weighted graph using adjacency list take up one extra place for storing weight of edges.
-        If edge connecting A -> B has weight of 7, store it beside the vertex <pre>{A: [[B,7], [C, weight]]}</pre>
+    <p>
+        There are multiple applications of MST in network design such as telephone line, electrical cables, TV cables, computer and more.<br>
+        Say that there are five cities that your company provides electricity to, from your electrical power plant there are
+        multiple cables that are connected to each of five cities. Now company need to maximize profit therefore will
+        try to find electricity cables that reach all five cities with lowest costs. Another use case can be uber-eats where 
+        you want to deliver many houses(verticies) in shortes amount of time which can be done by taking shortest paths
+        from one house to another.
     </p>
-    <p>Taking up extra space for weights.</p>
-    <br>
 
-    <b id="3-2">Adjacency matrix</b>
-    <p>As graph become dense it is more efficient to use adjacency matrix.</p>
-    <p>Below matrix represents graph in above example. Vertical axis represents vertex and horizontal
-        axis represents vertices that vertical axis' vertex points to.
+    <p>We know what Minimal Spanning Trees are but how to efficiently find them?</p>
+    <p>Two famous algorithm for finding Minimal Spanning Tree are Kruskal and Prim's algorithm which follow
+        greedy approach.
     </p>
-    <p>Vertex 1 points to 2 and 4 thus in adjacency matrix adj_matrix[1][2] = 1 and adj_matrix[1][4] = 1. All
-        other columns are set to 0 since vertex 1 do not point to them.
-    </p>
-    <p>Looking at vertex 2, it only points to vertex 5 therefore adj_matrix[2][5] = 1 and all other are 0.</p>
+    <h5 id="2">Krukal's Algorithm</h5>
 
-    <p>It is very straight forward and you can see that no matter it is directed or undirected graph its space
-        complexity will always be V^2. 
-    </p>
-    <p> So for dense graphs adjacency matrix is more suitable and more sparse matrix using adjacency list would 
-        be suitable.
-    </p>
-    <img src="../photos/graph_ds_7.png" alt="">
-    <p>For weighted graphs replace 1 with appropriate weights</p>
-    <br><br>
+    <h5 id="3">Prim's Algorithm</h5>
 
 
     <div id='reference' class="references">
         <h5>References:</h5>
         <ul>
-            <li><a href="https://en.wikipedia.org/wiki/Graph_theory">History of graph theory</a></li>
-            <li><a href="https://en.wikipedia.org/wiki/Seven_Bridges_of_K%C3%B6nigsberg">Konigsberg bridge problem</a></li>
-            <li><a href="https://www.geeksforgeeks.org/graph-and-its-representations/">Graph representation</a></li>
-            <li><a href="https://www.youtube.com/watch?v=HDUzBEG1GlA">Graph representation + python implementation</a></li>
-            <li><a href="https://www.youtube.com/watch?v=VSgI2cr-f28&list=PL9mhQYIlKEhdvKFh-wVpDuihNQv6C1gSy&index=13">Graph representation (In korean)</a></li>
-            <li><a href="https://www.youtube.com/watch?v=G86PQ1OeNqg&list=PL9mhQYIlKEhdvKFh-wVpDuihNQv6C1gSy&index=13&t=0s">Terminologies (In korean)</a></li>
-            <li><a href="https://www.programiz.com/dsa/graph-adjacency-list">Adjacency list</a></li>
+            <li><a href="https://www.geeksforgeeks.org/applications-of-minimum-spanning-tree/">Applications of MST</a></li>
         </ul>
 
     </div>
