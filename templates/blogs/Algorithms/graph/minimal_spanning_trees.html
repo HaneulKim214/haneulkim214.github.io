@@ -43,8 +43,16 @@
             <li>
                 <a href="#1">What is Minimal Spanning Tree?</a>
             </li>
-            <li><a href="#2">Kruskal's Algorithm</a></li>
-            <li><a href="#3">Prim's Algorithm</a></li>
+            <li><a href="#2">Kruskal's Algorithm</a>
+                <ul>
+                    <li><a href="#2-1">Python implementation</a></li>
+                </ul>
+            </li>
+            <li><a href="#3">Prim's Algorithm</a>
+                <ul>
+                    <li><a href="#3-1">Python implementation</a></li>
+                </ul>
+            </li>
             <li><a href="#reference">References</a></li>
         </ul>
     </div>
@@ -55,7 +63,7 @@
     <h5 id="1">What is Minimal Spanning Tree?</h5>
     <p>
         Just by the name Minimal Spanning Tree it explains everything. We've already learned that tree is an acyclic
-        undirected graph if you are familiar with graph terminologies I recommend you to check out 
+        undirected graph if you are unfamiliar with graph terminologies I recommend you to check out 
         <a href="graph_data_structure.html">graph introduction</a>.
     </p>
     <p>
@@ -63,7 +71,7 @@
         of a graph must include all vertices but not edges, it can contain all edges or subset of edges.
     </p>
     <p>
-        Minimal Spanning Tree is a spanning tree that have lowest cost => sum of edges' weight are the lowest among other
+        Minimal Spanning Tree is a spanning tree that have lowest cost => sum of edges' weights are the lowest among other
         spanning trees.
     </p>
     <p>
@@ -79,15 +87,40 @@
     <p>Two famous algorithm for finding Minimal Spanning Tree are Kruskal and Prim's algorithm which follow
         greedy approach.
     </p>
-    <h5 id="2">Krukal's Algorithm</h5>
+    <h5 id="2">Kruskal's Algorithm</h5>
+    <p>
+        Kruskal's algorithm is one of greedy algorithm since it chooses local minimum. Kruskal's algorithm
+        treats graph as a forest and nodes as individual trees and at each step it must satisfy 
+        properties of a minimum spanning tree that is tree(node) connecting to another tree(node) must have 
+        lowest cost and it cannot contain a cycle.
+        <nobr style="color:red">By definition tree needs to be undirected acyclic graph but does MST need to
+        be undirected??</nobr>
+
+        <p>Miminimum spanning tree of a graph could be found by using Kruskal's algorithm following three steps:
+            <ol>
+                <li>Remove loops and parallel edges</li>
+                <li>Sort all edges in increasing order</li>
+                <li>Add edges with least weight if adding it still satisfy MST property otherwise skip it.
+                </li>
+            </ol>
+        </p>
+    </p>
+
+    <p>For clarity we will use three steps explained above to find minimum spanning tree for below example.
+    </p>
+
+    <h6 id="2-1">Python implementation</h6>
+
 
     <h5 id="3">Prim's Algorithm</h5>
-
+    <h6 id="3-1">Python implementation</h6>
 
     <div id='reference' class="references">
         <h5>References:</h5>
         <ul>
             <li><a href="https://www.geeksforgeeks.org/applications-of-minimum-spanning-tree/">Applications of MST</a></li>
+            <li><a href="https://www.tutorialspoint.com/data_structures_algorithms/kruskals_spanning_tree_algorithm.htm">Kruskal's algorithm</a></li>
+            <li><a href="https://www.tutorialspoint.com/data_structures_algorithms/prims_spanning_tree_algorithm.htm">Prim's algorithm with same example as above</a></li>
         </ul>
 
     </div>
