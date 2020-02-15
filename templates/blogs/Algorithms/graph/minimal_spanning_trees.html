@@ -35,7 +35,7 @@
 <!-- ------------------------------ All Content goes here -------------------- -->
 <div class="col-md-6">
     <h2> Minimal Spanning Tree: </h1>
-    <p class="date">date posted: 2020-02-</p>
+    <p class="date">date posted: 2020-02-15</p>
     <br>
     <div class="toc">
         <h5>Contents</h5>
@@ -44,14 +44,11 @@
                 <a href="#1">What is Minimal Spanning Tree?</a>
             </li>
             <li><a href="#2">Kruskal's Algorithm</a>
-                <ul>
-                    <li><a href="#2-1">Python implementation</a></li>
-                </ul>
             </li>
             <li><a href="#3">Prim's Algorithm</a>
-                <ul>
-                    <li><a href="#3-1">Python implementation</a></li>
-                </ul>
+            </li>
+            <li>
+                <a href="#4">Kruskal Vs. Prim's</a>
             </li>
             <li><a href="#reference">References</a></li>
         </ul>
@@ -62,13 +59,14 @@
 
     <h5 id="1">What is Minimal Spanning Tree?</h5>
     <p>
-        Just by the name Minimal Spanning Tree it explains everything. We've already learned that tree is an acyclic
+        Just by the name Minimal Spanning Tree it self explanatory. We've already learned that tree is an acyclic
         undirected graph if you are unfamiliar with graph terminologies I recommend you to check out 
         <a href="graph_data_structure.html">graph introduction</a>.
     </p>
     <p>
         Spanning Tree of a graph G is a tree that spans G => include every vertex in G and is a subgraph of G. Spanning tree
-        of a graph must include all vertices but not edges, it can contain all edges or subset of edges.
+        of a graph must include all vertices but no restriction on edges, just need edges to help you reach all
+        vertices.
     </p>
     <p>
         Minimal Spanning Tree is a spanning tree that have lowest cost => sum of edges' weights are the lowest among other
@@ -77,7 +75,7 @@
     <p>
         There are multiple applications of MST in network design such as telephone line, electrical cables, TV cables, computer and more.<br>
         Say that there are five cities that your company provides electricity to, from your electrical power plant there are
-        multiple cables that are connected to each of five cities. Now company need to maximize profit therefore will
+        multiple cables that are connected to each five cities. Now company need to maximize profit therefore will
         try to find electricity cables that reach all five cities with lowest costs. Another use case can be uber-eats where 
         you want to deliver many houses(verticies) in shortes amount of time which can be done by taking shortest paths
         from one house to another.
@@ -85,18 +83,13 @@
 
     <p>We know what Minimal Spanning Trees are but how to efficiently find them?</p>
     <p>Two famous algorithm for finding Minimal Spanning Tree are Kruskal and Prim's algorithm which follow
-        greedy approach.
+        greedy approach => at each step only think about achieving local minimum.
     </p>
     <h5 id="2">Kruskal's Algorithm</h5>
     <p>
-        Kruskal's algorithm is one of greedy algorithm since it chooses local minimum. Kruskal's algorithm
-        treats graph as a forest and nodes as individual trees and at each step it must satisfy 
-        properties of a minimum spanning tree that is tree(node) connecting to another tree(node) must have 
-        lowest cost and it cannot contain a cycle.
-        <nobr style="color:red">By definition tree needs to be undirected acyclic graph but does MST need to
-        be undirected??</nobr>
-
-        <p>Miminimum spanning tree of a graph could be found by using Kruskal's algorithm following three steps:
+        First, Kruskal's algorithm figures out all information about its edges weight and use them to connect 
+        vertices without breaking property of MST. <br>
+        <p>Kruskal's algorithm follows three steps:
             <ol>
                 <li>Remove loops and parallel edges</li>
                 <li>Sort all edges in increasing order</li>
@@ -104,23 +97,142 @@
                 </li>
             </ol>
         </p>
+
+        There are two main method of efficiently realizing whether or not when connecting to vertices creates a cycle.
+        <br>
+        <ol>
+            <li>DFS:
+                If you are not sure what dfs is you can refer to 
+                <a href="http://127.0.0.1:5502/templates/blogs/Algorithms/graph/dfs_bfs.html">DFS and BFS</a> <br>
+                however this has costly.
+            </li>
+            <li>Disjoint method: alternative to costly DFS, it simply treats each vertices as set containing only one 
+                vertex hence all sets are disjoint with each other.<br>
+                By traversing ascending edge list we check if two vertices being connecting by an edge are disjoint if not
+                we join them and move on.
+            </li>
+        </ol>
+        
+        <nobr style="color:red">By definition tree needs to be undirected acyclic graph but does MST need to
+        be undirected??</nobr>
     </p>
 
-    <p>For clarity we will use three steps explained above to find minimum spanning tree for below example.
+    <p>Let's do an example using disjoint method.
     </p>
-
-    <h6 id="2-1">Python implementation</h6>
-
+    <img src="../photos/kruskal_1.png" alt="">
+    <p>
+        1. vertex E has edge that creates a loop and C-G has parallel edges so delete loop and higher weight edge.<br>
+        2. Sort all edges in increasing order.
+    </p>
+    <img src="../photos/kruskal_2.png" alt="">
+    <p>
+        Now remove all edges, consider each vertex as a set and perform step 3 using disjoint method.
+    </p>
+    <p>
+        Note that if two edges have same weight it doesn't matter which one you sort first.
+        We see edge A-B is the lowest and {A} ∩ {B} = { } so connect A-B.
+    </p>
+    <img src="../photos/kruskal_3.png" alt="">
+    <p>
+        So now {A} and {B} are joined => {A, B}.
+    </p>
+    <p>
+        Next, B-C is lowest edge and {A, B} ∩ {C} = { }. so connect them. and join sets {A, B, C}<br>
+        repeating the steps E-F, D-G we now have {A, B, C} , {E, F} and {D, F}<br>
+    </p>
+    <img src="../photos/kruskal_4.png" alt="">
+    <p>
+        As you can see in above grpah three sets are not connected to each other => disjoint sets.
+        <br>
+        Almost done, connect A-E since {A, B, C} ∩ {E, F} = { }.<br>
+        B-F, {A, B, C, E, F}, ∩ {F} = {F} => not an empty set so we do not add B-F.
+    </p>
+    <img src="../photos/kruskal_5.png" alt="">
+    <p>
+        C-G is successfully connected. and since we've visited all vertices we can stop here you can move on but 
+        after all vertices are met it will just create a cycle.
+    </p>
+    <img src="../photos/kruskal_6.png" alt="">
+    <p>We've found Minimum spanning tree using Kruskal's Algorithm!</p>
 
     <h5 id="3">Prim's Algorithm</h5>
-    <h6 id="3-1">Python implementation</h6>
-
+    <p>
+        Prim's Algorithm is used to find minimum spanning tree of a graph following greedy approach and it is created 
+        by Robert C.Prim. <br>
+        It first selects any vertex to be a node of a tree then extend it by connecting to lowest weight edges. <br>
+        Don't forget since its goal is to find minimum spanning tree at any step it cannot create a cycle.
+    </p>
+    <p>
+        It follows these steps:
+        <ol>
+            <li>Pick a node that will expands to a minimum spanning tree</li>
+            <li>Look at all vertices in minimum spanning tree then find all edges that span out from it, pick
+                edge with lowest weight and add it to minimum spanning tree.
+            </li>
+            <li>Repeat until all vertices are met.</li>
+        </ol>
+    </p>
+    <p>
+        We go find minimum spanning tree using Prim's algorithm on the same example as above. <br>
+        Delete all loops and parallel edges.<br>
+        Now we pick any vertex to be our root node for minimum spanning tree. I will choose B.
+    </p>
+    <img src="../photos/prim_1.png" alt="">
+    <p>
+        In our minimum spanning tree we only have vertex B. Look at all edges of vertex B in our graph and choose
+        the one with lowest weight which is A-B. <br>
+        Now we will have two vertices in MST and look at all edges connected to A and B.
+    </p>
+    <img src="../photos/prim_2.png" alt="">
+    <p>
+        If you look at A-F and B-F both edge allow us to reach F however B-F has lower weight therefore we
+        do not have to take A-F into consideration anymore. <br>
+        Continuing on, B-C edge has lowest weight so add it in our MST. <br>
+        Similarily edges connected to A,B and C lowest edges ia A-E or B-F. We can choose either one and
+        we will choose A-E.
+    </p>
+    <img src="../photos/prim_3.png" alt="">
+    <p>
+        E-F will be connect next then B-F <b>BUT</b> if we connect B-F it creates a cycle therefore take it out
+        of our consideration when choosing lowest edge and 
+        choose next lowest edge which is C-G.<br>
+        Finally there is only one edge left G-D and it does not create a cycle therefore add it to our minimum spanning
+        tree and we are done!
+    </p>
+    <img src="../photos/prim_4.png" alt="">
+    <p>
+        As you can see it created same MST but remember that there can be more than one minimum spanning tree. In 
+        our example using B-F edge instead of A-E would still create minimum spanning tree.
+    </p>
+    <p>
+        We've just found minimum spanning tree using two alternative algorithms however why is there two algorithm
+        that does the same thing?
+    </p>
+    <h5 id="4">Kruskal Vs. Prim's</h5>
+    <p>
+        Even though either one will successfully find MST depending on the graph one might be preferred 
+        over the other.
+    </p>
+    <p>
+        Kruskal's algorithm has all vertices in terms of disjoin sets and at each iterations they are connected 
+        however in Prim's you start with one root node and build on it. <br><br>
+        Also since Krukal require us to sort all edges in ascending order as there are many edges in a graph
+        it would take more time therefore in such case Prim's algorithm would be preferred.
+    </p>
+    <p>
+        However when graph is sparse meaning there are small number of edges in the graph or if edges are 
+        sorted already Kruskal will be preferred.
+    </p>
     <div id='reference' class="references">
         <h5>References:</h5>
         <ul>
             <li><a href="https://www.geeksforgeeks.org/applications-of-minimum-spanning-tree/">Applications of MST</a></li>
             <li><a href="https://www.tutorialspoint.com/data_structures_algorithms/kruskals_spanning_tree_algorithm.htm">Kruskal's algorithm</a></li>
             <li><a href="https://www.tutorialspoint.com/data_structures_algorithms/prims_spanning_tree_algorithm.htm">Prim's algorithm with same example as above</a></li>
+            <li>book: 뇌를 자극하는 알고리즘</li>
+            <li>
+                <a href="https://www.youtube.com/watch?v=Ryo0Mu5SeqU">Kruskal Vs. Prim's</a>
+            </li>
         </ul>
 
     </div>
