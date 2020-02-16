@@ -29,21 +29,27 @@
         <li><a href="topological_sorting.html">Topological Sort</a></li>
         <li><a href="minimal_spanning_trees.html">Minimal Spanning Trees</a></li>
         <li><b>Shortest Path Algorithms</b></li>
+        <li><a href="shortest_path_pt2.html">Shortest Path Algorithms part II</a></li>
     </ul>
 </div>
     
 <!-- ------------------------------ All Content goes here -------------------- -->
 <div class="col-md-6">
     <h2> Shortest path algorithm: </h1>
-    <p class="date">date posted: 2020-02-02</p>
+    <p class="date">date posted: 2020-02-16</p>
     <br>
     <div class="toc">
         <h5>Contents</h5>
         <ul>
             <li>
-                <a href="#1">Topological sorting</a>
+                <a href="#1">What is shortest path algorithm?</a>
             </li>
-            <li><a href="#2">Python Implementation</a></li>
+            <li><a href="#2">Single source</a>
+                <ul>
+                    <li><a href="#2-1">Dijkstra</a></li>
+                    <li><a href="#2-2">Bellman-Ford</a></li>
+                </ul>
+            </li>
             <li><a href="#reference">References</a></li>
         </ul>
     </div>
@@ -51,77 +57,117 @@
     <br>
     <br>
 
-    <h5 id="1">Topological sort</h5>
-
-    <h5 id="2">Python Implementation</h5>
-    
-    <h5 id="3">Graph representation</h5>
-    <p>Finally we are done with terminologies lets see how to represent graph data structures.</p>
-
-    <b id="3-1">Adjacency list</b>
+    <h5 id="1">What is shortest path algorithm?</h5>
     <p>
-        For each vertex it has a list associated with it where elements represent vertex that it 
-        points to. In Python dictionary of lists are used to represent this, each key is a vertex and 
-        value is list of vertices that key(vertex) is pointing to (directly).
+        You would probably guess what this algorithm is all about... Yes it is finding shortest path that
+        takes you from one place to another but it can be done if the graph is 
+        directional acyclic graph. If it is undirected graph you could make it directional
+        by replacing undirected edge with two directed edge going in opposite direction.
+        <br><br> All of the readers probably benefit from this algorithm in
+        everyday lives when using google map, kakao map to get from current place to another those maps perform
+        shortest path algorithm.
     </p>
+    <p>
+        There are two different types of shortes path algorithm
+        <ol>
+            <li>Single source: Finding shortest path between your starting point and all other vertice</li>
+            <li>All-pairs: Finding shortest path between any pair of vertices in a graph</li>
+        </ol>
+    </p>
+    <p>
+        When you are using single source shortest path algorithm you will know all distance from your
+        starting position to all vertices however you won't know distance between any other pairs of
+        vertices if one of them is not a starting vertex.
+    </p>
+    <p>
+        In all-pairs shortest path you will know all distance between any pairs of vertices in a graph. So
+        you would know distance going from A-B, B-C, A-C and so on.
+    </p>
+    <h5 id="2">Single source</h5>
+    <p>There are two main algorithms that belong to single source shortest path algorithm. Dijkstra algorithm named
+        after Edsger Dijkstra, Bellman-Ford was names after Richard Bellman it is said that this algorithm was
+        first proposed by Alfonso Shimbel in 1955 however Richard Bellman published it in 1956 and Edward F. Moore
+        published the same algorithm in 1957 thus sometimes called Bellman-Ford-Moore algorithm.
+    </p>
+    <h6 id="2-1">Dijkstra</h6>
+    <p>
+        Dijkstra is used when graph is acyclic directed graph with all positive edge weights if graph is undirected you must
+        change it to directed graph by replacing undirected edge with two directed edges going in opposite direction. It does 
+        work on edges with negative weights however most of the times it will fail. We will perform
+        Dijkstra algorithm on example with all positive edge weights then on example with negative
+        weight edge to show why it is not suitable.
+    </p>
+    <p>
+        Dijkstra algorithm follows these steps below:
+        <ol>
+            <li>Pick a starting vertex, find shortest path to all other vertices from starting vertex. If they are directly
+                connected assign edge weight on top of the vertex else assign infinity as there are no direct path to it => we 
+                do not know how to get there.
+            </li>
+            <li>
+                Pick vertex that has smallest distance from starting vertex and perfrom relaxation.
+            </li>
+            <li>
+                Again select smallest one and repeat step 2.
+            </li>
+            <li>Repeat above steps until all vertices are reached.</li>
+        </ol>
+    </p>
+    <img src="../photos/dijkstra_1.png" alt="">
+    <p>
+        1. Set vertex A as starting vertex, find shortest paths. It has two directly connected vertices B and E therefore 
+        distance from A-B is 2 and A-E is 4. All other vertices are not directly connected therefore distance from A are infinite.
+    </p>
+    <img src="../photos/dijkstra_2.png" alt="">
+    <p>
+        2. Vertex with smallest distance from starting vertex is B. Now look at B's directed connected vertices and 
+        perfrom relaxation that is 
     <pre>
-    adj_list = {
-        1: [2, 4],
-        2: [5],
-        3: [6,5],
-        4: [2],
-        5: [4],
-        6: [6]
-    }
+    if (d[u] + w(u,v) < d[v]):
+        d[v] = d[u] + w(u,v)
+    where u = current vertex cost and w(u,v) = cost of u-v edge.
     </pre>
-    <p>Code above represent below picture.</p>
-    <p>Looking at vertex 1, we can see there are two edges going out to vertex 2 and 4 thus adj_list[1] = [2,4]</p>
-    <p>In undirected graph since vertex 1 contains [2,4] vertex 2 and 4 will contain 1 thus adj_list[2] = [1,4,5] and 
-        adj_list[4] = [1, 2, 5]. Note that order of vertex do not matter, adj_list[4] = [2,1,5] is okay as well.
+        Vertex B has outgoing edge B-E. E already has a distance from starting point that is d[E] = 4. Since d[B] = 2 and
+        w(B, E) = 1, d[E] < d[B] + w(B,E) is satisfied and vertex E is relaxed to cost 3.
     </p>
-    <p>As graph becomes dense, number of edges increase approaching |E| = |V^2| using adjacency list becomes slow
-        since it require twice more space for edges going back and forth. For example if vertex 1 is connected to
-        all 2, 3, 4, 5, 6 then we require twice more space since we need to create list for 2 going to 1, 3 going to 1,
-        and so on...
+    <p>
+        Similarily d[C] = infinity and d[B] + w(B,C) = 9 so d[C] is relaxed to 9.
     </p>
-    <img src="../photos/graph_ds_6.png" alt="">
-    <p> For weighted graph using adjacency list take up one extra place for storing weight of edges.
-        If edge connecting A -> B has weight of 7, store it beside the vertex <pre>{A: [[B,7], [C, weight]]}</pre>
+    <img src="../photos/dijkstra_3.png" alt="">
+    <p>
+        Now we look at E and C. Out of the two E has smaller cost therefore choose E. It has only one outgoing edge to C thus
+        perform relaxation and C is relaxed from 9 to 6. Finally lowest cost vertex is C since F and D have infinite cost.
+        Since both F and D are infinite they are both relaxed to 8 and 12 respectively.
     </p>
-    <p>Taking up extra space for weights.</p>
-    <br>
+    <img src="../photos/dijkstra_4.png" alt="">
+    <p>
+        Now we have all shortest paths from vertex A to all other vertices. We have just used dijkstra algorithm to find
+        single source shortest path.
+    </p>
+    <p>
+        In our example all of our edges had positive weights what happens if there are negative weight edges?
+    </p>
 
-    <b id="3-2">Adjacency matrix</b>
-    <p>As graph become dense it is more efficient to use adjacency matrix.</p>
-    <p>Below matrix represents graph in above example. Vertical axis represents vertex and horizontal
-        axis represents vertices that vertical axis' vertex points to.
-    </p>
-    <p>Vertex 1 points to 2 and 4 thus in adjacency matrix adj_matrix[1][2] = 1 and adj_matrix[1][4] = 1. All
-        other columns are set to 0 since vertex 1 do not point to them.
-    </p>
-    <p>Looking at vertex 2, it only points to vertex 5 therefore adj_matrix[2][5] = 1 and all other are 0.</p>
 
-    <p>It is very straight forward and you can see that no matter it is directed or undirected graph its space
-        complexity will always be V^2. 
+    <h6 id="2-2">Bellman-Ford</h6>
+    
+
+    <p>
+        Book I am reading "뇌를 자극하는 알고리즘" only covers Dijkstra algorithm however as I was seaching 
+        the internet about things I was curious about it made this blog too long... I will split it into 
+        two parts, part II consisting all-pairs shortest path algorithms ->
+        <a href="shortest_path_pt2.html">Continue straight to part II</a>
     </p>
-    <p> So for dense graphs adjacency matrix is more suitable and more sparse matrix using adjacency list would 
-        be suitable.
-    </p>
-    <img src="../photos/graph_ds_7.png" alt="">
-    <p>For weighted graphs replace 1 with appropriate weights</p>
-    <br><br>
 
 
     <div id='reference' class="references">
         <h5>References:</h5>
         <ul>
-            <li><a href="https://en.wikipedia.org/wiki/Graph_theory">History of graph theory</a></li>
-            <li><a href="https://en.wikipedia.org/wiki/Seven_Bridges_of_K%C3%B6nigsberg">Konigsberg bridge problem</a></li>
-            <li><a href="https://www.geeksforgeeks.org/graph-and-its-representations/">Graph representation</a></li>
-            <li><a href="https://www.youtube.com/watch?v=HDUzBEG1GlA">Graph representation + python implementation</a></li>
-            <li><a href="https://www.youtube.com/watch?v=VSgI2cr-f28&list=PL9mhQYIlKEhdvKFh-wVpDuihNQv6C1gSy&index=13">Graph representation (In korean)</a></li>
-            <li><a href="https://www.youtube.com/watch?v=G86PQ1OeNqg&list=PL9mhQYIlKEhdvKFh-wVpDuihNQv6C1gSy&index=13&t=0s">Terminologies (In korean)</a></li>
-            <li><a href="https://www.programiz.com/dsa/graph-adjacency-list">Adjacency list</a></li>
+            <li><a href="https://brilliant.org/wiki/shortest-path-algorithms/">Different types of shortest path algorithms</a></li>
+            <li><a href="https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm">Bellman-Ford algorithm</a></li>
+            <li><a href="https://www.geeksforgeeks.org/bellman-ford-algorithm-dp-23/">Bellman-Ford algorithm part II</a></li>
+            <li><a href="https://www.youtube.com/watch?v=2raV0H9KqY8">Why Dijkstra is not used for graph with negative edge</a></li>
+            <li><a href="https://www.youtube.com/watch?v=XB4MIexjvY0&t=875s">Why Dijkstra is not used for graph with negative edge part II</a></li>
         </ul>
 
     </div>
