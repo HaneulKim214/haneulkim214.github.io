@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Haneul Kim's - Dynamic Programming</title>
+	<link rel="stylesheet" href="../../../../bootstrap-4.1.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../../static/css/fixed.css">
+    <link rel="stylesheet" href="../../../../static/css/blogs.css">
+	<!-- Font Awesome libarary -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+
+<body data-spy="scroll" data-target="#navbarResponsive">
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+	<a class="navbar-brand" href="../../../../index.html#my-brain">
+		Take me back.
+    </a>
+</nav>
+<div class="projects">
+
+<div class="row project">
+<div class="col-md-3 side-bar">
+    <ul>
+        <li><b>What is Dynamic Programming? </b></li>
+        <li><a href="lcs.html">Longest Common Subsequence</a></li>
+    </ul>
+</div>
+    
+<!-- ------------------------------ All Content goes here -------------------- -->
+<div class="col-md-6">
+    <h2> Dynamic Programming Introduction: </h1>
+    <p class="date">date posted: 2020-02-22</p>
+    <br>
+    <div class="toc">
+        <h5>Contents</h5>
+        <ul>
+            <li><a href="#1">What is dynamic programming?</a>
+                <ul>
+                    <li><a href="#1-1">Tabulation
+                    </a></li>
+                    <li><a href="#1-2">Memoization</a></li>
+                    <li><a href="#1-3">Tabulation Vs. Memoization</a></li>
+                </ul>
+            </li>
+
+            <li><a href="#reference">References</a></li>
+        </ul>
+    </div>
+    
+    <h5 id="1">What is dynamic programming?</h5>
+    <p>
+        Dynamic programming which is named by Bellman Ford in 1952 is a technique used to increase performace in
+        a problem, that can be broken down to subproblems and answers from previous subproblems are used recursively.
+        This similar divide and conquer technique since they both break down problem into subproblems and approach
+        smaller problems one by one however in order to increase performance with dynamic programming approach
+        a problem needs to has additional condition even though with out the 
+        condition a problem can be solved using dynamic programming it wouldn't be efficient.
+    </p>
+    <p>
+        After all reason for using some kind of technique in computer science is to increase efficiency. In order to 
+        benefit from dynamic programming technique a problem should satisfy two additional conditions then questions that
+        can be solved by divide and conquer:
+        <ol>
+            <li>Optimal substructure:
+                <p>
+                    larger/later subproblems require answers from previous sub problem's answers.
+                </p>
+            </li>
+
+            <li>Overlapping sub-problems:
+                <p>
+                    subproblems are reused several times
+                </p>
+            </li>
+        </ol>
+    </p>
+    <p>
+        So why so many conditions? <br>
+        Dynamic programming works in following steps:
+        <ol>
+            <li>Split problem into subproblems and order them in "must be solved first" -> "solved last" subproblems</li>
+            <li>Solve from first to last and store answers into a table.</li>
+            <li>Use answers stored in table to solve next subproblem and so on</li>
+        </ol>
+    </p>
+    <p>
+        The reason for storing answers in a table is because since we use dynamic programming on questions that have overlapping sub-problems
+        and sub problem depend on previous answers we do not want to calculate already solved problem again. By storing it in a table we can 
+        avoid computing same problem again.
+    </p>
+    <p>
+        So if a problem does not satisfy conditions we could still use dynamic programming approach but there is no point
+        in storing answers of subproblems into a table, it would be total waste of space since those answers will not be used to solve 
+        other subproblems.
+    </p>
+
+    <p>Now that you know what dynamic programming is and where to use it, let's find nth <a href="https://en.wikipedia.org/wiki/Fibonacci_number" target="_">fibonacci number</a> using recursive
+        algorithm then improve its performance using two different types of dynamic programming
+        <b>Memoization</b> and <b>Tabulation</b>.
+    </p>
+    <p>
+    Below is algorithm for finding nth fibonacci number in python.
+    </p>
+    <pre>
+def fib(n):
+    if n<=2: f = 1
+    else: f = fib(n-1) + fib(n-2)
+    return f</pre>
+    <p>
+        Its performance becomes intuitive if I represent it as a tree.
+    </p>
+
+    <img src="../photos/Fibo.png" alt="">
+    <p>
+        If you want to find Fn then you first need to find Fn-1, Fn-2 and for each of them we need to find
+        two of its previous numbers and so on... As we go down each depth there are 2^n numbers to compute therefore
+        its time complexity would be O(2^n).
+    </p>
+    
+    <h6 id="1-1">Memoization</h6>
+    <p>If we look carefully at our fibonacci tree above we can see there are duplicate values and current problem
+        relies on its previous problem's answer. Doesn't this sound like conditions we've described above? Yes it does
+        in fact satisfy conditions of dynamic programming question therefore let's increase performance by using
+        Memoization dynamic programming approach. Simply you are "Memoing" already solved problem so that you can just
+        take it out of your memo whenever you need it.
+    </p>
+    <p>
+        It is referred to as top-down approach since if you want to find F(n) then we goto F(n-1), F(n-2) then find 
+        their previous numbers and so on until very bottom.
+
+        Even though "dynamic programming" sounds fancy it's very simple. Memoization simply compute a subproblem, store it
+        in a dictionary and return, if it already exiests return that value.
+    </p>
+    <pre>
+memo = {}
+    def fib(n):
+        if n in memo: return memo[n]
+        if n<=2: f = 1
+        else: f = fib(n-1) + fib(n-2)
+        memo[n] = f
+        return f</pre>
+    <p>
+        We've just added 3 lines of code and improved performance from O(2^n) to O(n).
+    </p>
+    <p>
+        Note that in fibonacci number in order to find Fn we need to compute Fn-1, Fn-2, ... and so on. In recursive 
+        algorithm we needed to compute subprolblems couple of time however in memoization if we have computed it we never have to
+        compute it again therefore we only need to compute Fn-1, Fn-2, ... and so on only once giving us O(n).    </p>
+
+    <h6 id="1-2">Tabulation</h6>
+    This is bottom-up version of dynamic programming, this time we start by computing F1, F2, F3, and up to Fn. Starting from the
+    bottom we store its number into a table (hence the name Tabulation) and use those value inside table as we move up.
+    <pre>fib_table = {}
+def fib(n):
+    for k in range(1, n+1):
+        if k <=2:
+            f=1
+        else:
+            f = fib_table[k-1] + fib_table[k-2]
+        fib_table[k] = f
+    return fib_table[n]</pre>
+    <p>
+        As you can see we are starting from k = 1 which will satisfy the base case therefore f = 1 and we store that 
+        into our fibonacci table, next k=2 and again f = 2 and store into table. Next k = 3 and since we've already
+        stored k=2,k=1 into our fibonacci table we simply use them to find F3. Again we can see that we only need to
+        compute f1,f2, ... upto Fn once therefore giving same time complexity as our top-down approach.
+    </p>
+    <p>
+        It seems like both top-down and bottom-up give same performance boost then why is there two methods? why not just 
+        stick to one?
+    </p>
+    <h6 id="1-3">Tabulation Vs. Memoization</h6>
+    <p>
+        <b>Memoization</b> is preferred when we do not need to know answers to all previous subproblems to solve final problem. 
+        In fibonacci numbers we needed to know all of previous subproblems in order to find Fn however if we only need subset of
+         previous subproblems to find final answer we would use memoization technique.
+    </p>
+    <p>
+        <b>Tabulation</b> is preferred when you need all previous subproblems to find final answer just like in
+        fibonacci numbers.
+    </p>
+
+
+    <div id='reference' class="references">
+        <h5>References:</h5>
+        <ul>
+            <li><a href="https://www.quora.com/What-is-the-difference-between-bottom-up-and-top-down-dynamic-programming-method">Difference between memoization(top-down) and dynamic programming(bottom-up)</a></li>
+            <li><a href="https://stackoverflow.com/questions/13538459/difference-between-divide-and-conquer-algo-and-dynamic-programming">Difference between divide and conquer Vs. dynamic programming</a></li>
+            <li><a href="https://www.geeksforgeeks.org/overlapping-subproblems-property-in-dynamic-programming-dp-1/">Intro to memoization and tabulation.</a></li>
+            <li><a href="https://www.youtube.com/watch?v=OQ5jsbhAv_M">MIT lecture on Dynamic programming: Fibonacci, shortest paths. (Recommended)</a></li>
+            <li><a href="https://www.quora.com/How-would-you-choose-between-Memoization-and-Tabulation-in-Dynamic-Programming">Choosing between memoization and tabulation</a></li>
+        </ul>
+
+    </div>
+</div>
+
+</div>
+</body>
+
+</html>

@@ -68,9 +68,9 @@
         shortest path algorithm.
     </p>
     <p>
-        There are two different types of shortes path algorithm
+        There are two different types of shortest path algorithm
         <ol>
-            <li>Single source: Finding shortest path between your starting point and all other vertice</li>
+            <li>Single source: Finding shortest path between your starting point and all other vertices</li>
             <li>All-pairs: Finding shortest path between any pair of vertices in a graph</li>
         </ol>
     </p>
@@ -125,10 +125,10 @@
     <pre>
     if (d[u] + w(u,v) < d[v]):
         d[v] = d[u] + w(u,v)
-    where u = current vertex cost and w(u,v) = cost of u-v edge.
+    <code class="comments"># where u = current vertex cost and w(u,v) = cost of u-v edge.</code>
     </pre>
         Vertex B has outgoing edge B-E. E already has a distance from starting point that is d[E] = 4. Since d[B] = 2 and
-        w(B, E) = 1, d[E] < d[B] + w(B,E) is satisfied and vertex E is relaxed to cost 3.
+        w(B, E) = 1, d[E] > d[B] + w(B,E) is satisfied and vertex E is relaxed to cost 3.
     </p>
     <p>
         Similarily d[C] = infinity and d[B] + w(B,C) = 9 so d[C] is relaxed to 9.
@@ -145,17 +145,88 @@
         single source shortest path.
     </p>
     <p>
-        In our example all of our edges had positive weights what happens if there are negative weight edges?
+        Now by performing dijkstra algorithm on simple example with negative weights see why it does not work.
+    </p>
+    <img src="../photos/dijkstra-negative-edge_1.png" alt="">
+    <p>
+        Setting vertex A as our starting vertex and assign distance to all edges.
+    </p>
+    <img src="../photos/dijkstra-negative-edge_2.png" alt="">
+    <p>
+        There are shortest path from A-B and A-C with same distance so doesn't matter which vertex we goto first. 
+        We will goto B. Shortest path from A-B is set. Next A-C is shortest so shortest path from A-C is set.
+        Next shortest path is B-E = 3 and A-D = 8, since 
+        B-E is shorter we move along in that direction and perfrom relaxtion
+        giving shortest path from A-B-E = 5. 
+    </p>
+    <img src="../photos/dijkstra-negative-edge_3.png" alt="">
+    <p>
+        Next shortest path would be E-D which is a negative value. thus giving us shortest path from A-B-E-D = 3.
+        Now we are only left with A-D which has weight of 8 and since we already found shortest path from 
+        A-B-E-D, A-D should be greather than A-B-E-D which in fact is so we dijkstra still works with negative weight.
+    </p>
+    <img src="../photos/dijkstra-negative-edge_4.png" alt="">
+    <p>Finally we look at D-C = -7. We've already found shortest path from A-C which was 2 thus by definition of
+        dijkstra if we have found shortest path it cannot be updated thus A-D-C should be greater than A-C. However
+        due to negative weight A-D-C = 1 < A-C = 2 hence shortest path must be updated which is contradictory to
+        dijkstra algorithm since at first dijkstra tells us that A-C is the shortest path going from A to C however later on
+        A-D-C proves that dijkstra algorithm gave wrong answer in the beginning.
+    </p>
+    <p>
+        Above example shows that sometimes dijkstra works with negative value but sometimes it doesn't.
+    </p>
+    <p>
+        Now we will look at how to find shortest path with negative weights without ever failing.
     </p>
 
-
     <h6 id="2-2">Bellman-Ford</h6>
-    
+    <p>
+        Bellman-Ford algorithm can be done in 3 simple steps:
+        <ol>
+            <li>Create a list containing all edges.</li>
+            <li>Initialize distance from start to all other vertices to infinite. Distance from itself is 0.</li>
+            <li>Perform relaxation on all edges in list created |V-1| times, that is number of vertices - 1.</li>
+        </ol>
+    </p>
+    <p>To make things simple we will only work with bottom half part of our previous graph with negative weights. 
+        If you understand it, it is quite simple to implement on larger graphs. 
+    </p>
+    <p>
+        1. Creating list of edges using bottom half of previous example with negative weight we get <pre>lst = [(A-D), (A-C), (D-C)]</pre>
+    </p>
+    <p>
+        2. Initialize distances.<br>
+        <b>NOTE: unlike dijkstra directly connected vertices gets assigned infinite number.</b>
+    </p>
+    <img src="../photos/bellman-ford_1.png" alt="">
+    <p>
+        3. going through [(A,D), (A,C). (D,C)] |V-1| = 2 times and perform relaxation. <br>
+        
+        First looking at (A,D), w(A,D) + d[A] is less than already assigned distance which is infinity thus we relax it. <br>
+        same for (A,C), w(A,C) + d[A] is less than infinity therefore relax it.
+    </p>
+    <img src="../photos/bellman-ford_2.png" alt="">
+    <p>
+        next looking at (D,C), w(D,C) + d[D] = 1, which is smaller than d[C] = 2 so relax it.<br>
+    </p>
+    <img src="../photos/bellman-ford_3.png" alt="">
+    <p>
+        Now repeat the steps one more time as we have to perform it |V-1| times.<br>
+        (A,D), w(A,D) + d[A] = d[D] so we keep it as is. <br>
+        (A,C), w(A,C) + d[A] > d[C] so keep it. <br>
+        (D,C), w(D,C) + d[D] = d[C] so we keep it. <br>
+        Note that order of edges in list does not matter.
+    </p>
+    <p>By using Bellman-Ford we check that even though there are negative weights it can correctly 
+        update it. However since you need to iterate |V-1| times on number of edges, its
+        time complexity is O(|E|*|V-1|) which is O(n^2) when there are same number of edges as vertices and 
+        upto O(n^3) when graph is complete.
+    </p>
 
     <p>
-        Book I am reading "뇌를 자극하는 알고리즘" only covers Dijkstra algorithm however as I was seaching 
-        the internet about things I was curious about it made this blog too long... I will split it into 
-        two parts, part II consisting all-pairs shortest path algorithms ->
+        Book I am reading "뇌를 자극하는 알고리즘" only covers Dijkstra algorithm however as I was searching 
+        the internet about things I was curious about it made this blog too long... for that reason 
+        I will split it into two parts, part II consisting all-pairs shortest path algorithms ->
         <a href="shortest_path_pt2.html">Continue straight to part II</a>
     </p>
 
