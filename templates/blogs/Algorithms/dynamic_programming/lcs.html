@@ -33,7 +33,7 @@
 <div class="col-md-6">
     <h2> Longest Common Subsequence: </h1>
         
-    <p class="date">date posted: 2020-02-22</p>
+    <p class="date">date posted: 2020-03-07</p>
     <br>
     <div class="toc">
         <h5>Contents</h5>
@@ -51,7 +51,8 @@
     </div>
     
     <h5 id="1">What is LCS?</h5>
-    <p>LCS stands for Longest Common Subsequence. First two words are pretty intuitive therefore let me explain what subsequence is.
+    <p>LCS stands for Longest Common Subsequence. First two words pretty much explain everything
+        there is to this concept therefor let me explain what subsequence is.
         <br>
         We know that substring is a continous subset of a string. for example if we have a str = "hello" its substring would be "hel", "llo", and much more
         but not "hlo" since the letters are not continuous.
@@ -59,36 +60,196 @@
     <p>
         Subsequence is similar to substring however it does not have to be continuos yet still have to be in same relative order. <br>
         "hlo" would be subsequence of word "hello" however "lhe" is not since "h" must come first in the word "hello". <br>
-        So longest common subsequence is in set of subsequences, one that has most common letters.
+        So longest common subsequence is, within set of subsequences one that has most common letters.
     </p>
     <p>
         Let's further understand this concept following a simple example:
         
-    <pre>s1 = "simple"
-s2 = "examples"</pre>
+    <pre>s1 = "sample"
+s2 = "maples"</pre>
         
-        subsequences = [{m,p,l,e}, {p,l,e}, {l,e}, {e}, {s}] <br>
-        I don't think this is a good example... Let me visualize this to make it clearer.
+        subsequences = [{m,p,l,e}, {a,p,l,e}, {p,l,e}, {l,e}, {e}, {s}] <br>
+        hm... I really don't think this is a good example... Let me use my drawing skills to clarify this concept.
     </p>
     <p>
-        
+        First I will create line connecting characters of our first subsequence set {m, p, l, e} notice that there are
+        no lines crossing which implies that all characters are in relative order.
     </p>
-
+    <p>
+        <img src="../photos/dp_lcs_1.png" alt="">
+    </p>
+    <p>
+        All sets of subsequences do not have crossing lines hence they are subsequence. <br>
+        One might think that since there are same characters in each string longest subsequence is
+        {s, a, m, p, l, e}
+    </p>
+    <p>
+        <img src="../photos/dp_lcs_2.png" alt="">
+    </p>
+    <p>  As you can see if we join "s" first then there cannot be anymore joins since
+        it will cross the black line thus {s} would be only subsequence if we start with "s".
+    </p>
+    <p>
+        I hope everyone understood what lowest common sequence is. Now we will find lcs of two strings by using two techniques of dynamic programming that we've learned in 
+        <a href="dp_intro.html">previous blog</a>
+    </p>
+        
 
     <h6 id="1-1">Recursion</h6>
+    Sorry, before moving on to Tabulation and Memoization lets try to find lcs using recursion to appreciate dynamic programming more.
+
+    <p>
+        It is very simple code, lets go through it with our example above.<br>
+        <ul>
+            <li>X = string 1</li>
+            <li>Y = string 2</li>
+            <li>m = len(X)</li>
+            <li>n = len(Y)</li>
+        </ul>
+    </p>
+    <p>let X = "sample" and Y = "maples"</p>
+    <pre>
+def lcs(X, Y, m, n): 
+    if m == 0 or n == 0:
+        return 0
+    elif X[m-1] == Y[n-1]: 
+        return 1 + lcs(X, Y, m-1, n-1)
+    else: 
+        return max(lcs(X, Y, m, n-1), lcs(X, Y, m-1, n))</pre>
+    <p>
+        when we run the function first, since both X,Y length = 6 if statement is passed, now onto elif statement.<br>
+        Looking at the picture below we see that elif statement is also not satisfied therefore onto else statement. From our first block
+        we move back one string from X,Y and take the bigger one.
+    </p>
+    <img src="../photos/lcs_1.png" alt="">
+    
+    <p>
+        left box represents lcs(X,Y,m, n-1) and right box represents lcs(X,Y, m-1,n). Note that running left box gets us to elif statement
+        therefore it has a value of 1 and runs the function again but this time moving back one position for both string, because they've matched already.
+        For the box on the left it goes once again into else statement.
+    </p>
+    <img src="../photos/lcs_2.png" alt="">
+    <p>
+        Keep on calling lcs function recursively until you've covered all letters in each string. Then moving from leaf node we take maximum value at each node, upto very top and 
+        that value will be our longest common sequence, in this case it would be 4.<br>
+        I didn't finish making whole tree but you get the point. One thing to notice is that boxes in red means that those values have been computed already,
+        people who've read my previous blog on dynamic programming probably know what do to. 
+    </p>
+    <p>
+        Yes, there is no need to compute same questions twice => dynamic prgramming.
+    </p>
+    <p>So with naive recursive function you can see in worst case, where there is no subsequence it will have time complexity of 
+        <b>O(2^n)</b> since at each node there will be a split.</p>
+    <img src="../photos/lcs_3.png" alt="">
+
+    <p>We now know how slow it is to find lcs using recursive method so it is time to move on to Tabulation.</p>
 
     <h6 id="1-2">Tabulation</h6>
+    <p>
+        We have learned that tabulation is creating a table to store answers from previous subproblems and using it. <br>
+        Using previous example:
+    </p>
+    <p>I should've used shorter strings... Anyways below is matrix created that will help us find lcs. Cells filled in zeroes
+        help us get started with filling our table. 
+    </p>
+    <p>
+        Now let's fill the rest. Starting from 1st row we compare letters in each column and if they match we add 1 to diagonal(upper left) value.
+        Else if they do not match we take maximum value of upper and left value.
+    </p>
+    <img src="../photos/lcs_tabulation_1.png" alt="">
+    <p>
+        "m" != "s", we take maximum value of upper and left value which are 0, 0 therefore we take 0. <br>
+        "m" != "a", same as above, we get 0.<br>
+        "m" == "m", match! add 1 + digonal(upper left) value so 1+0 = 1. <br>
+        Now we simple repeat the process until we fill up all the cells. 
+    </p>
+    <img src="../photos/lcs_tabulation_2.png" alt="">
+    <p>So we can see that highest value is 4 => lcs just like value we found using recursion but with O(mxn) time complexity.</p>
+    <p>But what is are the string that form longest common subsequence? That is what the red lines are for. 
+        So starting from bottom right, we got value 4 from upper cell so we move up. Next we got 4 from adding 1 + upper left value
+        so we move in that direction, repeat the process.
+    </p>
+    <p>
+        Every diagonal line represents words that matches therefore e, l, p, a. "aple" is the longest common subsequence.
+    </p>
+    <p>
+        But notice in our first example we said that our lcs was "mple". Well they both are, we at (a,m) column you can
+        see that we could've went either direction, up or to the left and if we had gone upward we would have gotten "mple".
+    </p>
 
+    <p>All the process we took to create a matrix above is in python code:</p>
+    <pre>
+def lcs(X,Y):
+    m, n = len(X), len(Y)
+    matrix = [[None]*(n+1) for i in range(m+1)]
+    
+    for i in range(m+1):
+        for j in range(n+1):
+            if i == 0 or j == 0:
+                matrix[i][j] = 0 
+            elif X[i-1] == Y[j-1]:
+                matrix[i][j] = matrix[i-1][j-1] + 1
+            else:
+                matrix[i][j] = max(matrix[i-1][j], matrix[i][j-1])   
+    return L[m][n]</pre>
     <h6 id="1-3">Memoization</h6>
+    Similar to tabulation it simply keeps answers of previous questions therefore no need to re-compute. But 
+    as I've explained before memoization is referred in problems where we do not need all previous questions.
+    
+    <p>Simliarily we create a table but in this case we set our first letters to be in 0th column and 0th row.</p>
+    <p>
+        First, create a table and fill all values as -1 for keeping track of what we've seen before.
+    </p>
+    <pre>X = "sample"
+Y = "maples"
+table = [[-1 for i in range(len(X)] for j in range(len(Y))]</pre>
+    <p>
+        You can see below that there is only 2 lines of code added from recursive function that is, 2nd if statement
+        which checks whether or note we've already seen that question before and return it if we have otherwise move
+        on which is exactly same as our previous recursive function.
+    </p>
+    <pre>def lcs_memoization(X,Y, m,n, table):
+    if m==0 or n ==0:
+        return 0
+    
+    if table[m-1][n-1] != -1:
+        return table[m-1][n-1]
+    
+    if X[m-1] == Y[n-1]:
+        table[m-1][n-1] = 1+ lcs_memoization(X, Y,m-1,n-1, table)
+        return table[m-1][n-1]
+    
+    else:
+        table[m-1][n-1] = max(lcs_memoization(X,Y, m, n-1, table), lcs_memoization(X,Y, m-1, n, table))
+        
+        return table[m-1][n-1]
 
+lcs_length = lcs_memoization("sample", "maples", 6,6,table)</pre>
+    <p>
+        To see the difference to tabulation approach let me print out table created. We can see many -1 which
+        means that those problems were never solved so as opposed to tabulation approach where it computes
+        every single problems in memoizations it only computes problems it needs therefore in questions where
+        we do not need to know all previous answers this would give better performance than tabulation method.
+        <pre>[[0, 0, 0, 0, 0, 1],
+[-1, 1, 1, 1, 1, 1],
+[1, 1, 1, 1, 1, 1],
+[-1, -1, 2, 2, 2, 2],
+[-1, -1, -1, 3, 3, 3],
+[-1, -1, -1, -1, 4, 4]]</pre>
+    </p>
+    <p>
+        In conclusion just like tabulation it has O(mxn) time complexity however depending on questions you are trying to
+        solve one way is preferred over another just like in finding lcs where memoization would be preferred.
+    </p>
 
 
     <div id='reference' class="references">
         <h5>References:</h5>
         <ul>
-            <li><a href="https://www.quora.com/What-is-the-difference-between-bottom-up-and-top-down-dynamic-programming-method">Difference between memoization(top-down) and dynamic programming(bottom-up)</a></li>
-            <li><a href="https://stackoverflow.com/questions/13538459/difference-between-divide-and-conquer-algo-and-dynamic-programming">Difference between divide and conquer Vs. dynamic programming</a></li>
-            <li><a href="https://www.geeksforgeeks.org/overlapping-subproblems-property-in-dynamic-programming-dp-1/">Intro to memoization and tabulation.</a></li>
+            <li><a href="https://www.geeksforgeeks.org/python-program-for-longest-common-subsequence/">Python code for finding lcs with recursion</a></li>
+            <li><a href="https://www.youtube.com/watch?v=sSno9rV8Rhg">finding lcs using recursion, memoization, and tabulation</a></li>
+            <li><a href="https://www.geeksforgeeks.org/longest-common-subsequence-dp-using-memoization/">Python code lcs memoization</a></li>
+
         </ul>
 
     </div>
