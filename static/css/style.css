@@ -386,7 +386,7 @@ Extra (xl) large devices (large desktops, 1200px and up)
 }
 
 #hobbies #carousel img{
-  width: 36%;
+  width: 26%;
 }
 
 #carousel {
@@ -405,7 +405,7 @@ Extra (xl) large devices (large desktops, 1200px and up)
 }
 
 #carousel div img {
-	width: 200px;
+	width: 30%;
 	transition: width 1s;
 }
 
@@ -483,7 +483,7 @@ Extra (xl) large devices (large desktops, 1200px and up)
 
 /* 텍스트 opacity 도 같이 바뀐다... */
 #carousel div.selected:hover {
-  width: 60%;
+  width: 30%;
 	z-index: 10;
 	left: 50%;
   transform: translateY(15%) translateX(-50%);
