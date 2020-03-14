@@ -51,13 +51,14 @@
     
     <br>
     <br>
-    <p>There are two main methods when it comes to searching graph data structures, trees, string, and much more which
+    <p>There are two main methods when it comes to <b>searching graph data structures</b>, trees, string, and much more which
         are 
-        <b>depth first search</b> and <b>breadth first search</b>. 
+        <b>depth first search</b> and <b>breadth first search</b>.<br>
+        Both of these are used to search for desired vertex in a graph or to find all vertices that exist in a graph.
     </p>
 
     <h5 id="1">Depth First Search</h5>
-    <p>DFS for short uses stack data structure(LIFO) and it is edge based technique. Its goal is to find 
+    <p>DFS for short uses stack data structure(Last In First Out) and it is edge based technique. Its goal is to find 
         unvisited vertex then go down deep until no more vertex to visit then move backwards until there
         is another vertex to visit that has not been visited already.
     </p>
@@ -69,7 +70,7 @@
     
     <p>Lets go through DFS using a graph below by following:
         <ol>
-            <li>Find a vertex to perform DFS, mark it as visited, insert into the stack and if it is visited
+            <li>Find a vertex to get started with DFS, mark it as visited, insert into the stack and if it is visited
                 we output it.</li>
             <li>Goto adjacency vertex and repeat step 1.</li>
             <li>Repeat step 2 until no adjacency vertex or adjacency vertex has been visited already, 
@@ -81,7 +82,7 @@
     </p>
     <img src="../photos/dfs_1.png" alt="">
     <p>
-        <b>1.</b> choose a vertex to perfrom DFS, I will choose vertex A. Mark it visited, output it and 
+        <b>1.</b> choose a vertex to get started with DFS, I will choose vertex A. Mark it visited, output it and 
         insert into a stack.
     </p>
     <img src="../photos/dfs_2.png" alt="">
@@ -118,8 +119,8 @@
     </p>
 
     <h5 id="2">Breadth First Search</h5>
-    <p>BFS is often used for finding shortest path, or whether or not there exists path between two verticies.
-        It is vertex based technique and uses queue data structure.
+    <p>BFS is often used for finding shortest path, or to check if there exists path between two verticies.
+        It is vertex based technique and uses queue data structure (FIFO).
     </p>
     <p>
         Unlike DFS where it goes deep down into one path BFS searches layer by layer, considering all
@@ -127,10 +128,10 @@
          would be considered layer 1 and friends of friend are in layer 2 because you cannot reach them directly but
          through your link(friend) and so on...
     </p>
-    <p>For simplicity we will use same graph from DFS example and perfrom BFS this time by following following
+    <p>For simplicity we will use same graph from DFS example and perfrom BFS this time by following
         steps:
         <ol>
-            <li>Find starting point mark it as visited and insert into queue.</li>
+            <li>Find starting point, mark it as visited and insert into queue.</li>
             <li>Following FIFO delete first item(vertex) in queue. Insert deleted vertex's adjacent 
                 vertex into queue and mark them as visited.
             </li>
@@ -141,7 +142,7 @@
     <p><b>1.</b> Choose starting point, vertex A. Mark it visited and insert into queue.</p>
     <img src="../photos/bfs_1.png" alt="">
     <p><b>2.</b> delete first item in queue which is vertex A and insert all its adjacency vertex and mark them
-    as visited. Doesn't matter which vertex to insert first but we will just follow alphabetical order and insert
+    as visited. Doesn't matter which vertex gets insert first but we will just follow alphabetical order and insert
     vertex B first.</p>
     <img src="../photos/bfs_2.png" alt="">
     <p>
@@ -157,11 +158,11 @@
         nothing to insert to queue and it becomes empty.
     </p>
     <img src="../photos/bfs_5.png" alt="">
-    <p>Now we have successfully done breadth first search. If you at deleted vertex we can see that 
+    <p>Now we have successfully performed breadth first search. If you look at deleted vertex we can see that 
         they are in order of their depth, vertex A have depth 0, {B,C} have depth = 1, {D, E, F} have depth = 2,
         and finally {G} has depth =3. <br>
 
-        So we searched all friends first, then friend's friends, and so on...
+        So we searched all friends first, then mutual friend, and so on...
     </p>
     <!-- <p>Choosing the starting point depends on what problem you are using BFS to solve for example if you want to
         find shortest path between two path, in directed graph (u, v) vertex U would be the starting point.
