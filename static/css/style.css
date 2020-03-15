@@ -13,6 +13,7 @@ body {
   overflow: hidden;
   font-family: "Lato", sans-serif;
   color: #505962;
+  height: 100%;
 }
 
 /* To cover space Navbar takes up */
@@ -310,7 +311,7 @@ Extra (xl) large devices (large desktops, 1200px and up)
 /* -------------------- My Brain --------------------- */
 
 .my_brain {
-  margin-top: 5%;
+  margin-top: 1%;
   color:#4e555c;
 }
 
@@ -385,160 +386,78 @@ Extra (xl) large devices (large desktops, 1200px and up)
   color: whitesmoke;
 }
 
-#hobbies #carousel img{
-  width: 26%;
-}
 
-#carousel {
-	position: relative;
-	height: 400px;
-	/* width: 50%; */
-	top: 50%;
-	transform: translateY(-55%);
-	overflow: hidden;
-}
-
-#carousel div {
-	position: absolute;
-	transition: transform 1s, left 1s, opacity 1s, z-index 0s;
-	opacity: 1;
-}
-
-#carousel div img {
-	width: 30%;
-	transition: width 1s;
-}
-
-#carousel div.hideLeft {
-  width: 40%;
-	left: 0%;
-	opacity: 0;
-	transform: translateY(-10%) translateX(-50%);
-}
-
-#carousel div.prevLeftSecond {
-  width: 40%;
-	z-index: 4;
-	left: 15%;
-	transform: translateY(1%) translateX(-50%);
-	opacity: .5;
-}
-
-#carousel div.prev {
-  width: 45%;
-	z-index: 1;
-	left: 27%;
-  transform: translateY(15%) translateX(-50%);
-  opacity: 0.7;
-}
-
-#carousel div.selected {
-  width: 60%;
-	z-index: 10;
-	left: 50%;
-	transform: translateY(15%) translateX(-50%);
-}
-
-#carousel div.next {
-  width: 45%;
-  z-index: 6;
-  opacity: 0.7;
-	left: 70%;
-	transform: translateY(25%) translateX(-52%);
-}
+/* Books */
 
 
-#carousel div.nextRightSecond {
-  width: 40%;
-	z-index: 1;
-	left: 85%;
-	transform: translateY(20%) translateX(-70%);
-	opacity: .7;
-}
-
-#carousel div.hideRight {
-	left: 100%;
-	opacity: 0;
-	transform: translateY(-10%) translateX(-50%);
-}
-
-.buttons {
-  /* position: fixed; */
-  margin-top: 2rem;
-	left: 2%;
-	transform: translateX(-0%);
-	bottom: 100px;
-}
-
-/* ------------------- Book Description ------------------ */
-
-#hobbies #carousel .selected .book_description {
-  position: absolute;
+.books .book-tooltip .tooltipbox {
+  visibility: hidden;
+  width: 320px;
   text-align: center;
-  margin-left: 50%; 
-  margin-right: 12%; 
-  transform: translateY(-120%) translateX(-50%);
+  border-radius: 6px;
+  padding: 9px ;
+  position: absolute;
+  z-index: 1;
+  bottom: 30%;
+  left: -35%;
+  /* margin-left: -60px; */
   opacity: 0;
+  transform: translateX(120%);
+
 }
 
-/* 텍스트 opacity 도 같이 바뀐다... */
-#carousel div.selected:hover {
-  width: 30%;
-	z-index: 10;
-	left: 50%;
-  transform: translateY(15%) translateX(-50%);
-  opacity:0.4;
-}
-#hobbies #carousel .selected .book_description:hover {
-  position: absolute;
-  text-align: center;
-  margin-left: 50%; 
-  /* margin-right: 9%; */ 
-  transform: translateY(-120%) translateX(-50%);
+.books .book-tooltip:hover .tooltipbox {
+  visibility: visible;
   opacity: 1;
-  font-weight: bold;
-  color: white;
+  color: #40474e;
+  background-color: aliceblue;
+}
+
+.books .book-tooltip .tooltipbox img {
+  height: 14em;
+}
+
+.books .book-tooltip .tooltipbox .summary {
+  font-size: 85%;
+  line-height: 150%;
 }
 
 
-#hobbies #carousel .hideLeft .book_description{
-  opacity:0;
-}
-#hobbies #carousel .prevLeftSecond .book_description{
-  opacity:0;
-}
-#hobbies #carousel .prev .book_description{
-  opacity:0;
-}
-#hobbies #carousel .next .book_description{
-  opacity:0;
-}
-#hobbies #carousel .nextRightSecond .book_description{
-  opacity:0;
-}
-#hobbies #carousel .hideRight .book_description{
-  opacity:0;
+
+/*------------ Media Query --------------*/
+@media (max-width: 1350px) {
+  .books .book-tooltip .tooltipbox {
+    visibility: hidden;
+    width: 320px;
+    text-align: center;
+    border-radius: 6px;
+    padding: 9px ;
+    position: absolute;
+    z-index: 1;
+    bottom: 30%;
+    left: -65%;
+    /* margin-left: -60px; */
+    opacity: 0;
+    transform: translateX(120%);
 }
 
-
-/* ----------------- Book Shelf -------------------*/
-/* .book {
-    padding: 15px 0 0 0;
-    margin: auto;
-}
-.shelf {
-    border-bottom: 30px solid #A1A194;
-    border-left: 20px solid transparent;
-    border-right: 20px solid transparent;
-    top: -15px;
-    z-index: -1;
-} */
-
-/*------------------- Movies ----------------*/
-
-@media (max-width: 767px) {
-  #hobbies #carousel img{
-    width: 60%;
-    /* height: 200px; */
+@media (max-width: 800px) {
+  .books .book-tooltip .tooltipbox {
+    visibility: hidden;
+    width: 220px;
+    text-align: center;
+    border-radius: 6px;
+    padding: 9px ;
+    position: absolute;
+    z-index: 1;
+    bottom: 30%;
+    left: -100%;
+    /* margin-left: -60px; */
+    opacity: 0;
+    transform: translateX(120%);
+  }
+  .books .book-tooltip .tooltipbox .summary {
+    font-size: 71%;
+    line-height: 150%;
   }
 }
