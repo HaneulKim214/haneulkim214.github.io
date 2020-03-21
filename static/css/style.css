@@ -422,6 +422,10 @@ Extra (xl) large devices (large desktops, 1200px and up)
   line-height: 150%;
 }
 
+.books .book_finish_date {
+  font-size: 70%;
+  text-align: right;
+}
 
 
 /*------------ Media Query --------------*/
@@ -438,7 +442,8 @@ Extra (xl) large devices (large desktops, 1200px and up)
     left: -65%;
     /* margin-left: -60px; */
     opacity: 0;
-    transform: translateX(120%);
+    transform: translateX(100%);
+  }
 }
 
 @media (max-width: 800px) {
@@ -451,13 +456,37 @@ Extra (xl) large devices (large desktops, 1200px and up)
     position: absolute;
     z-index: 1;
     bottom: 30%;
-    left: -100%;
+    left: -60%;
     /* margin-left: -60px; */
     opacity: 0;
-    transform: translateX(120%);
+    transform: translateX(70%);
   }
   .books .book-tooltip .tooltipbox .summary {
     font-size: 71%;
     line-height: 150%;
+  }
+}
+
+@media (max-width: 766px) {
+  .books .book-tooltip .tooltipbox {
+    visibility: hidden;
+    width: 350px;
+    /* height: 200px; */
+    text-align: center;
+    position: absolute;
+    z-index: 1;
+    bottom: 90%;
+    opacity: 0;
+    transform: translateX(163%);
+  }
+  .books .book-tooltip .tooltipbox img{
+    text-align: right;
+  }
+  .books .book-tooltip .tooltipbox .summary {
+    font-size: 60%;
+    line-height: 150%;
+  }
+  .books .book-tooltip .tooltipbox img {
+    height: 125px;
   }
 }
