@@ -72,7 +72,9 @@
         <ol>
             <li>Find a vertex to get started with DFS, mark it as visited, insert into the stack and if it is visited
                 we output it.</li>
-            <li>Goto adjacency vertex and repeat step 1.</li>
+            <li>Goto adjacency vertex and see if itself has adjacency vertex that has not been visited, if yes go to it, if there
+                are more than one pick any one.
+            </li>
             <li>Repeat step 2 until no adjacency vertex or adjacency vertex has been visited already, 
                 pop that vertex out of stack and move backwards until there is another vertex to visit.
             </li>
@@ -100,7 +102,7 @@
 
     <p>
        Now we are at vertex E. Its only adjacency vertex is G but has been visited already so pop it.<br>
-       Similiary pop vertex D, B.
+       similarly pop vertex D, B.
     </p>
     <img src="../photos/dfs_5.png" alt="">
 
@@ -111,11 +113,10 @@
     </p>
     <img src="../photos/dfs_6.png" alt="">
 
-    <p><b>4.</b> Pop F, C. Now we are left with vertex A its adjacency vertex all been visited so pop it.</p>
+    <p><b>4.</b> Pop F, C. Now we are left with vertex A where all its adjacency vertex have been visited so pop it.</p>
     <img src="../photos/dfs_7.png" alt="">
 
-    <p>You can see that our stack is empty which implies that all vertices has been visited thus we just 
-        successfully finished depth first search.
+    <p>You can see that our stack is empty which implies that we've successfully visited all vertices using depth first search.
     </p>
 
     <h5 id="2">Breadth First Search</h5>
