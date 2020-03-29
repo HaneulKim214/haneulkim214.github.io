@@ -24,15 +24,15 @@
 <div class="row project">
 <div class="col-md-3 side-bar">
     <ul>
-        <li><b>타겟넘버</b></li>
+        <li><b>#1 타겟넘버</b></li>
     </ul>
 </div>
     
 <!-- ------------------------------ All Content goes here -------------------- -->
 <div class="col-md-6">
-    <h2> #2 네트워크: </h1>
+    <h2> #1 타겟넘버: </h1>
         
-    <p class="date">date posted: 2020-03-26</p>
+    <p class="date">date posted: 2020-03-25</p>
     <br>
     <div class="toc">
         <h5>Contents</h5>
@@ -49,36 +49,51 @@
 
     <br><br>
     <h5 id="1">오늘의 TMI</h5>
-
     <p>
-        <ol>
-            <li>요즘 Oasis - Don't look back in anger 노래에 빠져서 무한반복하다가 질릴까봐 참고 있음.</li>
-            <li>어제 아침에 코딩문제때문에 늦게 집에갔는데 가서 해변의 카프카 읽으려다 잤음. 오늘 다시 시도해야지.</li>
-            <li>아침에 문제풀이가 확실히 잘됨.</li>
-        </ol>
+        ... 퇴근후 하려고 하니 눈물이 살짝 흐르는거 같네요.
     </p>
+    <p>
+        그냥 자고 출근 일찍해서 문제를 풀어 보았습니다. 원래 보통 일찍 출근해서 1~2시간정도 책읽고 일을 시작 하는데
+        알고리즘 문제 같은 머리를 좀 돌려야 할때는 순서를 바꿔야 할거 같네요.
+    </p>
+    <p>
+        슬프지만 당분간은 아침에 문제를 풀고 저녁에 책읽는걸로...
+    </p>
+    <p>
+        시작하기전에 TMI 어제 "Tears of the Sun" 이라는 <b>실화</b> 바탕의 영화를 봤는데 너무 재밌엇네요. 마지막에
+        명언이 하나 나오는데:<br><br>
 
+        <span style="font-family: cursive;">
+        The only thing necessary for the triumph of evil is for good men to do nothing. 
+        </span>
+        <span style="text-align: right; font-family: cursive;">-Edmund Burke</span>
+    </p>
+    <p>
+        "악한자가 업적을 이루는데 필요한건 좋은사람들이 아무것도 안하는거다" 라는 말인데요. 최근에 뉴스에서 
+        "Neutrality always takes side of tormentor not the tormented" 라는 말을 듣고 인스타에 적어놨엇는데 어제 이것도 보고 
+        너무 와닿았네요.
+    </p>
+    <p>
+        요즘 코로나, n번방 때문에 난리인데 우리모두 저희가 옳지 않다 생각할땐 용기내어 나설수 있는 사람이 되길 바랍니다.
+    </p>
     <br><br>
 
     <h5 id="2"> 코딩 풀이 시작</h5>
-
     <p>
         문제설명: <a href="https://programmers.co.kr/learn/courses/30/lessons/43165">https://programmers.co.kr/learn/courses/30/lessons/43165</a>
     </p>
     <p>
-       아직은 문제를 바로 보고 풀 실력이 안되는것 같습니다 제 스스로 풀때까지는 사람들의 답을 보고 이해하고  거기서 조금 
+       아직은 문제를 바로 보고 풀 실력이 안되는것 같습니다 (혼자서 풀려고 노력은 해보세요) 제 스스로 풀때까지는 사람들의 답을 보고 이해하고  거기서 조금 
        개선 할것이 있으면 해보도록 하고 이해한대로 설명을 해보겠습니다.
     </p>
     <p>
-        <a href="https://train-validation-test.tistory.com/entry/Programmers-level-2-%ED%83%80%EA%B2%9F-%EB%84%98%EB%B2%84-python">첫번째 답</a>
-    </p>
-    <p>
-        다른 답들도 몇가지 봤는데 저는 위에 답이 가장 이해가 잘 됬기 때문에 사용 하였습니다. 이답 저답 다 한번 봐보시길 추천!
+        한명의 풀이보다 이답 저답 다 한번 봐보시길 추천!
     </p>
     <p>
         실제로 손으로 풀어보신다면 이게 바로 Breadth First Search 를 사용 하고 있다는것을 알수 있을것입니다.
         
-        numberlist 에 있는 숫자들을 possible_targets 에 넣어주는것인데 각 숫자마다 +- 두가지가 될수 있기때문에 2^n 개의 가능성이 있습니다.
+        numberlist 에 있는 숫자들을 possible_targets 에 넣어주는것인데 각 숫자마다 +- 즉 두개의
+        경우의 수를 가지기 때문에 2^n 개의 가능성이 있습니다.
     </p>
     <p>
         예시: numberlist = [1,2,3], target = 6<br>
@@ -92,16 +107,21 @@
                 [(1 + 2), (1 - 2),<br>
                  (-1 + 2), (-1 - 2)]<br>
                  
-                 이렇게 1에게 +2, -2 두개의 경우의 수가 생기고, -1 에게도 두개의 경우의 수가 생깁니다. 
+                 이렇게 1에게 +2, -2 두개의 경우의 수가 생기고, -1 에게도 두개의 경우의 수가 생깁니다. 총 4개의 경우의수가 생기죠.
             </li>
             <li>
-                마지막 숫자를 possible_targets 에 있는 숫자에 +- 한번씩 해준다면 numberlist 가 가질수 있는 모든 +- 경우의수의 답이 나옵니다.
-                여기서 이제 target 이 몇개나 있는지 possible_targets.count(target) 해주면 끝.
+                마지막 숫자도 동일하게 possible_targets 에 있는 각 숫자에 +3/-3 을 각각 해주면 possible_targets 는 [1,2,3] 3개의
+                숫자가 +/- 했을때 가질수 있는 모든 합을 가집니다. 마지막으로 몇개나 저희의 target 이랑 동일한지 알아내면 끝!
             </li>
         </ol>
     </p>
     <p>
-        위에 방식을 Tree 를 사용해서 그래본다면.
+        위에 방식을 시각화 해보겠습니다.
+        <img src="photos/1_네트워크_1.png" alt="">
+    </p>
+    <p>
+        모든 경우의수의 답이 있는걸 쉽게 볼수 있습니다. 저희의 target 은 6 이기 때문에
+        이와 동일한 답은 하나뿐이기때문에 저희는 1 은 return 합니다.
     </p>
 
     <pre>
@@ -116,11 +136,13 @@ def solution(numberlist, target):
         possible_targets = sub
 
     return possible_targets.count(target)</pre>
-
+<p>
+    위의 코드를 퍼온곳은 아래 References 섹션에 기재했습니다. 
+</p>
     <div id='reference' class="references">
         <h5>References:</h5>
         <ul>
-            <li><a href="https://programmers.co.kr/learn/courses/30/lessons/43162">프로그래머스 문제 - 네트워크</a></li>
+            <li><a href="https://programmers.co.kr">한국어 코딩문제 - 프로그래머스</a></li>
             <li><a href="https://train-validation-test.tistory.com/entry/Programmers-level-2-%ED%83%80%EA%B2%9F-%EB%84%98%EB%B2%84-python">첫번쨰 답.</a></li>
 
         </ul>
