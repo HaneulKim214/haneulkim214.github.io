@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Haneul Kim's - 체육복</title>
+	<link rel="stylesheet" href="../../../../bootstrap-4.1.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../../static/css/fixed.css">
+    <link rel="stylesheet" href="../../../../static/css/blogs.css">
+	<!-- Font Awesome libarary -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+
+<body data-spy="scroll" data-target="#navbarResponsive">
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+	<a class="navbar-brand" href="../../../../index.html#my-brain">
+		Take me back.
+    </a>
+</nav>
+<div class="projects">
+
+<div class="row project">
+<div class="col-md-3 side-bar">
+    <ul>
+        <li><a href="1_타겟넘버.html">#1 타겟넘버</a></li>
+        <li><a href="2_네트워크.html">#2 네트워크</a></li>
+        <li><b>#3 체육복</b></li>
+    </ul>
+</div>
+    
+<!-- ------------------------------ All Content goes here -------------------- -->
+<div class="col-md-6">
+    <h2> #3 체육복: </h1>
+        
+    <p class="date">date posted: 2020-04-04</p>
+    <br>
+    <div class="toc">
+        <h5>Contents</h5>
+        <ul>
+            <li>
+                <a href="#1">오늘의 TMI </a>
+            </li>
+            <li>
+                <a href="#2">코딩 풀이 시작 </a>
+            </li>
+            <li><a href="#reference">References</a></li>
+        </ul>
+    </div>
+
+    <br><br>
+    <h5 id="1">오늘의 TMI</h5>
+
+    <p>
+        <ol>
+            <li>오늘 책상 패드를 사려고 찾다가 맘에 딱 드는 "두가찌" 라는 캐나다 브랜드를 찾았는데 소가죽, 송아지 가죽을 사용 한다길래 
+                "흠... 가죽을 어떻게 벗기는거지?" 라는 생각이 들어서 찾아보니 가죽 만드는 모든 프로세스가 환경에 나쁘다고 하더라. 
+                이걸보고 나는 환경을 돕는 사람이되고 싶은데 지식이 부족해서 나도 모르게 환경에 불이익을 주고 있을수 있다는 
+                생각이 들어서 이쪽 분야 전문가랑 빨리 일해보고 싶다는 생각이 들었네요. 전기 사용하고, 고기 먹고, 책, 등등 
+                환경에 영향을 미치는 것들을 하면서 환경 운동을 할 자격이 있나는 생각도 드네요 (이건 뭐 일기수준이였네요...쏴리).
+            </li>
+            <li>
+                DFS/BFS 문제를 풀려고 했는데 대부분 레벨 3이라... 아직 넘 힘들어 레벨 1로 내려갑니다....
+            </li>
+        </ol>
+    </p>
+
+    <br><br>
+
+    <h5 id="2"> 코딩 풀이 시작</h5>
+
+    <p>문제설명 --> 
+        <a href="https://programmers.co.kr/learn/courses/30/lessons/42862">체육복</a>
+    </p>
+
+
+    <p>
+        이문제는 Greedy 문제중 하나입니다. Greedy 문제란 보통 문제들을 분할해서 하나하나 풀어 나가는데
+        분할된 문제에서 가장 optimal 한 방향으로 문제를 풀어나가는겁니다. Global 한 결과는 생각은 안한체
+        local 한 결과만 신경쓰고 바로 진행을 하기 때문에 Greedy 문제라고 합니다.
+    </p>
+
+    <p>
+        이번 문제는 레벨1 이라 상당히 쉬웠는데요.
+    </p>
+    <p>
+        <ol>
+            <li>reserve, lost 서로 같은 학생이 없도록 새로 리스트를 생성.</li>
+            <li>reserve 학생마다 에서 앞학생이 lost 리스트에 있으면 lost에서 지워준다 => 체육복 빌림. 앞에는 있고 뒤에 친구가 없다고 뒷친구한테.</li>
+            <li>return 총 학생수 - lost 리스트의 수(빌려줬으면 지워짐) </li>
+        </ol>
+    </p>
+
+    <pre>
+def solution(n, lost, reserve):
+    _reserve = [r for r in reserve if r not in lost]
+    _lost = [l for l in lost if l not in reserve]
+
+    for r in _reserve:
+        f = r - 1
+        b = r + 1
+        
+        if f in _lost:
+            _lost.remove(f)
+        elif b in _lost:
+            _lost.remove(b)
+    return n - len(_lost)</pre>
+
+    <p>
+        일단 Time complexity 는 모든 학생이 여별의 체육복이 있지만 모두 잃어버렸다면 _reserve, _lost 만들때 각자 O(n) 이
+        걸릴테고 밑에 _reserve 를 for loop 에 돌릴때 O(n) 
+        이 발생해서 => 3O(n) 이 됩니다.
+    </p>
+    
+    <p>
+        둘다 Linear 이긴 하지만 3O(n) 는 3배나 깊은 slope 를가지고 있습니다 => n 이 하나 늘대마다 3배 오래 걸립니다. <br>
+        최대한 줄여봅시다.
+    </p>
+
+<p>아래의 코드에선 자꾸 2개가 틀린다는데 도대체 무엇때문에 에러가 나는지 모르겠네요 된다면 O(n) 이 될텐데요.</p>
+<pre>
+def solution(n, lost, reserve):
+    for r in reserve:
+        if r in lost:
+            lost.remove(r)
+            continue
+
+        f = r - 1
+        b = r + 1
+        
+        if f in lost:
+            lost.remove(f)
+        elif b in lost:
+            lost.remove(b)
+            
+    return n - len(lost)
+</pre>
+
+    <div id='reference' class="references">
+        <h5>References:</h5>
+        <ul>
+            <li><a href="https://programmers.co.kr/learn/courses/30/lessons/42862">프로그래머스 문제 - 체육복</a></li>
+        </ul>
+
+    </div>
+</div>
+
+</div>
+</body>
+
+</html>
