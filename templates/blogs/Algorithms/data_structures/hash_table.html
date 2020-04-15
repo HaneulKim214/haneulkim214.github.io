@@ -64,7 +64,7 @@
     if I know its full story and their applications. So let's begin with why Hash table
     were invented.
     <br><br>
-    <p>They were invented to improve from deficiency that <b>Direct Access Tables</b> were facing.
+    <p>They were invented to overcome deficiency that <b>Direct Access Tables</b> were facing.
         <br>
         Direct access table is a table where each data has associated index therefore desired data could
          be directly reached with O(1) time complexity.
@@ -79,18 +79,18 @@
         Then why not just use direct access table? 
     </p>
     <p>Even though all operations have exceptional small time complexity, it suffers largely 
-        from space complexity. Since for each friend there must be extra space for each index that 
-        points to information. In practice as list of friends become larger space that are
-         being wasted grows since you are not always looking for all your friends at once.
+        from space complexity. Since for each friend there must be extra memory space for every index index that 
+        points to an information of a friend. As list of friends become larger there will be more memory space
+        that aren't used often.
     </p>
     <p> Say there are 100 students in a school where on average 50% of students study in the library, 
         if you want to create a library of 100 seats for each
         students, half of the seats will not be occupied.
          On average less than half will not be used and in break times 
         none of them will be used.
-         Now to avoid this problem where most desks space are unused arise Hash Table.
+        We could avoid this problem by using concept of Hash Table.
     </p>
-    <p> Using the same analogy, you might assign 2 student per desk therefore you only need 50 desks instead of 100.
+    <p> Assign 2 student per desk therefore you only need 50 desks instead of 100.
         From student_1 to student_100, we use a function called hash function to efficiently assign two students to one desk.
         In this case we will use modular arithmetics (hash function may not be modular arithmetics)
          and create hash function denoted h(x) where x represents student number.
@@ -108,11 +108,11 @@
         now a key(index) of new table, hash table.
     </p>
 
-    <p>Hash table's time complexity thus depends on its hash function thus main goal of using hash table 
+    <p>Hash table's time complexity depends on its hash function therefore main goal of using hash table 
         is to use hash function that distribute original keys equally into hash table.
          If hash function map multiple key into same
-        position then when calling that index multiple values will be returned and from there you must search for 
-        your desired result. This phenomenon is referred to as collision. When this happens there is two ways of 
+        position then when calling that index multiple values will be returned and from there you must search in linear fashion
+        to find your index. This phenomenon is referred to as <b>collision</b>. When this happens there is two ways of 
         handling them:
         <ol>
             <li id="1-1"><b>Chaining:</b> Creating a linked list whenever collision happens. 
@@ -133,7 +133,7 @@
                 index. 
                 <br>
                 When searching, first goto assigned index then keep moving onto next hash table's index until 
-                wanted index is reached or until there is empty index (information of that index doesn't exist).
+                wanted index is reached or until there is empty index => information of that index doesn't exist.
                 <br><br>
                 One thing to note is its deletion operation. When a key is deleted, its index in hash table is
                 marked as "deleted". Insertion can happen in "deleted" index however when searching instead of 
