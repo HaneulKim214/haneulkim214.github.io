@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Haneul Kim's - #6 위장 </title>
+	<link rel="stylesheet" href="../../../../bootstrap-4.1.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../../static/css/fixed.css">
+    <link rel="stylesheet" href="../../../../static/css/blogs.css">
+	<!-- Font Awesome libarary -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+
+<body data-spy="scroll" data-target="#navbarResponsive">
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+	<a class="navbar-brand" href="../../../../index.html#my-brain">
+		Take me back.
+    </a>
+</nav>
+<div class="projects">
+
+<div class="row project">
+<div class="col-md-3 side-bar">
+    <ul>
+        <li><a href="1_타겟넘버.html">#1 타겟넘버</a></li>
+        <li><a href="2_네트워크.html">#2 네트워크</a></li>
+        <li><a href="3_체육복.html">#3 체육복</a><li>
+        <li><a href="4_완못선.html">#4 완주하지 못한 선수 (hash)</a></li>
+        <li><a href="5_전목.html">#5 전화번호 목록 (hash)</a></li>
+        <li><b>#6 위장 (hash)</b></li>
+    </ul>
+</div>
+    
+<!-- ------------------------------ All Content goes here -------------------- -->
+<div class="col-md-6">
+    <h2> #6 위장: </h1>
+        
+    <p class="date">date posted: 2020-04-19 </p>
+    <br>
+    <div class="toc">
+        <h5>Contents</h5>
+        <ul>
+            <li>
+                <a href="#1">오늘의 TMI </a>
+            </li>
+            <li>
+                <a href="#2">코딩 풀이 시작 </a>
+            </li>
+            <li><a href="#reference">References</a></li>
+        </ul>
+    </div>
+
+    <br><br>
+    <h5 id="1">오늘의 TMI</h5>
+    <p>
+        <ol>
+            <li>블로그 자주하면 TMI 쓸게 별로 없는듯. => 천천히 해야겠네</li>
+            <li>다음주 강릉여행 가려고함, 무계획으로 그냥 이곳저곳 걸을생각...</li>
+        </ol>
+    </p>
+
+    <br><br>
+
+    <h5 id="2"> 코딩 풀이 시작</h5>
+    <p>문제 설명은 아래 프로그래머스 링크에서 보세요.</p>
+    <h6 style="color: green;">#1 시도</h6>
+    <ul>
+        <li>이름만 hashmap 이지 사실상 그냥 dictionary...</li>
+        <li>list 형태로 옷 이름은 넣어줌.</li>
+        <li>종류가 이미 있으면 그 hashmap[종류] 로 이미 있는 [이름] 을 불러 새로운 이름을 넣어줌 -> [이름, 이름]</li>
+        <li>각 종류마다 몇개있는지 확인
+            <ul>
+                <li>한가지만 착용할수 있기에 각 종류마다 갯수를 더해줌</li>
+                <li>종류가 다른게 있으면 조합을 할수 있으므로 곱하기 해줌. ex: 2얼굴 x 1상의 -> (1얼굴 1상의), (2얼굴 1상의) 2개의 조합 가능. </li>
+            </ul>
+        </li>
+    </ul>
+<pre>
+import numpy as np
+
+def solution(clothes):
+    hashmap = {}
+    
+    for c in clothes:
+        if c[1] in hashmap:
+            hashmap[c[1]].append(c[0])
+        else:
+            hashmap[c[1]] = [c[0]]
+            
+    count_per_group = [len(value) for value in hashmap.values()]
+    multiplied = np.prod(count_per_group) if len(count_per_group) > 1 else 0 
+    return sum(count_per_group) + multiplied
+</pre>
+    <ul>
+        <li>
+            고쳐야할 부분<br>
+             ex: clothes = [["yellow_hat", "headgear"], ["sung", "eyewear"], ["tshirt", "top"]] 이렇게 있을경우:
+            <ul>
+                <li>각 종류당 하나씩 있기때문 = 3</li>
+                <li>(yellow_hat, sung), (yellow_hat, tshirt), (sung, tshirt) 이런식으로 3개 더 추가.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h6 style="color: green;">#2 시도</h6>
+    <ul>
+        <li>종류별 조합의수는 = len(종류1) * len(종류2) *... *len(종류n) 으로 가능.</li>
+        <li>종류가 안들어 갈수도 있다. ex: clothes = [["yellow_hat", "headgear"], ["sung", "eyewear"], ["tshirt", "top"]] 이렇게 있을경우:
+            <ul>
+                <li>("yellow_hat"), ("sung"), ("tshirt"), ("sung", "tshirt"), etc.. 이런식으로 3개의 종류가 있더라도 하나만 사용할수 있고 2개만 사용할수 있다.</li>
+            </ul>
+        </li>
+        <li>서로 착용 안되는 경우의 수도 포함 해줘야기 때문에 len(종류) + 1 를 해준다. </li>
+        <li>위에는 모든 종류를 아무것도 안입을경우까지 카운트 해주는데 그럴필요 없기에 전체수 - 1 을 해주면 끝.</li>
+    </ul>
+<pre>
+import numpy as np
+
+def solution(clothes):
+    hashmap = {}
+    for c in clothes:
+        if c[1] in hashmap:
+            hashmap[c[1]].append(c[0])
+        else:
+            hashmap[c[1]] = [c[0]]
+    count_per_group = [len(value) for value in hashmap.values()]  
+    return np.prod([c+1 for c in count_per_group]) -1
+</pre>
+    <ul>
+        <li>성공하긴 했지만... 코드가 쫌 더러운 느낌?</li>
+        <li>굳이 hashmap 의 value를 list 로 만든후에 다시 len(list) 할필요가 없을듯.</li>
+    </ul>
+    
+    <h6 style="color: green;">#3 시도</h6>
+    <ul>
+        <li>여전히 더럽긴 하지만 마지막 loop comprehension 을 없앴기때문에 성능 개선.</li>
+    </ul>
+<pre>
+import numpy as np
+
+def solution(clothes):
+    hashmap = {}
+    for c in clothes:
+        if c[1] in hashmap:
+            hashmap[c[1]] = hashmap[c[1]] + 1
+        else:
+            hashmap[c[1]] = 1
+            
+    count_per_group = list(hashmap.values()) 
+    return np.prod([c+1 for c in count_per_group]) -1
+</pre>
+
+<h6 style="color: green;">#4 시도</h6>
+<ul>
+    <li>Counter 를 사용해서 hashmap 을 만들어놓으면 훨씬 깔끔.</li>
+    <li>[cat for name, cat in [[name,cat], [name2,cat2]] ] --> 밖에 리스트를 돌면서 안에 두값을 name, cat 에 넣어줌 --> 거기서 cat 만 사용하여 Counter dicionary 만들어줌.</li>
+</ul>
+<pre>
+import numpy as np
+from collections import Counter
+
+def solution(clothes):
+    hashmap = Counter([cat for name,cat in clothes])       
+    count_per_group = list(hashmap.values()) 
+    return np.prod([c+1 for c in count_per_group]) -1
+</pre>
+<ul>
+    <li>Counter 를 이렇게 쓸수있는지는 몰랐네요 아래의 링크르 보고 한수 배워왔습니다.</li>
+</ul>
+
+    <div id='reference' class="references">
+        <h5>References:</h5>
+        <ul>
+            <li><a href="https://programmers.co.kr/learn/courses/30/lessons/42578">프로그래머스 문제 - 위장</a></li>
+            <li><a href="https://itholic.github.io/kata-camouflage/">#1 다른사람 풀이</a></li>
+        </ul>
+
+    </div>
+</div>
+
+</div>
+</body>
+
+</html>
