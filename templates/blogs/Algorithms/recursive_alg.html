@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Haneul Kim's - Recursive algorithm</title>
+	<link rel="stylesheet" href="../../../bootstrap-4.1.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../static/css/fixed.css">
+    <link rel="stylesheet" href="../../../static/css/blogs.css">
+	<!-- Font Awesome libarary -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+
+<body data-spy="scroll" data-target="#navbarResponsive">
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+	<a class="navbar-brand" href="../../../index.html#my-brain">
+		Take me back.
+    </a>
+</nav>
+<div class="projects">
+
+<div class="row project">
+<div class="col-md-3 side-bar">
+</div>
+    
+<!-- ------------------------------ All Content goes here -------------------- -->
+<div class="col-md-6">
+    <h2> Recursive algorithm: </h1>
+        
+    <p class="date">date posted: 2020-04-30</p>
+    <br>
+    <div class="toc">
+        <h5>Contents</h5>
+        <ul>
+            <li><a href="#1">What is Recursive algorithm?</a></li>
+            <li><a href="#2">Examples</a>
+                <ul>
+                    <li>Factorials</li>
+                </ul>
+            </li>
+            <li><a href="#reference">References</a></li>
+        </ul>
+    </div>
+    
+    <h5 id="1">What is Recursive algorithm?</h5>
+    <p>
+        Recursion problems was pretty hard for me to get a grasp therefore I needed some time to learn what it is exactly before getting into 
+        solving problems.
+    </p>
+    <ul>
+        <li>Recursion problem:
+            <ul>
+                <li>break down problem into smaller problems and call same function over and over again while updating answer.</li>
+                <li>No calculations until base case(simplest form of problem that can be solved directly) reached.</li>
+                <li>Solve using smaller version of the same problem.</li>
+            </ul> 
+        </li>
+    </ul>
+
+    <h5 id="2">Examples</h5>
+    <h6>Factorial</h6>
+    <ul>
+        <li>! = factorial</li>
+        <li>n! = (n)(n-1).....(1)</li>
+        <li>ex: 5! = 5*4*3*2*1 = 120</li>
+        <li>0! = 1</li>
+    </ul>
+    <p>
+        Above bullet points pretty much explain what factorials are. Let's see what it looks like in code.
+    </p>
+    <ul>
+        <li>Inside our big function there is smaller version (n-1) of the same problem.</li>
+        <li>If we recursively run function it will reach a base case which will return 1 then we 
+            move up until all functions gets return value.
+        </li>
+    </ul>
+<pre>
+def factorial(n):
+    if n == 0:
+        return 1
+    else:
+        return n * factorial(n-1) 
+</pre>
+<p>
+    To clarify our understanding let's go through above code with an example.
+</p>
+<p>let n = 5,
+    <ol>
+        <li>n=5 !=0 thus goto else statement.</li>
+        <li>5 * factorial(4)  --> we are calling smaller function, remember no computations until base case.</li>
+        <li>since 4 != 0 again we call 4 * factorial(3) and so on...</li>
+    </ol>
+</p>
+<p>
+    <img src="../Algorithms/photos/recursion_1.png" alt="">
+</p>
+<ol start=4>
+    <li>Then we reach 1 * factorial(0) which is our base case since this time it will factorial(0) will return 1.</li>
+    <li>Now we start computation. I will make visualization for you to understand.
+        <ul>
+            <li>we reached base case 1*factorial(0). Since factorial(0)=1, 1*1=1.</li>
+            <li>1*factorial(0) has been called from factorial(1) thus we return our result to factorial(1)</li>
+            <li>2*factorial(1) has been called from factorial(2) thus return result 2.</li>
+            <li>Moving up, we reach our first function call and since it got result from factorial(4) = 24 we can now 
+                return our most top level function 5*24 = 120.
+            </li>
+        </ul>
+    </li>
+</ol>
+<p>
+    <img src="../Algorithms/photos/recursion_2.png" alt="">
+</p>
+<p>This is basically it, with this concept you can solve any recursive problem. Always remember goal of recursive algorithm 
+    is to solve problem with same smaller problems so there will always be same function call inside a function and every function call
+    will have to decrease parameter value so it eventually reach base case and move back up.
+</p>
+<p>
+    I highly recommend MIT lecture listed in my reference section, simple explanation but lots of information!
+</p>
+<p>Now lets see if I could solve recursive algorithm coding problems. :)</p>
+
+    <div id='reference' class="references">
+        <h5>References:</h5>
+        <ul>
+            <li><a href="https://www.youtube.com/watch?v=wMNrSM5RFMc">Recursion Explained</a></li>
+            <li><a href="https://www.youtube.com/watch?v=WPSeyjX1-4s">MIT Lecture (recommended)</a></li>
+            <li><a href="https://www.youtube.com/watch?v=X32dce7_D48">Why 0! = 1</a></li>
+        </ul>
+
+    </div>
+</div>
+
+</div>
+</body>
+
+</html>
