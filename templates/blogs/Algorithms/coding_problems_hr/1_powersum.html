@@ -62,57 +62,65 @@
         solving problems. If you are struggling with recursion problems I recommend you to read --> <a href="../recursive_alg.html" target="_">What is Recursive algorithm</a>
     </p>
 
-    <h6 style="color: green;">#1 try</h6>
-    
+    <h6 style="color: green;">#1 Solution from Danny Sivan</h6>
+    <p>I could not solve this problem and took me a while to understand solutions. This solution by Danny was most
+        intuitive to me so let me explain the code with an example where X = 10, n = 2.
+    </p>
     <ul>
-        <li>sd</li>
+        <li>We enter for loop with range(1, 10)
+            <ul>
+                <li>when i = 1, ans = 10 - (1^2) = 9</li>
+                <li>since ans = 9 > 0, we go into elif statement and call powerSum(9, 2, 2)
+                    <ul>
+                        <li>Notice that 3rd parameter is i+1, adding one at every iteration to make sure it will end. Just like how we n-1 in factorial</li>
+                        <li>we enter for loop with range(2, 9)
+                            <li>when i =2, X = 9, ans = 9 - (2^2) = 5</li>
+                            <li>ans > 0, so we call powerSum(5, 2, 3)
+                            <ul>
+                                <li>enter for loop with range(3, 5)</li>
+                                <li>i =3, X=5, ans = 5 - (3^2) = -4 This time we go into else statement</li>
+                                <li>now i=4, X=5 ans = - again so again into else statement</li>
+                                <li>we exit for loop and return count = 0.</li>
+                                <li>Time to move back up!! return to powerSum(5,2,3)</li>
+                            </ul>
+                        </li>
+                        <li>count += powerSum(5,2,3) is same as count += 0</li>
+                        <li>now next i in for loop, i =3, X=9 then ans = 9 - (3^2) = 0</li>
+                        <li>ans = 0 , count+= 1</li>
+                        <li>continue the for loop and all ans will get negative value so we continue until loop is finished.</li>
+                    </ul>
+                </li>
+                <li>count += powerSum(9,2,2)  is same as count += 1</li>
+            </ul>
+        </li>
+        <li>Finally we are at i = 2, repeat above process and you will get there....</li>
     </ul>
     
-    <p>이번 코딩문제에서 가장 중요한건 sorted 의 key를 어떤식으로 활용하나 이다.</p>
-
-    <p>이제 두번째 for loop 설명:</p>
-    <ul>
-        <li>rank_dict 는 list 이다. 거기에 첫번째 아이템은 = ('pop', [(600,1), (2500,4)] ) 임.</li>
-        <li>각 아이템마다 1번째 아이템인 [(600,1), (2500,4)] 을 가지고 sort 해준다.</li>
-        <li>아까와 비슷하다. 이번엔 tuple 의 0번째 아이템으로 sort 를 한다. [(2500,4), (600,1)] 이렇게됨.</li>
-        <li>각 장르당 2개씩밖에 앨범에 안실리기때문에 [:2] 를 끝에 추가해준다.</li>
-        <li>각 장르당 만들어진 list 를 가지고 순서대로 tuple 의 1번째인 i 값을 넣어주면 끝.</li>
-    </ul>
 <pre>
-def solution(genres, plays):
-    final_lst = []
-    table = {}
-    
-    for i, (g, p) in enumerate(zip(genres, plays)):
-    
-        if g in table:
-            table[g].append((p, i))
+def powerSum(X, n, start):
+    count = 0
+    for i in range(start, X):
+        ans = X - i ** n
+        if ans == 0:
+            count += 1
+        elif ans > 0:
+            count += powerSum(ans, n, i+1)
         else:
-            table[g] = [(p, i)]
-    rank_dict= sorted(table.items(), key=lambda tup:sum([x[0] for x in tup[1]]), reverse=True)
-    
-    for item in rank_dict:
-        d = sorted(item[1], key=lambda e:e[0], reverse=True)[:2]
-        for _ in d:
-            final_lst.append(_[1])
-            
-    return final_lst
+            continue
+    return count
+
+powerSum(10, 2, 1)
 </pre>
-    <ul>
-        <li>장르안에서 같은 play값을 가지고 있을때 i(고유번호) 가 낮은걸 먼저 줘야하는데 나는 그거 없이 했지만 통과...</li>
-        <li>다른 사람들은 sorted(key 값에 itemgetter 를 많이 사용한거 같다.) 나는 최대한 import 없이 하고 싶어서 lambda 를 사용 + 이해하기 더 좋은거 같음. </li>
-        <li>이번에는 sorted 를 이해만 한다면 쉽게 풀수 있는것 같다.</li>
-        <li>이제 hash는 혼자서도 잘 푸는듯ㅎㅎ 하하하하하하 호호호호호</li>
-    </ul>
 
-    
-    <p>rank_dict 만들때 table 이름을 잘못써서 한참을 코드를 뜯어고치다가 이름이 잘못된걸 알아차리고 돌려보니 성공. 다들 저런 실수 조심하세요.</p>
-
+<p>This was my first recursive algorithm problem and it was pretty challenging to understand since it was hard to 
+    keep track of all function calls. Hope it will get better and more intuitive in next problem solving exercise.
+</p>
 
     <div id='reference' class="references">
         <h5>References:</h5>
         <ul>
             <li><a href="https://www.hackerrank.com/challenges/the-power-sum/problem">HacerRank Problem - The Power Sum</a></li>
+            <li><a href="https://www.hackerrank.com/rest/contests/master/challenges/the-power-sum/hackers/danny_sivan/download_solution">HacerRank solution - The Power Sum</a></li>
         </ul>
 
     </div>
