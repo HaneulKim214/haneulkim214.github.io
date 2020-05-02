@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Haneul Kim's - #2 Recursive Digit Sum </title>
+	<link rel="stylesheet" href="../../../../bootstrap-4.1.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../../static/css/fixed.css">
+    <link rel="stylesheet" href="../../../../static/css/blogs.css">
+	<!-- Font Awesome libarary -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+
+<body data-spy="scroll" data-target="#navbarResponsive">
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+	<a class="navbar-brand" href="../../../../index.html#my-brain">
+		Take me back.
+    </a>
+</nav>
+<div class="projects">
+
+<div class="row project">
+<div class="col-md-3 side-bar">
+</div>
+    
+<!-- ------------------------------ All Content goes here -------------------- -->
+<div class="col-md-6">
+    <h2> #2 Recursive Digit Sum: </h1>
+        
+    <p class="date">date posted: 2020-05-01 </p>
+    <br>
+    <div class="toc">
+        <h5>Contents</h5>
+        <ul>
+            <li>
+                <a href="#1">TMI of the day</a>
+            </li>
+            <li>
+                <a href="#2">Solutions </a>
+            </li>
+            <li><a href="#reference">References</a></li>
+        </ul>
+    </div>
+
+    <br><br>
+    <h5 id="1">TMI of the day</h5>
+    <p>
+        <ol>
+            <li>Very very tiring day, could not focus therefore came to cafe nearby. </li>
+            <li>Never knew I would say this but I kinda miss Toronto :(</li>
+            <li>Must adore place I am currently in and be thankful, always! :)</li>
+        </ol>
+    </p>
+
+    <br><br>
+
+    <h5 id="2"> Solutions</h5>
+    <p>
+       For those of you who do not know what recursive algorithm, reading this will help --> <a href="../recursive_alg.html" target="_">What is Recursive algorithm</a>
+    </p>
+
+    <h6 style="color: green;">#1 Try</h6>
+    <ul>
+        <li>First, I created a base case so that I know that my recusive function will terminate.</li>
+        <li>When len(sup_digit) != 1 then we goto else statement and get sum of current sup_digit and
+            call superDigit function recursively until it reaches base case.
+        </li>
+    </ul>
+    <pre>
+def sum_digit(sup_digit):
+    total = 0
+    for number in sup_digit:
+        total += int(number)
+    return str(total)
+
+# Complete the superDigit function below.
+def superDigit(n, k):
+    sup_digit = n*k
+
+    # base case
+    if len(sup_digit) == 1:
+        return str(sup_digit) 
+    
+    else:
+        summed_digit = sum_digit(sup_digit)
+        return str(superDigit(summed_digit, 1))
+    </pre>
+    <ul>
+        <li>Passes 7/11 test cases.</li>
+    </ul>
+<br>
+    <h6 style="color: green;">#1 Solution</h6>
+    <ul>
+        <li>using map function.
+            <ul>
+                <li>list(string) gives list of characters</li>
+                <li>map(int, list) = changes elements in list to integers</li>
+                <li>sum(map(int, list)) = since all are in int we can simply sum them. ex: "123" = 1+2+3 = 6</li>
+                <li>change back to string since it has to be passed into recursive function.</li>
+            </ul>
+        </li>
+    </ul>
+<pre>
+def superDigit(n, k):
+    sup_digit = str(sum(map(int, list(n))) * k)
+
+    # create base case
+    if len(sup_digit) == 1:
+        return int(sup_digit) 
+    
+    else:
+        return int(superDigit(sup_digit, 1))
+</pre>
+<ul>
+    <li>I guess using <pre>sup_digit = str(sum( map(int, list(n*k)) )) </pre>
+    gives a runtime error because having "123"*10^5 then summing each individual number would take
+much longer then sum([1,2,3])*10^5</li>
+</ul>
+<br>
+<h6 style="color: green;">#2 Solution</h6>
+<p>So if summing n then multiplying k to it was the trick then my original code should work as well. Previously
+    I've multiplied n*k then summed all individual characters but just like 1st solution let me sum(n)*k and see 
+    if it works(I know it works...)
+</p>
+<pre>
+def sum_digit(sup_digit):
+    total = 0
+    for number in sup_digit:
+        total += int(number)
+    return str(total)
+
+# Complete the superDigit function below.
+def superDigit(n, k):
+    sup_digit = sum_digit(n)*k
+    # base case
+    if len(sup_digit) == 1:
+        return str(sup_digit) 
+    
+    else:
+        return str(superDigit(sup_digit, 1))
+</pre>
+<p>Which works as well so I guess the problem was not the sum_digit function but summing n then multiplying by k rather
+    than n*k then summing all numbers.
+</p>
+<br>
+
+    <div id='reference' class="references">
+        <h5>References:</h5>
+        <ul>
+            <li><a href="https://www.hackerrank.com/challenges/recursive-digit-sum/problem?isFullScreen=true">HacerRank Problem - Recursive Digit Sum</a></li>
+        
+        </ul>
+
+    </div>
+
+
+</div>
+
+</div>
+
+<!-- <script src="../../../../static/js/pre.js"></script> -->
+</body>
+
+</html>
