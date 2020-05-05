@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Haneul Kim's - #3 Maximum parimeter triangle </title>
+	<link rel="stylesheet" href="../../../../bootstrap-4.1.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../../static/css/fixed.css">
+    <link rel="stylesheet" href="../../../../static/css/blogs.css">
+	<!-- Font Awesome libarary -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+
+<body data-spy="scroll" data-target="#navbarResponsive">
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+	<a class="navbar-brand" href="../../../../index.html#my-brain">
+		Take me back.
+    </a>
+</nav>
+<div class="projects">
+
+<div class="row project">
+<div class="col-md-3 side-bar">
+</div>
+    
+<!-- ------------------------------ All Content goes here -------------------- -->
+<div class="col-md-6">
+    <h2> #3 Maximum parimeter triangle: </h1>
+        
+    <p class="date">date posted: 2020-05-05 </p>
+    <br>
+    <div class="toc">
+        <h5>Contents</h5>
+        <ul>
+            <li>
+                <a href="#1">TMI of the day</a>
+            </li>
+            <li>
+                <a href="#2">Solutions </a>
+            </li>
+            <li><a href="#reference">References</a></li>
+        </ul>
+    </div>
+
+    <br><br>
+    <h5 id="1">TMI of the day</h5>
+    <p>
+        <ol>
+            <li>I've been trying to solve recursion problems however had no idea how to approach it... backing down one step to solve easier problems and hope I can solve them later on.</li>
+        </ol>
+    </p>
+
+    <br><br>
+
+    <h5 id="2"> Solutions</h5>
+
+    <h6 style="color: green;">#1 Try</h6>
+    <p>This problem is solved using greedy approach which basically means at each step you find most optimal solution and in the end that will be global optimal solution. But we know that
+        obtaining global optimal solution is not always true.
+     </p>
+     <p>
+         So this is my approach:
+     </p>
+     <ul>
+         <li>sort list of sticks in ascending order.</li>
+         <li>start from first three sticks, goto next three, and so on... Check if they are valid triangles, if yes insert into triangles list.</li>
+         <li>If there is no valid triangle, return [-1]</li>
+         <li>If we only have one valid triangle, return that one triangles[0]</li>
+         <li>If we have more than one valid triange since we had them sorted in ascending order, last triangle would be valid and have greatest perimeter</li>
+     </ul>
+
+<pre>
+def check_valid_tri(triangle):
+    """if sum of two sides > another side then it is valid triangle"""
+    a = triangle[0]
+    b = triangle[1]
+    c = triangle[2]
+    
+    if (a + b > c) & (a + c > b) & (b + c > a):
+        return True
+    else:
+        return False
+
+def maximumPerimeterTriangle(sticks):
+    sticks.sort()
+    triangles = []
+    for i, st in enumerate(sticks):
+        triangle = sticks[i:3+i]
+        if len(triangle) < 3: 
+            continue  
+        if check_valid_tri(triangle):
+            triangles.append(triangle)
+              
+    if len(triangles) == 0:
+        return [-1]
+    
+    elif len(triangles) == 1:
+        return triangles[0]
+    else:
+        return triangles[-1]
+</pre>
+
+<p>This problem was pretty easy to solve, I just needed to search for ways to check whether a triangle was valid <del>(I'm a math major)</del>. </p>
+
+<br>
+
+    <div id='reference' class="references">
+        <h5>References:</h5>
+        <ul>
+            <li><a href="https://www.hackerrank.com/challenges/maximum-perimeter-triangle/problem?isFullScreen=true">HacerRank Problem - Maximum parimeter triangle</a></li>
+            <li><a href="https://www.geeksforgeeks.org/check-whether-triangle-valid-not-sides-given/">Check valid triangle</a></li>
+        
+        </ul>
+
+    </div>
+
+
+</div>
+
+</div>
+
+<!-- <script src="../../../../static/js/pre.js"></script> -->
+</body>
+
+</html>
