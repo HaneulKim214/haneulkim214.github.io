@@ -104,6 +104,14 @@ def maximumPerimeterTriangle(sticks):
 
 <p>This problem was pretty easy to solve, I just needed to search for ways to check whether a triangle was valid <del>(I'm a math major)</del>. </p>
 
+<p>This works perfectly, going over every three sticks (do not need to try all combinations since it is ordered and if it doens't creates valid triangle at last three it means there won't be any sticks that can be 
+    replaced to create valid triangle since a + b < c will become a + b << c)
+</p>
+<p>
+    Every three sticks can be seen as feasible solution, and we update our triangles with more feasible ones finally picking the latest feasible one which would be our most optimal solution. This is very
+    simple greedy approach and I believe my code has done a pretty good job! :)
+</p>
+
 <br>
 
     <div id='reference' class="references">
