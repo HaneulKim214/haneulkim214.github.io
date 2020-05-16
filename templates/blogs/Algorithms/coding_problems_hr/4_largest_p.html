@@ -48,7 +48,7 @@
     <h5 id="1">TMI of the day</h5>
     <p>
         <ol>
-            <li>My neck is hurting, some kind of muscle pain. Okay this was really tmi.</li>
+            <li>My neck is hurting, some kind of muscle pain. Okay this was hardcore tmi sorry.</li>
         </ol>
     </p>
 
@@ -58,7 +58,7 @@
     <p>Again, greedy approach will be taken to solve this problem. There are two ways of doing it.
         <ol>
             <li>Get all possible array and take most optimal</li>
-            <li>Have base array, update it each time more optimal array arise.</li>
+            <li>Have base array, update it each time more optimal array arise so in the end your base array would be most optimal.</li>
         </ol>
     </p>
 
@@ -67,7 +67,7 @@
     <ul>
         <li>Only trying for k = 1</li>
         <li>given an array, I find highest number in an array and swap it with the first element. Since having largest value as first element will give 
-            highest possible lexicographical value.
+            highest possible lexicographical value when k = 1.
         </li>
     </ul>
 <pre>
@@ -79,13 +79,15 @@ def largestPermutation(k, arr):
 </pre>
 <ul>
     <li>This passes all test case but it won't work for k > 1</li>
-    <li>as k increase we must increase 0th position to 1st position and so on... But note that we should not consider already swapped value.</li>
+    <li>As k increase we must increase position to swap accordingly. ex:when k = 2 first find largest value and swap it with first element then find largest from elements
+        ignoring the first and swap it with second element.
+    </li>
 </ul>
 <br>
 
     <h6 style="color: green;">#2 Try</h6>
     <ul>
-        <li>as we loop thorugh high_pos conders arr[i:] therefore ignoring already swapped value</li>
+        <li>As we loop thorugh high_pos, arr[i:] therefore ignoring already swapped value</li>
         <li>find position of higest value from arr[i:] swap it with ith position. Note that previous values in array are swapped already.</li>
     </ul>
 <pre>
@@ -106,11 +108,10 @@ def largestPermutation(k, arr):
 <br>
 <h6 style="color: green;">#3 Try</h6>
 <ul>
-    <li>previously in 3rd line we are taking arr.index(highest_value) => after finding highest value in arr[i:] we find index in arr[:] in second loop we found 2 to be 
-        highest value but we look for its index in arr[:] which will ofcourse give us first position since we swapped it. So it should be arr[i:].index(highest_value) + i, add i at
+    <li>Add i at
         the end because we will swap values in original arr[:] thus must add value that has been cut off.
     </li>
-    <li>Also if k > len(arr) it outputted error because arr[k:] wouldn't exist if k > len(arr), so fixed that as well.</li>
+    <li>If k > len(arr) it outputted error because arr[k:] wouldn't exist if k > len(arr), so replaced k with len(arr) if k was larger.</li>
 </ul>
 
 <pre>
