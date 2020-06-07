@@ -27,7 +27,7 @@
     
 <!-- ------------------------------ All Content goes here -------------------- -->
 <div class="col-md-6">
-    <h2> What is Hypothesis Testing?: </h1>
+    <h2> What is Hypothesis Testing?</h1>
         
     <p class="date">date posted: 2020-06-07 </p>
     <br>
@@ -48,7 +48,7 @@
     <h5 id="1">TMI of the day</h5>
     <p>
         <ol>
-            <li>Ate puradak, which is "high end" chicken. This time I had with bone but I prefer boneless.</li>
+            <li>Ate puradak, which is a thing in korea it is basically "high end" chicken. Waassss good. But this time I had with bone, I prefer boneless.</li>
         </ol>
     </p>
 
@@ -56,41 +56,44 @@
 
     <h5 id="1"> What is Hypothesis Testing?</h5>
     <p>
-        For a while I had hard time understanding what exactly Hypothesis testing is since there are too many similar statistical jargons. Here I will
-        go through an example question and explain which part I was confused and explain differences between two jargons that might be confusing to most people like me.
+        For a while I had hard time understanding what exactly Hypothesis testing is since there are too many confusing statistical jargons. Here I will
+        go through an example question and explain which part I was confused and explain differences between two jargons that might be confusing to most people like me as
+        well as explain what hypothesis testing is and when and how to use them.
     </p>
 
     <p>
-        Here are some important jargons in understanding what hypothesis testing is:
+        Here are some important jargons in understanding what hypothesis testing is and terms you probably have to come back to multiple times:
         <ul>
             <li><b>Null hypothesis</b> = Initial belief in your experiment.</li>
             <li><b>Alternative hypothesis</b> = New belief that you want to verify by rejecting null hypothesis.</li>
             <li><b>Z-score</b> = How many standard deviation away from the mean is this value you want to test.</li>
             <li><b>P-value</b> = probability of such event given null hypothesis is true.</li>
-            <li><b>Type I error</b> = Rejecting null when it is true. Also known as False positive</li>
+            <li><b>Type I error</b> = Rejecting null when it is true. Also known as false positive</li>
             <li><b>alpha = significance level</b> = probabilty of Type I error occuring.</li>
-            <li><b>Type II error</b> = Accepting null hypothesis when it is false. Known as False negative</li>
+            <li><b>Type II error</b> = Accepting null hypothesis when it is false. Also known as false negative.</li>
+            <li><b>Test Statistics</b> = statistic used to reject null or fail to reject null.</li>
         </ul>
     </p>
 
     <p>
-        Hypothesis testing is used to test whether your result your experiment produced means something. For example if you invented a drug for covid-19 and want to see if
-        it actually cures people with the virus we would use hypothesis testing to see if it is the drug that cures people with the virus instead of something else we do not know.
+        Hypothesis testing is used to conclude whether the result your experiment produced means something. For example if you invented a drug for covid-19 and want to see if
+        it actually cures people with the virus we would use hypothesis testing to see if it is the drug that cures instead of some other factore we are not aware of.
     </p>
     <p>
-        Before we move on let me claify some jargons. I was very confused with p-value, type I error, alpha, and significance level. If you want to test effectiveness of your drug you wouldn't
-        try in on all population since it would be expensive therefore select sample from the population and experiment. So with the outcome of the sample we have to conclude whether our
+        Before we move on lets clarify four terms that were confusing to me, P-value, type I error, alpha, and significance level. If you want to test effectiveness of your drug you wouldn't
+        try in on all population since it would be expensive thus select sample from population then experiment. So with the outcome of the sample we have to conclude whether our
         intial belief (drug is effective) is true or reject intial belief (drug is ineffective).
     </p>
     <p>
-        Probability of getting outcome you've got from the sample assuming intial belief is true is called a p-value. Low p-value implies that assuming inital belief outcome is very unlikely to happen thus
-        we would reject intial belief. p-value = 0.05 => 5% chance outcome is likely to happen if initial belief is true which is very unlikely. Alpha and significance level basically mean the same thing, it 
-        says that how low of percentage will you give to reject initial belief. So alpha = 0.05 means that if p-value is less than 0.05 we will reject initial belief and if alpha = 0.01 it means that 
+        Probability of getting outcome you've got from the sample assuming intial belief is true is called a <b>p-value</b>. Low p-value implies that assuming inital belief outcome is very unlikely to happen thus
+        it would be appropriate to reject intial belief. p-value = 0.05 implies 5% chance outcome is likely to happen if initial belief is true. <b>Alpha</b> and <b>significance level</b> basically mean the same thing, it 
+        means how low of a percentage will you accept for rejecting initial belief. Setting alpha = 0.05 means that if p-value is less than 0.05 we are 95% confident in
+         rejecting initial belief thus alternative hypothesis is accepted and it is statistically significant. If alpha = 0.01 it means that 
         p-value has to be less than 0.01 to be able to reject inital belief.
     </p>
     <p>
-        Alpha and significance level is basically threshold for deciding whether you can reject initial belief. In other words it is how much risk are you willing to take, that is how much Type I error is
-        acceptable? If you are building a recommendation system you would set alpha to be 0.05 or higher since giving incorrect recommendation is not crucial to living, in other words it is acceptible to have 
+        <b>Alpha</b> and <b>significance level</b> are threshold for deciding whether you can reject initial belief. In other words it is how much risk you are willing to take, that is how much Type I error is
+        acceptable? If you are building a recommendation system you would set alpha to be 0.05 or higher since giving incorrect recommendation is not crucial to survival, in other words it is acceptible to have 
         Type I error.  
     </p>
     <p>
@@ -99,30 +102,30 @@
     <br>
     <h5 id="2"> Why Hypothesis Testing?</h5>
     <p>
-        It is a way of making conclusion with reduced subjectivity therefore less prone to bias.<br>
+        It is a way of reducing subjectivity leading to less bias.<br><br>
         Let me show you why using an example. 
     </p>
     <p>
-        You are running candy bar factory and on average their weight is 5g.
+        Say you are running candy bar factory and on average candy bar's weight is 5g.
         New employee recruited today comes into your office and tells you that average weight of candy bars are not 5g.
     </p>
     <p>
-        Your initial belief is that it is 5g, this is called a <b>Null hypothesis</b>. We assume this is true untill new accusation is made. This new accusation from the new employee is called an 
+        Your initial belief is candy bars are 5g, this is called a <b>Null hypothesis</b>. We assume this is true until new contradiction is made. This new contradiction from new employee is called an 
         <b>Alternative hypothesis</b>. We assume our initial belief is true since we've been running candy factory for a while and if new employee provides enough evidence that his/her accusation is true
         then we reject our initial belief and accept new belief that average weight of candy bars are not 5g.
     </p>
     <p>
-        So to test this we would select 50 candy bars at random and calculate average weight. Say you do this 3 times and outputs averages of (5.02g, 5.65g, and 7.22g). For first outcome most people will agree that
-        our null is true since 5.02g is pretty close to 5g. Our last outcome 7.22g, most people will agree with alternative hypothessis. What about when sample outputted average weight as 5.65g? Some might agree on
+        So to test this we would select 50 candy bars at random and calculate average weight. Doing this 3 times and outputs average of 5.02g, 5.65g, and 7.22g. For first outcome most people will agree that
+        our null is true since 5.02g is pretty close to 5g. Our last outcome 7.22g, most people will agree with alternative hypothessis. What about when sample outputted average weight of 5.65g? Some might agree on
         null hypothesis and some might not => subjective.
     </p>
     <p>To reduce subjectivity in our conclusion we use hypothesis testing.</p>
 
     <p>
-        Now we kindof know what hypothesis testing is lets fully understand it with an two examples with small and large sample sizes:
+        We have basic understanding of hypothesis testing, lets fully understand its usage with two examples:
     </p>
     <ul>
-        <li><a href="small_sample.html">Small sample size example</a></li>
+        <li><a href="small_sample.html">Hypothesis testing on small sample size example</a></li>
         <li><a href="large_sample.html">Large sample size example</a></li>
     </ul>
 
