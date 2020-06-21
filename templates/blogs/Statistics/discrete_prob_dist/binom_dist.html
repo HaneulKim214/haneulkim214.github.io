@@ -50,9 +50,13 @@
 
     <h5 id="1">Binomial distribution</h5>
     <p>
-        I think probability distributions are really useful in understanding things that happen in real life. When young 
-        most people probably have been questioned "What is the proability of flipping 3 heads in 5 flips?" or something similar. However
-        not many knew the answer or even if they did they could not solve similar questions that had more trials.
+        Even though I am a math major I find statistics more fun to study since 
+        many theorems appear in real life unlike mathematics where most problems are abstract.
+        One of topic in statistics we are going to talk about is <b>Binomial distribution.</b> When young 
+        most people probably had been questioned "What is the proability of flipping 3 heads in 5 flips?" or
+         something similar. 
+        Not many knew the answer or even if they did they could not solve similar questions that involved higher number 
+        of trials and successes.
     </p>
 
     <p>
@@ -61,12 +65,13 @@
     </p>
     <p>
         Binomial distribution is probability distribution of binomial random variable. Say you are flipping 10 coins(binomial experiment)
-         and want to find out probabilty of getting "n" number of heads where "n" is any positive integer between 0~10. You would get
-         probability of getting 1 heads, 2 heads, 3 heads and so on... number of heads are denoted as X, random variable. Finding all 
-         probability of these random variables and distributing them into a table or a bar chart is called a probability distribution.
+         and want to find out probabilty of getting "r" number of heads where "r" is any positive integer between 0~10. You would 
+         calculate probability of getting 1 heads, 2 heads, 3 heads and so on... 
+         number of heads are denoted as X, which are referred to as random variable. Distribution of these random variables 
+         are called probability distribution of such experiment in our case, flipping 10 coins.
     </p>
     <p>
-        Certain conditions must be satisfied for probability of random variables to be called binomial distribution.
+        Three conditions must be satisfied for probabilities of random variables to exhibit behavior of binomial distribution.
         <ol>
             <li>All trials must be independent and all trials have equal success rate</li>
             <li>Each trial is binomial experiment (having only two outcomes)</li>
@@ -74,14 +79,14 @@
         </ol>
     </p>
 
-    <h6 id="1-1">Deriving formula</h6>
+    <h6 id="1-1">Deriving formula for binomial distribution</h6>
     <p>
-        Let's say a I have 30% chance of making a 3-point shot, which makes 70% of missing 3-point shot. I want to know probability of
-        myself making 2 shots in 5 tries.
+        Let's say a I have 30% chance of making a 3-pointer, which automatically assign failure percentage of 70%. 
+        I want to know the probability of making two 3-pointers in 5 tries.
     </p>
     <p>
-        Probability of scoring 2 shots and 3 shots can be interpreted as (0.3)(0.3)(0.7)(0.7)(0.7) since probability of scoring is 0.3 and missing is 0.7. 
-        Denoting scoring as <b>S</b> and miss as <b>M</b> gives us <b>SSMMM</b> but there are multiple ways of scoring two 3-pointers. It can be
+        Probability of scoring 2 shots and missing 3 shots can be interpreted as (0.3)(0.3)(0.7)(0.7)(0.7) since probability of scoring is 0.3 and missing is 0.7. 
+        Denoting scoring as <b>S</b>, misses as <b>M</b> give us <b>SSMMM</b> but there are multiple ways of scoring two 3-pointers. It can be
         SMMMS, SMMSM, SMSMM, and so on... 
     </p>
     <p>
@@ -90,13 +95,14 @@
         Number of ways two 3-pointer could be scored can be calculated using <a href="https://www.youtube.com/watch?v=p8vIcmr_Pqo">combinatorics</a>
         <img src="../../../../blog materials/statistics/combination.png" alt="">
     </p>
-    <p>There are 10 different ways two 3-pointers can be made. Now multiplying it with probability of making 2 shots would be 
+    <p>There are 10 different ways two 3-pointers can be made in 5 tries. Now multiplying it with probability of making 2 shots and missing 3 shots
+         would be 
         <img src="../../../../blog materials/statistics/binom_dist_ex1.png" alt="">
         which equals to 0.3087 = 31%. I would make 2/5 3-pointers with 31% chance.
     </p>
     <p>
         We always want to generalize our formula so we don't reinvent the wheel.<br>
-        Notice that # of ways 2 shots can be made in 5 tries where 5<span style="font-size: x-large;">C</span>2 so if we want to 
+        Notice that # of ways 2 shots can be made in 5 tries was represented as 5<span style="font-size: x-large;">C</span>2 so if we want to 
         find # of ways "r" shots can be made in "n" trials our formula can be generalized to n<span style="font-size: x-large;">C</span>r.
     </p>
     <p>
@@ -106,10 +112,11 @@
          <img src="../../../../blog materials/statistics/binom_dist_formula.png" alt="">
     </p>
 
-    <h6 id="1-2">Example</h6>
-    <p><b>Q:</b> Find proability of getting 2 heads in 6 coin flips?</p>
+    <br>
+    <h6 id="1-2">Example question</h6>
+    <p><b>Q:</b> Find the proability of getting 2 heads in 6 coin flips?</p>
     <p>
-        n = 6, total number of trials. Success is getting heads meaning flipping tail is considered failure. Each trial is independent and 
+        n = 6, total number of trials. Flipping heads is considered a success meaning flipping tail is considered failure. Each trial is independent and 
         has equal probability of success therefore it satisfied two conditions of binomial distribution. Lastly since we are working with fixed 
         number of trials we satisfy all three conditions allowing us to use binomial distribution formula.
     </p>
@@ -117,21 +124,20 @@
     <p>
         <b>A:</b>Probability of getting 2 heads in 6 coin flips is 23.4%
     </p>
-
+    <br>
     <h5 id="2">Cumulative Binomial distribution</h5>
-    <p>Previous example only considers exact random variable. If we want to find probability of getting 2 or 3 heads in 6 coins flips
+    <p>Previous example only considers finding probabiliy of exact random variable. If we want to find probability of getting 2 or 3 heads in 6 coins flips
         we simply add P(X=2) + P(X=3).
     </p>
     <p>
-        To find probability of getting 3 heads or less we simply add all probability of random variables 0,1,2,and 3.<br>
+        To find probability of getting 3 heads or less we simply add all probabilities of random variable 0,1,2,and 3.<br>
         <img src="../../../../blog materials/statistics/cum_binom_dist.png" alt="">
     </p>
-    <p>Very simple right? Now we know how powerful binomial distribution is lets look at some limitations.</p>
+    <p>Very simple right? Now we know how powerful binomial distribution is lets look at some of its limitations.</p>
     <p>
         Let's say you want to find probability of getting less than or equal to 50 heads in 100 coin flips. It would be same as before however 
-        there are 51 different probability you need to calculate and sum which can be very cumbersome and prone to error. As number of trial 
-        gets larger and as number of probabilities of random variable we need to sum gets larger it gets harder and harder to calculate without 
-        using a program.
+        there are 51 different probabilities you need to calculate and sum together which can be very cumbersome and prone to error. 
+        As number of trials and successes gets larger it would be hard if not impossible to calculate without a program.
     </p>
 
     <p>
