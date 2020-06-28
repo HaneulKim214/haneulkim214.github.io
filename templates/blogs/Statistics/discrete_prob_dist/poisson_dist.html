@@ -57,76 +57,89 @@
 
     <h5 id="1">What is Poisson distribution?</h5>
     <p>
-        Poisson distribution is a model for calculating probability of event happening within a certain range where range can
+        Poisson distribution is used for calculating probability of event happening within a certain range where range can
         be time or space. Space can have multiple dimensions, cars passing by a highway checkpoint is an example of one dimension,
-        flowers in meadows is two dimensions and stars in region of galaxy is example of three dimensions. Poisson distribution often
-        referred to as Poisson process are primary building blocks of branch of statistics called "Spatial Statistics" that deals
-        with space range I've just mentioned.
+        flowers in meadows is two dimensions and stars in region of galaxy is example of three dimensions. 
+    </p>
+    <p> <!-- Difference between Poisson distribution and Poisson Process  -->
+
+        <!-- Poisson distribution is made from . Poisson process is a random proccess in probability theory and used to model random points 
+            in time and space.
+            referred to as Poisson process are primary building blocks of branch of statistics called "Spatial Statistics" that deals
+            with space range I've just mentioned. -->
     </p>
     <p>
         Just like other distributions we've looked at in order to use poisson ditribution formula our data must create 
         poisson distribution and in order to do that two conditions must be met:
 
         <ol>
-            <li>Event occurring within a range(time or space) must be independent. <br>
-                &nbsp; ex: % of machine breaking within <b>one week</b>
+            <li>Events occurring within a range(time or space) must be independent. <br>
+                &nbsp; ex: % of machine breaking within <b>one week</b> where breaking does not affect next break.
             </li>
             <li>Mean number of event happening within given range must be <b>known</b> <br>
-                &nbsp; ex: on average machine breaks <b>3</b> times in a week.
+                &nbsp; ex: on average machine breaks <b>3</b> times within a week.
             </li>
         </ol>
 
         Then we can use Poisson Distribution formula:<br>
         <img src="../../../../blog materials/statistics/poisson_dist_formula.png" alt=""><br>
-        where &lambda; = mean number of event happening within a range.<br>
-        r = random variable.
+        where<br>
+        &nbsp;&nbsp;&nbsp;  &lambda; = mean number of event happening within a range.<br>
+        &nbsp;&nbsp;&nbsp;  r = random variable.
     </p>
     <p>
         One more thing to note is expected value and variance of Poisson distribution.<br>
-        E(X) refers number of event occurring in our range. Which is simply &lambda;. Similarily Var(X) of Poisson 
+        E(X) refers number of event occurring in given range which is simply &lambda;. Similarily Var(X) of Poisson 
         distribution is &lambda;. <br><br>
         E(X) = Var(X) = &lambda; in Poisson distribution.
     </p>
-
+    <br><br>
     <h5 id="2">Example</h5>
     <p>
         Q: Find the probability of 3 cars passing a highway checkpoint in 60 seconds where on average
         10 cars pass highway checkpoint in 60 seconds.
     </p>
     <p>
-        For simplicity I am not going to consider rush hours and treat every hour to have same number of cars passing. <br>
-        i) cars passing by are independent of each other. <br>
-        ii) mean value(10) of cars passing by within given range (60seconds) is known.
+        For simplicity I am not going to consider rush hours and treat every minutes to have same mean number of cars passing. <br>
+        &nbsp;&nbsp;&nbsp; i) cars passing by are independent of each other. <br>
+        &nbsp;&nbsp;&nbsp; ii) mean value of cars passing by within given range (60seconds) is known.
     </p>
     <p>
-        Both conditions of Poisson distribution are met therefore we could use Poisson distribution formula. <br>
-        Our mean value (&Lambda;) is 10 cars within given range and now we want to know probability of 3 cars passing by
+        Both conditions of Poisson distribution are met therefore we could use Poisson distribution formula. <br><br>
+
+        Our mean value(&lambda;) is 10 cars/60seconds and now we want to know probability of 3 cars passing by
         in 60 seconds, 3 is our random variable. All variables are known, plug them into the formula.
     </p>
     <p>
        <img src="../../../../blog materials/statistics/pois_dist_example.png" alt=""> 
     </p>
     <p>
-        Probability of 3 cars passing by highway checkpoint within 60 seconds where on average 10 cars pass by per 60 seconds 
+        Probability of 3 cars passing by highway checkpoint within 60 seconds
         is <b>0.76%</b>.
     </p>
     <p>
         As mentioned in the beginning Poisson distribution can be applied to higher dimensions which makes it very powerful tool 
-        it solving real world problems.
+        for solving real world problems.
     </p>
-
+    <br><br>
     <h5 id="#3">Poisson distribution to approximate binomial distribution</h5>
     <p>
-        Another use case of Poisson distribution is that we could use it to approximate value of binomial distribution problem.
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Another use case of Poisson distribution is that we could use it to approximate value of binomial distribution.
     </p>
     <p>
-        <b>Why?</b> Binomial distribution formula require us to calculate high number of factorials which can be hard for calculators
-        to take in therefore we use Poisson distribution which makes calulation much simpler. <br><br>
-        <b>When?</b> Binomial distribution can be replaced by Poisson distribution when n >= 50 and p < 0.1, that is when there are 
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Why?</b> Binomial distribution formula require calculation of high number of factorials which can be hard for calculators
+        to take in or fit in a screen.
+        
+        <br><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <b>When?</b> Poisson distribution can be used to approximate values of Binomial distribution when n >= 50 and p < 0.1, that is when there are 
         large enough samples and probability of success is low.
         <br><br>
+
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <b>How?</b> In binomial distribution problem we would be given values for n and p. E(X) = np therefore we can 
-        simply substitute np with &lambda;. E(X) = np = &lambda;.
+        simply substitute np with &lambda;. E(X) = np = &lambda;, expected value in Poisson distribution.
     </p>
 
     <p>Now we know why, when and how to use Poisson distribution inplace of Binomial distribution lets go over with an example.</p>
@@ -141,22 +154,24 @@
     </p>
     <p>
         Notice in factorial calculation numbers are pretty large and as n gets higher and higher it will become larger therefore 
-        much harder to fit into calculator. Even though there are computers that solve factorials efficiently it is a good practice to
+        much harder to fit into calculator and definitely not easy to do by hand.
+         Even though there are computers that solve factorials efficiently it is a good practice to
         know how we could use simpler method. 
     </p>
     <p>
-        This time we will solve using Poisson distribution. We know E(X) = np = &lambda; therefore &lambda; = 3.
+        This time we will solve using Poisson distribution. We know E(X) = np = &lambda; therefore E(X) = 60*0.05 = 3.
+        <br>
         <img src="../../../../blog materials/statistics/pois_binomial_pois_ex1.png" alt="">
     </p>
+    <p>Probability of getting 5 questions correct in 60 questions is 10%.</p>
     <p>
-        Which deals with much smaller number making calculations easier. Notice that both formula outputted same answer. As n gets larger and
-        p gets smaller Poisson distribution will do a better job of approximating binomial distribution. <br><br>
-
-        So probability of getting 5 questions correct in 60 questions is 10%.
+        This time we dealt with much smaller number making calculations easier. Notice that both formula outputted same answer. As n gets larger and
+        p gets smaller Poisson distribution will do a better job of approximating binomial distribution. Which
+        also means it will look more like Binomial distribution as n gets largers and p gets smaller. <br>
     </p>
     <p>
         This time I didn't explain how Poisson distribution formula was derived as it require deep mathematical understanding
-        however I will try to post blog on it for those interested (once I understand it myself).
+        however I will try to post it for those interested (once I understand it myself).
     </p>
     <div id='reference' class="references">
         <h5>References:</h5>
@@ -168,13 +183,6 @@
         </ul>
 
     </div>
-
-
-</div>
-
-</div>
-
-<!-- <script src="../../../../static/js/pre.js"></script> -->
 </body>
 
 </html>
