@@ -29,18 +29,26 @@
 <div class="col-md-6">
     <h2> Poisson distribution</h1>
         
-    <p class="date">date posted: 2020-06-27 </p>
+    <p class="date">date posted: 2020-06-28 </p>
     <br>
     <div class="toc">
         <h5>Contents</h5>
         <ul>
-            <li><a href="#1">What is Poisson distribution?</a>
+            <li>
+                <a href="#1">What is Poisson distribution?</a>
             </li>
-            <li><a href="#2">Geometric distribution</a>
-            <ul>
-                <li><a href="#2-1">Example</a></li>
-            </ul></li>
-            <li><a href="#reference">References</a></li>
+            <li>
+                <a href="#2">Example</a>
+            </li>
+            <li>
+                <a href="#3">Poisson distribution to approximate binomial distribution</a>
+                <ul>
+                    <li>Example</li>
+                </ul>
+            </li>
+            <li>
+                <a href="#reference">References</a>
+            </li>
         </ul>
     </div>
 
@@ -49,112 +57,114 @@
 
     <h5 id="1">What is Poisson distribution?</h5>
     <p>
-       For me I tend to break down thing to understand the concept. What is a <b>probability distribution</b>?
-       It is a way of representing "probability" for each possible outcomes in given experiment.<br>
-       In a given experiment if number of possible outcomes are infinitely many it is called a <b>continuous proability
-           distribution.
-       </b> When there are finite number of possible outcomes <b>discrete probability distribution.</b><br>
-       Putting them together it is way of representing probability of all possible outcomes in an experiment with
-       finite number of outcomes such as rolling a die, picking a card from a deck, etc...
-       <br><br>
-       <h6 id="1-1">rolling one die</h6>
-       For example when rolling a die there are number of outcomes(discrete),
-        and if you calculate probability of rolling 1, 2, 3, ..., 6(all possible outcomes), you have a 
-        discrete probability distribution. It is mathematical function that outputs proability of outcomes given the occurence.
-        So if you input 1 into rolling a die experiment discrete probability distribution will output 1/6 which is
-        probability of 1 occuring.
-    </p>
-    <img src="../../../../blog materials/statistics/discrete_prob_dist.png" width="600" height="400" alt="">
-    <p>
-        P(X=x) is a notation for proability of random variable x happening. P(X=1) = proability of rolling a 1.
-        <br>
-        For all random variable (possible outcome) they have same proability of 1/6 therefore it is called a uniform distribution.
+        Poisson distribution is a model for calculating probability of event happening within a certain range where range can
+        be time or space. Space can have multiple dimensions, cars passing by a highway checkpoint is an example of one dimension,
+        flowers in meadows is two dimensions and stars in region of galaxy is example of three dimensions. Poisson distribution often
+        referred to as Poisson process are primary building blocks of branch of statistics called "Spatial Statistics" that deals
+        with space range I've just mentioned.
     </p>
     <p>
-        Next we will look at discrete probability distribution of rolling two dice.
+        Just like other distributions we've looked at in order to use poisson ditribution formula our data must create 
+        poisson distribution and in order to do that two conditions must be met:
+
+        <ol>
+            <li>Event occurring within a range(time or space) must be independent. <br>
+                &nbsp; ex: % of machine breaking within <b>one week</b>
+            </li>
+            <li>Mean number of event happening within given range must be <b>known</b> <br>
+                &nbsp; ex: on average machine breaks <b>3</b> times in a week.
+            </li>
+        </ol>
+
+        Then we can use Poisson Distribution formula:<br>
+        <img src="../../../../blog materials/statistics/poisson_dist_formula.png" alt=""><br>
+        where &lambda; = mean number of event happening within a range.<br>
+        r = random variable.
     </p>
-    <h6 id="1-2">rolling two dice.</h6>
     <p>
-        Below is probability distribution of rolling two dice. x-axis represents possible outcome from two rolls. Given x we can find its probability just by looking at the distribution.<br>
-    </p>
-    <p>So depending on the proability distribution it will output different proability of a random variable <b>x</b> occuring.</p>
-    <img src="../../../../blog materials/statistics/two_dice_prob_dist.png" alt="">
-    <p>
-       Two examples seem to intuitive that creating a formula seems cumbersome. But what if someone asks you for the probaiblity of rolling
-        die 100 times and getting 1 for the first time? It is not very intuitive, but with help of discrete probability distribution we can make in more intuitive 
-        and by help of special discrete probability distribution it will make calculations easier. 
-    </p>
-    <p>Main objective of creating a formula is to not re-invent the wheel, we can use generalized formula over and over again
-        on similar questions.
-    </p>
-    <h5 id="2">Geometric distribution</h5>
-    <p>
-        Geometric distribution is a special distribution used for solving specific problem such as 
-         finding proability of first success.
-         <br><br>
-         To use geometric distibution it must follow two conditions:
-         <ol>
-             <li>independent trials --> previous trial does not affect next trial's probability of succeeding.</li>
-             <li>Binomial outcome --> like "yes" or "no, only two possible outcome.</li>
-            </ol>
+        One more thing to note is expected value and variance of Poisson distribution.<br>
+        E(X) refers number of event occurring in our range. Which is simply &lambda;. Similarily Var(X) of Poisson 
+        distribution is &lambda;. <br><br>
+        E(X) = Var(X) = &lambda; in Poisson distribution.
     </p>
 
-    <h6 id="2-1">Example question:</h6>
+    <h5 id="2">Example</h5>
     <p>
-        Q: Your goal is to roll 10-sided die and find proability of rolling a 1 after 7 tries.
+        Q: Find the probability of 3 cars passing a highway checkpoint in 60 seconds where on average
+        10 cars pass highway checkpoint in 60 seconds.
     </p>
     <p>
-        1. Rolling a die are independent since rolling one die would not affect outcome of next roll.<br>
-        2. People might be saying that there are 10 possible outcomes therefore it does not satisfied 2nd condition. <b>However</b> 
-        we could make this into a binomial outcome. Since we are interested in rolling a 1, other than 1 we treated as "fail" therefore
-        rolling 1 = "success" and others = "fail".
+        For simplicity I am not going to consider rush hours and treat every hour to have same number of cars passing. <br>
+        i) cars passing by are independent of each other. <br>
+        ii) mean value(10) of cars passing by within given range (60seconds) is known.
+    </p>
+    <p>
+        Both conditions of Poisson distribution are met therefore we could use Poisson distribution formula. <br>
+        Our mean value (&Lambda;) is 10 cars within given range and now we want to know probability of 3 cars passing by
+        in 60 seconds, 3 is our random variable. All variables are known, plug them into the formula.
+    </p>
+    <p>
+       <img src="../../../../blog materials/statistics/pois_dist_example.png" alt=""> 
+    </p>
+    <p>
+        Probability of 3 cars passing by highway checkpoint within 60 seconds where on average 10 cars pass by per 60 seconds 
+        is <b>0.76%</b>.
+    </p>
+    <p>
+        As mentioned in the beginning Poisson distribution can be applied to higher dimensions which makes it very powerful tool 
+        it solving real world problems.
     </p>
 
-    <p>First thing you need to do is caluate probability of success and failure.
-        <ul>
-            <li>In our case success = rolling a 1. Since it is 10-sided die probability of rolling a 1 would be 1/10 = 10% denoted as p = 0.10.</li>
-            <li>Any other outcome would be a failure therefore
-                1 - 0.1 = 0.9 = 90% denoted at q = 0.9.</li>
-        </ul>
-    </p>
-    <p>Then we generate general formula for finding probability of success at <b>r</b> trial. (r is just an integer)</p>
+    <h5 id="#3">Poisson distribution to approximate binomial distribution</h5>
     <p>
-        <img src="../../../../blog materials/statistics/geo_dist_formula.png" alt="">
+        Another use case of Poisson distribution is that we could use it to approximate value of binomial distribution problem.
     </p>
     <p>
-        X stands for random variable in our case number of trials denoted by r. p = success probability and q = failure probability.
+        <b>Why?</b> Binomial distribution formula require us to calculate high number of factorials which can be hard for calculators
+        to take in therefore we use Poisson distribution which makes calulation much simpler. <br><br>
+        <b>When?</b> Binomial distribution can be replaced by Poisson distribution when n >= 50 and p < 0.1, that is when there are 
+        large enough samples and probability of success is low.
+        <br><br>
+        <b>How?</b> In binomial distribution problem we would be given values for n and p. E(X) = np therefore we can 
+        simply substitute np with &lambda;. E(X) = np = &lambda;.
+    </p>
+
+    <p>Now we know why, when and how to use Poisson distribution inplace of Binomial distribution lets go over with an example.</p>
+    <h6 id="3-1">Example</h6>
+    <p>
+        Q: you are given a test with 60 questions where for each question your probability of answering correctly is 0.05, What 
+        is the probability that you will get 5 questions correct? 
     </p>
     <p>
-        P(X=1) = proability of succeeding in 1st trial = (q^r-1)p = (0.9^0)(0.1) = 0.1 which makes sense since rolling a 1 is 1/10. <br>
-        P(X=2) = proability of succeeding in 2nd trial, and by using this formula we could find probaility of any P(X=r).
+        This is binomial distribution problem where n = 60, p = 0.05.  <br>
+        <img src="../../../../blog materials/statistics/pois_dist_binomial_ex1.png" alt="">
     </p>
     <p>
-        Simply you could think of P(X=r) as "how many times do I need to fail in order to succeed on <b>r</b>th trial?" so P(X=9) would mean I need to fail 9-1=8  times thus q(probaility of fail)^8 then 
-        after 8 failure you will succeed therefore multiply probaility of success hence we get the formula P(X=r) = q^(r-1)p
+        Notice in factorial calculation numbers are pretty large and as n gets higher and higher it will become larger therefore 
+        much harder to fit into calculator. Even though there are computers that solve factorials efficiently it is a good practice to
+        know how we could use simpler method. 
     </p>
     <p>
-        Geometric distribution often depicted using a tree
+        This time we will solve using Poisson distribution. We know E(X) = np = &lambda; therefore &lambda; = 3.
+        <img src="../../../../blog materials/statistics/pois_binomial_pois_ex1.png" alt="">
     </p>
     <p>
-        <img src="../../../../blog materials/statistics/geo_dist_tree.png" alt="">
+        Which deals with much smaller number making calculations easier. Notice that both formula outputted same answer. As n gets larger and
+        p gets smaller Poisson distribution will do a better job of approximating binomial distribution. <br><br>
+
+        So probability of getting 5 questions correct in 60 questions is 10%.
     </p>
     <p>
-        If you fail once then succeed first you go down to q then to p thus (0.9)(0.1)
-         if you fail two times then succeed it would be (0.9)(0.9)(0.1).
-    </p>
-    <p>
-        Now we can answer our question. P(X=8) = (q^8-1)(p) = ((0.9)^7)(0.1) = 0.0478. Probability of rolling a 1 after 7 tries is 
-        4.7%.
-    </p>
-    <p>
-        Next we will look at another special discrete probability distribution called 
-        <a href="binom_dist.html" style="color: rgb(104, 152, 241);"><b>Binomial distribution.</b></a>
+        This time I didn't explain how Poisson distribution formula was derived as it require deep mathematical understanding
+        however I will try to post blog on it for those interested (once I understand it myself).
     </p>
     <div id='reference' class="references">
         <h5>References:</h5>
         <ul>
-            <li><a href="https://www.amazon.com/Head-First-Statistics-Brain-Friendly-Guide/dp/0596527586">Head first Statistics: Geometric distribution - chapter 7</a></li>
-            <li><a href="https://mathinsight.org/probability_distribution_idea#:~:text=For%20the%20example%20of%20rolling,10%2C11%2C12%7D.">Discrete/Continuous probability distributon</a></li>
+            <li><a href="https://www.amazon.com/Head-First-Statistics-Brain-Friendly-Guide/dp/0596527586">Head first Statistics: Poisson distribution - chapter 7</a></li>
+            <li><a href="http://dl.rasabourse.com/Harvard%20Statistics.pdf">Introduction to Probability by Joseph K.Blitzstein and Jessica Hwang Chapter 13</a></li>
+            <li><a href="https://www.youtube.com/watch?v=3z-M6sbGIZ0">Poisson process part I</a></li>
+            <li><a href="https://www.youtube.com/watch?v=Jkr4FSrNEVY">Poisson process part II</a></li>
         </ul>
 
     </div>
