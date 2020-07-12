@@ -59,14 +59,16 @@
 
     <h5 id="1">Data distribution Vs. Sampling distribution</h5>
     <p>
-        Before reading and proving what Central limit theorem it is important to clearly understand difference between data and 
-        sampling distribution. Even though it is a very simple concept lot of people(including myself) gets mixed up with the two
-        leading to wrong application of central limit theorem.
+        Before explaining Central limit theorem it is important to clearly understand difference between data and 
+        sampling distribution. Even though it is a very simple concept lot of people(including myself) get
+         mixed up with the two
+        leading to wrong assumption of central limit theorem.
     </p>
 
     <p>
         <b>Data Distribution:</b> A function or listing showing all possible values of data, how often each data is likely to occur.<br>
-        For example if we were to measure height of 5000 people each person would represent one data point and data distribution would show 
+        For example if we were to measure height of 5000 people each person's height would represent 
+        one data point and data distribution shows 
         how many people are 160cm, 161cm and so on... Histogram is often used to represent data distribution.         
     </p>
     <pre>
@@ -74,8 +76,9 @@ import numpy as np
 population =  np.random.randint(low=150, high=200, size=5000)</pre>
 <p>
     I will randomly choose 5000 people between 150 ~ 200cm height and create a data distribution (seen below).<br>
-    It is a histogram representing how many out of 5000 people are 150cm tall, 151cm tall and so on until 200cm. So left most bar
-    represents there are about 90 people from our population of 5000 people which are 150cm tall.
+    It is a histogram representing frequency of data for each value of height. 
+    Left most bar
+    indicate that there are about 90 people who are 150cm tall.
     <img src="../../../../blog materials/statistics/data_distribution.png" alt="">
 </p>
     <p>
@@ -87,20 +90,21 @@ population =  np.random.randint(low=150, high=200, size=5000)</pre>
 
     <h5 id="2">Central Limit Theorem</h5>
     <p>
-        By definition: The tendency of <b>sampling distribution</b> to show shape of normal distribution as sampling size
+        <u>Definition</u>: The tendency of <b>sampling distribution</b> to show shape of normal distribution as sampling size
         increases, often assumption that sampling distribution follows normal distribution is made when sampling size is greater than 30.
     </p>
     <p>
         The key point here is that Central limit theorem is applied <b>only</b> to sampling distribution and not data distribution. Furthermore
-        sampling size mentioned is talking about number of sampling statistics.
+        sampling size mentioned is talking about number of sampling statistic calculated.
     </p>
     
     <h6 id="2-1">Example</h6>
     <p>
-        Now I will show you central limit theorem taking place in sampling distribution and <b>not</b> in data distribution.
+        Now I will show you central limit theorem holding true in sampling distribution but <b>not</b> in data distribution.
     </p>
     <p>
-        Let's say we measured height of n number of people and create a histogram to see if it becomes similar to
+        Let's say we measured height of n number of people and create a histogram(data distribution) to see if
+         it becomes similar to
         normal distribution as n increases. 
     </p>
 <pre>
@@ -122,15 +126,15 @@ height=800, width=800)
 fig.show()
 </pre>
 <p>
-    Below shows data distribution of sample size = 10, 30, 50, 100, 200. Notice that increasing n does not make data 
-    distribution look more like normal distribution.
+    Below shows data distribution of sample size = 10, 30, 50, 100, 200 and it is clear to us
+    that increasing n does not make data distribution close to normal distribution.
 </p>
 <img src="../../../../blog materials/statistics/ex_data_dist.png" alt="">
 
 <p>
-    Now from our population of 5000 people I will measure height of 100 people and calculate mean height (sample statistic). I will repeat it n times
-    and show that as n increases sampling distribution will become bell-curve shaped(normal distribution). Note that randomly choosing 100 people and 
-    calculating mean height, that mean value is one sample size.
+    Now from our population of 5000 people I will measure height of 100 people and calculate their mean height (sample statistic). I will repeat it n times
+    and show that as n increases sampling distribution will become more and more like bell-curve shaped(normal distribution).
+     Note that mean height of 100 people is one sample size.
 </p>
 
 <pre>
@@ -158,21 +162,23 @@ fig.show()
 </pre>
 <img src="../../../../blog materials/statistics/ex_sampling_dist.png" alt="">
     <p>
-        Note that sampling distribution becomes more like normal distribution as sample size increases. When I first started studying statistics
-        I would assume if data is large enough it would follow normal distribution which is totally wrong. I've just showed you that
-        central limit theorem only applies to <b>sampling distribution</b> so do not make a mistake of assuming data distribution follows
-        normal distribution is there are lots of data.
+        Note that sampling distribution becomes more like normal distribution as sample size increases. 
+         I've just showed you that
+        central limit theorem <b>only</b> applies to <b>sampling distribution</b> so do not make a common mistake of assuming data distribution follows
+        normal distribution when there are lots of data points.
     </p>
     <p>
-        One more thing, no matter what shape of data distribution population follows when you create sampling distribution with
-        large enough sample size central limit theorem will always hold true. No matter whether data distribution of population is skewed, bi-modal, etc... 
-        sampling distribution with large sample size assumption of normal distribution is plausible.
+        One more thing, no matter what shape of population's data distribution follows when you create sampling distribution with
+        large enough sample size central limit theorem will always hold true.
+         No matter whether data distribution of population is skewed, bi-modal, etc... 
+       assumption of normal distribution is plausible when sample size is large enough.
     </p>
 
     <h6 id="2-2">Why assumption of normal distribution important?</h6>
     <p>
-        Normal distribution leads to simpler mathematical calculations as mentioned in binomial and poisson distribution blogs when it is 
-        suitable to use normal distribution to approximate two distributions calculation becomes much simpler. Furthermore lots of 
+        Normal distribution leads to simpler mathematical calculations for distributions such as binomial and poisson. Even though
+        binomial and poisson distribution can be calculated using their own function when assumption of normal distribution is made
+        it makes the calculation much easier. Furthermore lots of 
         data collected from real life are normally distributed such as height, reading ability, and more. Lastly 
         once distribution is normal you could use empirical rule to see how far your data is deviated from the mean with ease.
     </p>
