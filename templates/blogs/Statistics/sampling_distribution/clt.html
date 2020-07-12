@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Haneul Kim's - Central Limit Theorem</title>
+	<link rel="stylesheet" href="../../../../bootstrap-4.1.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../../static/css/fixed.css">
+    <link rel="stylesheet" href="../../../../static/css/blogs.css">
+	<!-- Font Awesome libarary -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+
+<body data-spy="scroll" data-target="#navbarResponsive">
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+	<a class="navbar-brand" href="../../../../index.html#my-brain">
+		Take me back.
+    </a>
+</nav>
+<div class="projects">
+
+<div class="row project">
+<div class="col-md-3 side-bar">
+</div>
+    
+<!-- ------------------------------ All Content goes here -------------------- -->
+<div class="col-md-6">
+    <h2> Central Limit Theorem</h1>
+        
+    <p class="date">date posted: 2020-07-12 </p>
+    <br>
+    <div class="toc">
+        <h5>Contents</h5>
+        <ul>
+            <li>
+                <a href="#1">Data distribution Vs. Sampling distribution</a>
+            </li>
+            <li>
+                <a href="#2">Central Limit Theorem</a>
+                <ul>
+                    <li>
+                        <a href="#2-1">example</a>
+                    </li>
+                    <li>
+                        <a href="#2-2">Why assumption of normal distribution important?</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#reference">References</a>
+            </li>
+        </ul>
+    </div>
+
+    <br>
+    <br>
+
+    <h5 id="1">Data distribution Vs. Sampling distribution</h5>
+    <p>
+        Before reading and proving what Central limit theorem it is important to clearly understand difference between data and 
+        sampling distribution. Even though it is a very simple concept lot of people(including myself) gets mixed up with the two
+        leading to wrong application of central limit theorem.
+    </p>
+
+    <p>
+        <b>Data Distribution:</b> A function or listing showing all possible values of data, how often each data is likely to occur.<br>
+        For example if we were to measure height of 5000 people each person would represent one data point and data distribution would show 
+        how many people are 160cm, 161cm and so on... Histogram is often used to represent data distribution.         
+    </p>
+    <pre>
+import numpy as np
+population =  np.random.randint(low=150, high=200, size=5000)</pre>
+<p>
+    I will randomly choose 5000 people between 150 ~ 200cm height and create a data distribution (seen below).<br>
+    It is a histogram representing how many out of 5000 people are 150cm tall, 151cm tall and so on until 200cm. So left most bar
+    represents there are about 90 people from our population of 5000 people which are 150cm tall.
+    <img src="../../../../blog materials/statistics/data_distribution.png" alt="">
+</p>
+    <p>
+        <b>Sampling distribution:</b> A function or listing showing all possible values of sample statistics from each sample, 
+        how often each sample statistic is likely to occur. From a population if we choose n samples and calculate sample statistic 
+        of our choice (mean, mode, median, etc...) that is one sample statistic, do this R times and distribute them on a histogram 
+        showing how likely each value of sample statistic is likely to occur, that is <b>sampling distribution</b>. 
+    </p>
+
+    <h5 id="2">Central Limit Theorem</h5>
+    <p>
+        By definition: The tendency of <b>sampling distribution</b> to show shape of normal distribution as sampling size
+        increases, often assumption that sampling distribution follows normal distribution is made when sampling size is greater than 30.
+    </p>
+    <p>
+        The key point here is that Central limit theorem is applied <b>only</b> to sampling distribution and not data distribution. Furthermore
+        sampling size mentioned is talking about number of sampling statistics.
+    </p>
+    
+    <h6 id="2-1">Example</h6>
+    <p>
+        Now I will show you central limit theorem taking place in sampling distribution and <b>not</b> in data distribution.
+    </p>
+    <p>
+        Let's say we measured height of n number of people and create a histogram to see if it becomes similar to
+        normal distribution as n increases. 
+    </p>
+<pre>
+fig = make_subplots(rows=5, cols=1,
+subplot_titles=("n = 10", "n = 30", "n = 50", "n = 100", "n = 200"))
+
+for idx, n in enumerate([10,30,50,100,200]):
+    samples = np.random.randint(low=150, high=200, size=n)
+    fig.add_trace(
+        go.Histogram(
+        x     = samples,
+        name  = f"height of {n} people",
+        xbins = dict(size=1)
+        ),
+        row=idx+1, col=1
+    )
+fig.update_layout(title = "<b>Data distribution of height of n people</b>",
+height=800, width=800)
+fig.show()
+</pre>
+<p>
+    Below shows data distribution of sample size = 10, 30, 50, 100, 200. Notice that increasing n does not make data 
+    distribution look more like normal distribution.
+</p>
+<img src="../../../../blog materials/statistics/ex_data_dist.png" alt="">
+
+<p>
+    Now from our population of 5000 people I will measure height of 100 people and calculate mean height (sample statistic). I will repeat it n times
+    and show that as n increases sampling distribution will become bell-curve shaped(normal distribution). Note that randomly choosing 100 people and 
+    calculating mean height, that mean value is one sample size.
+</p>
+
+<pre>
+import random
+fig = make_subplots(rows=6, cols=1,
+                subplot_titles=("n = 10", "n = 30", "n = 50", "n = 100", "n = 200", "n=1000"))
+
+for idx, n in enumerate([10,30,50,100, 200, 1000]):
+    sampling_dist = []
+    for i in range(n):
+        samples       = random.sample(list(population), 100)
+        sample_stats  = np.mean(samples) # note that it can be any statistics not just MEAN
+        sampling_dist.append(sample_stats)
+
+    fig.add_trace(
+        go.Histogram(
+            x     = sampling_dist,
+            name  = f"mean height of {n} samples"
+        ),
+        row=idx+1, col=1
+    )
+fig.update_layout(title = "<b>Sampling distribution of mean height of n people</b>",
+                    height=800, width=800)
+fig.show()
+</pre>
+<img src="../../../../blog materials/statistics/ex_sampling_dist.png" alt="">
+    <p>
+        Note that sampling distribution becomes more like normal distribution as sample size increases. When I first started studying statistics
+        I would assume if data is large enough it would follow normal distribution which is totally wrong. I've just showed you that
+        central limit theorem only applies to <b>sampling distribution</b> so do not make a mistake of assuming data distribution follows
+        normal distribution is there are lots of data.
+    </p>
+    <p>
+        One more thing, no matter what shape of data distribution population follows when you create sampling distribution with
+        large enough sample size central limit theorem will always hold true. No matter whether data distribution of population is skewed, bi-modal, etc... 
+        sampling distribution with large sample size assumption of normal distribution is plausible.
+    </p>
+
+    <h6 id="2-2">Why assumption of normal distribution important?</h6>
+    <p>
+        Normal distribution leads to simpler mathematical calculations as mentioned in binomial and poisson distribution blogs when it is 
+        suitable to use normal distribution to approximate two distributions calculation becomes much simpler. Furthermore lots of 
+        data collected from real life are normally distributed such as height, reading ability, and more. Lastly 
+        once distribution is normal you could use empirical rule to see how far your data is deviated from the mean with ease.
+    </p>
+
+
+    <div id='reference' class="references">
+        <h5>References:</h5>
+        <ul>
+            <li><a href="https://math2510.coltongrainger.com/books/2017-bruce-and-bruce-pratical-statistics-for-data-scientists.pdf">Practical Statistics for Data Scientists 1st ed - Chapter 2 </a></li>
+            <li><a href="https://www.statisticshowto.com/data-distribution/#:~:text=A%20data%20distribution%20is%20a,how%20often%20each%20value%20occurs.">Data distribution </a></li>
+            <li><a href="https://www.youtube.com/watch?v=rBjft49MAO8">Normal distribution </a></li>
+            <li><a href="https://www.youtube.com/watch?v=mtbJbDwqWLE">Empirical rule of normal distributon</a></li>
+            <li><a href="http://davidmlane.com/hyperstat/A25329.html">Importance of normal distribution</a></li>
+        </ul>
+
+    </div>
+</body>
+
+</html>
