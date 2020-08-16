@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Haneul Kim's - K-Nearest Neighbors</title>
+	<link rel="stylesheet" href="../../../../bootstrap-4.1.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../../static/css/fixed.css">
+    <link rel="stylesheet" href="../../../../static/css/blogs.css">
+	<!-- Font Awesome libarary -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+
+<body data-spy="scroll" data-target="#navbarResponsive">
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+	<a class="navbar-brand" href="../../../../index.html#my-brain">
+		Take me back.
+    </a>
+</nav>
+<div class="projects">
+
+<div class="row project">
+<div class="col-md-3 side-bar">
+</div>
+    
+<!-- ------------------------------ All Content goes here -------------------- -->
+<div class="col-md-6">
+    <h2> K-Nearest Neighbors</h1>
+        
+    <p class="date">date posted: 2020-08-15 </p>
+    <br>
+    <div class="toc">
+        <h5>Contents</h5>
+        <ul>
+            <li>
+                <a href="#1">What is K-Nearest Neighbors?</a>
+                <ul>
+                    <li><a href="#1-2">Similarity measure</a></li>
+                    <ul>
+                        <li><a href="#1-1-1">Euclidean distance</a></li>
+                        <li><a href="#1-1-2">Manhattan distance</a></li>
+                    </ul>
+                    <li><a href="#1-3">Classification example</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#2">Model performance</a>
+            </li>
+            <li>
+                <a href="#3">How to choose optimal K?</a>
+            </li>
+            <li>
+                <a href="#reference">References</a>
+            </li>
+        </ul>
+    </div>
+
+    <br>
+    <br>
+
+    <h5 id="1">K-Nearest Neighbors</h5>
+    <p>KNN is a supervised machine learning algorithm where we do not have to fit training data to our model.</p>
+    <p>
+        It is fairly simple algorithm however choosing K, choosing right measurement for similarity, and seeing how good a model is
+        not so simple.
+    </p>
+    <p>
+        KNN predicts target variable depending by looking at its most simliar(closest) K datas. For example when K=1 it would look at 
+        first most closest data and predict that our new data and its closest data will have same target variable. When K > 1 it would
+         choose K number of data closest to new data and select majority group(classification) or average value from closest K datas 
+         (regression).
+    </p>
+    <p>
+        Now we have an understanding of what KNN is I go through an example and talk about things that you should be careful of.
+         But before that I will explain different measurement we could use to define simliarity.
+    </p>
+
+    <br>
+    <h6 id="1-2">Similarity measure</h6>
+    <p>
+        There are multiple ways of calculating similarity between two data points however I will only talk about two most 
+        used and simple measures.
+    </p>
+    <h6 id="1-1-1">Euclidean distance</h6>
+    <p>
+        Straight line connecting two points.
+        Say you have data point <b>p</b> and <b>q</b>. To find euclidean distance between the two we substract each feature
+        one from another, square them, sum all squared differences and take the square root.
+    </p>
+    <img src="../../../blog materials/ml/euclidean-distance.png" alt="">
+    <p>
+        So no matter how many features we have we can calculate similairty without reducing dimensions.
+    </p>
+    <h6 id="1-1-2">Manhattan distance</h6>
+    <p>
+        Distance measured by moving in one direction at a time. Think of walking from one point to another point in Manhattan, 
+        you cannot cut through buildings therefore you need to follow the path, either right-left or up-down. It is also referred to
+        as taxicab geometry.
+    </p>
+    <p>
+        You can get Manhattan distance by summing absolute valued differences. Say we have data <b>p</b> and <b>q</b> then we get following formula
+        where i refers to ith feature in each data.
+    </p>
+    <img src="../../../blog materials/ml/Manhattan-distance.png" alt="">
+    <br><br><br>
+
+    <h6 id="1-3">Classification example</h6>
+    <p>
+        Import necessary libraries and retrieve Iris data from sklearn. 
+        <pre>
+from sklearn import decomposition
+from sklearn.datasets import load_iris
+from sklearn.metrics import accuracy_score
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+import pandas as pd
+
+data = load_iris()</pre>
+    </p>
+    <p>
+        data is a dictionary with data, target_variable, target_names, and other informations about the data therefore print(data)
+        to see what it offers.
+    </p>
+    <p>
+    Get independent variables(X) and dependent variable(y). Note that flower types are in numbers but if you print(data) you could see
+    that 0 = "setosa", 1 = "versicolor", and 2 = "virginica". I will not change them to their names because later on we need them to be in 
+    integers so that we could label them with different colors in a graph.
+<pre>
+X = pd.DataFrame(data.data, columns=data.feature_names)
+y = pd.DataFrame(data.target).rename(columns = {0:"flower_type"})
+</pre>
+    </p>
+<p>
+Now we have our data, split into train, test set (note that knn doesn't really need prediction as it just needs to find K closest data from dataset)
+<pre>
+X_train, X_test, y_train, y_test = train_test_split(X, y)
+knn = KNeighborsClassifier(n_neighbors=5, p=2, metric="minkowski")
+
+knn.fit(X_train, y_train.values.ravel())
+y_pred = knn.predict(X_test)
+</pre>
+
+<p>
+    n_neighbors = K, p = Power parameter for Minkowski metric, when p=1 it is using manhattan distance and when p=2 it uses euclidean distance
+    to calulate simliarity.
+</p>
+<p>
+    So our KNN has K=5 and using Euclidean distance to find simliar 5 data points. After it will assign X_test's y_value with
+    majority y value from 5 closest data points.
+</p>
+<p>
+    We measure our model performance by seeing how many correct y-values it got.
+<pre>
+accuracy_score(y_pred, y_test)
+</pre>
+accuracy_score is simply correct/correct + wrong. I could write my own accuracy_score function.
+
+<pre>
+def accuracy_score(y_pred, y_test):
+    correct_prediction = 0
+    wrong_prediciton = 0 
+    for prediction, actual in zip(y_pred, y_test["flower_type"]):
+        if actual == prediction:
+            correct_prediction += 1
+        else:
+            wrong_prediciton += 1
+    return correct_prediction/len(y_test)</pre>
+</p>
+
+<p>
+    We've just used KNN to classify flower type, it seems very simple but here are some <b>important</b> things to 
+    keep in mind:
+<ol>
+    <li>Independent variables must be scaled</li>
+    <li><b>Do not</b> measure model performance solely on accuracy score </li>
+</ol>
+</p>
+1. Features that have large measurements will dominate the measure. <br>
+For example:
+    <ul>
+        <li>A: $50000 income, 30 years old</li>
+        <li>B: $20000 income, 25 years old</li>
+    </ul>
+    <p>
+        calculating euclidean distance we would get sqrt((50000-20000)^2 + (30-25)^2). As you can see age would not affect
+        distance value compared to income. Therefore you must standardize so that all features share same range => same importance.
+    </p>
+</p>
+<br>
+
+<h5> Model performance</h5>
+<p>
+    For all classification algorithms it is always best practice to look at multiple metrics when measuring model performance.
+    Even though your model has 99% accuracy that doesn't mean you should always use that model, this holds stronger when
+    there exists class imbalance => target variables do not share same proportion.
+</p>
+<p>
+   For example if you are building a model that predicts cancer simply predicting "No cancer" for all patients
+    will still result in high accuracy due to rareness of cancers therefore looking solely on accuracy is not a good
+     measure.
+</p>
+<p>
+    In addition to accuracy score there are other metrics to consider, however I will talk about two things specificity and 
+    sensitivity.
+</p>
+<p>
+    Sensitivity = True positive / True positive + False negative. Used when predicting correctly is utmost importance<br>
+    Specificity = True negative / True negative + False positive. Correctly identifying negative outcomes.
+</p>
+<p>
+    True implies model's correct prediction and positive refers to whether it guessed True, "Yes cancer", etc... (depends on 
+    what you choose to be positive.). For example if correctly identifying cancer is positive, given new patient if your model
+    predicts as "Yes cancer" True positive if actually cancer patient and False positive if patient is healthy.
+</p>
+
+<p>
+    Since there exists trade-off between sensitivity and specificity you need to choose whether to increase sensitivity or
+    specificty depending on question you are trying to answer. For example in cancer detection you would not want to miss 
+    cancer detection therefore incresing sensitivity would be more important. Where as in spam detection wrongly classifying 
+    spam as ham would not be detrimental.
+</p>
+<br><br>
+<h5 id="2">How to choose optimal K?</h5>
+<p>
+    We can choose K by using n-fold cross-validation technique, that is splitting train data into n group, train on
+    n-1 group and test on nth group. Repeat this n times with different values of K and use K that led to best result
+    on our test set.
+</p>
+<p>
+    When K is low we are prone to overfitting, say K=1 then even though data is an outlier it will still get assigned to
+    closest data and if K is too high it oversmooth data therefore cannot capture local structure in the data, main advantage
+    of knn.
+</p>
+<p>
+    Typically when dataset has lots of outliers/noise high K value works better and when there are little or none outliers/noise
+    smaller K works better. 
+</p>
+<p>
+    Lastly it is a good idea to choose odd number K value to avoid ties.
+</p>
+
+
+<p>
+    Finally, though KNN is simple to understand don't forget:
+    <ol>
+        <li>Need to choose K depending on your dataset using cross validation technique</li>
+        <li>Scale features so that one feature does not dominate others</li>
+        <li>Don't look at only accuracy score, consider other metrics such as sensitivity, specificity, f1 score, etc...</li>
+    </ol>
+</p>
+    <div id='reference' class="references">
+        <h5>References:</h5>
+        <ul>
+            <li><a href="https://math2510.coltongrainger.com/books/2017-bruce-and-bruce-pratical-statistics-for-data-scientists.pdf">Practical Statistics for Data Scientists 1st ed - Chapter 6 </a></li>
+            <li><a href="https://en.wikipedia.org/wiki/Euclidean_distance">Euclidean Distance</a></li>
+            <li><a href="https://en.wikipedia.org/wiki/Taxicab_geometry">Manhattan Distance</a></li>
+            <li><a href="https://www.youtube.com/watch?v=eg8DJYwdMyg&list=PLUl4u3cNGP619EG1wp0kT-7rDE_Az5TNd&index=13">MIT lecture - Classification using KNN</a></li>
+            <li><a href="https://towardsdatascience.com/top-10-model-evaluation-metrics-for-classification-ml-models-a0a0f1d51b9">10 classifier model metrics</a></li>
+        </ul>
+
+    </div>
+</body>
+
+</html>
