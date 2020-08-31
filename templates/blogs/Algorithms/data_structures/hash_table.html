@@ -69,19 +69,19 @@
         Direct access table is a table where each data has associated index therefore desired data could
          be directly reached with O(1) time complexity.
           For example, for each of your friend if you enter their name on your directory
-        all their informations show up, this is direct access table where name is the index.
+        all their informations show up, this is direct access table where name is an index.
         <br>
         In mathematical terms its an injective function or one-on-one mapping.
     </p>
     <p>You can easily see that since each index is used to get their data, 
         operations like inserting, deleting, searching all
         have time complexity of O(1). <br>
-        Then why not just use direct access table? 
+        Then seems to be the problem? 
     </p>
     <p>Even though all operations have exceptional small time complexity, it suffers largely 
-        from space complexity. Since for each friend there must be extra memory space for every index index that 
+        from space complexity. Since for each friend there must be an extra memory space for every index that 
         points to an information of a friend. As list of friends become larger there will be more memory space
-        that aren't used often.
+        that aren't often used.
     </p>
     <p> Say there are 100 students in a school where on average 50% of students study in the library, 
         if you want to create a library of 100 seats for each
@@ -103,7 +103,7 @@
         <li>when x = 51, h(51) = 51 mod 50 = 1 => student_51 gets assigned to desk_1</li>
     </ul> 
 
-    <p>So by using this hash function we are able to save our school from spending extra money on 50 desks.</p>
+    <p>So by using this hash function we are able reduce cost of 50 desks</p>
     <p>The reason it is called a hash table is because original key is transformed via hash function which is 
         now a key(index) of new table, hash table.
     </p>
@@ -124,20 +124,19 @@
                 </ul>
                  <u>disadvantages:</u>
                 <ul>
-                    <li>Since it uses linked list data structure lacks cache performance</li>
+                    <li>Since it uses linked list data structure, lacks cache performance</li>
                     <li>Maybe some parts of hash table are not used => space complexity increase w/o being used.</li>
-                    <li>In worst case, all key collide leading to O(n) search time.</li>
+                    <li>In worst case, all keys collide leading to O(n) search time.</li>
                 </ul>
             </li>
-            <li id="1-2"><b>Open addressing:</b> When collision happens, look for next empty space for storing 
+            <li id="1-2"><b>Open addressing:</b> When collision happens, look for next empty space to store 
                 index. 
                 <br>
                 When searching, first goto assigned index then keep moving onto next hash table's index until 
                 wanted index is reached or until there is empty index => information of that index doesn't exist.
                 <br><br>
                 One thing to note is its deletion operation. When a key is deleted, its index in hash table is
-                marked as "deleted". Insertion can happen in "deleted" index however when searching instead of 
-                stopping it skips "deleted" and keep searching.
+                marked as "deleted". Insertion can happen in "deleted" index however while searching, it skips "deleted" index.
                 <br><br>
                 <p>There are two types of Open addressing: Linear probing and Quadratic probing.</p>
                 <b id='1-2-1'>Linear Probing:</b> basically what I've described above. 
@@ -155,7 +154,7 @@
                                 Move to next empty index. All is good.
                             </li>
                             <li>key = 10, h(10), 10 mod 3 = 1, gets assigned to 1st index. Uh oh, collision!
-                                Move to next index. Uh on #2, collsion! Now it gets assgined to index 3.
+                                Move to next index. Uh oh another collsion! Now it gets assgined to empty index 3.
                             </li>
                         </ol>
                     </p>
@@ -181,8 +180,8 @@
                             adding (number_of_collision)^2 to key value.
                         </li>
                     </ol>
-                    We've just suffered from quadratic probing. It is because quadratic must 
-                    satisfy some requirements to assign key every spot. The requirement is that
+                    We've just suffered from quadratic probing. It is because quadratic probing must 
+                    satisfy some requirements to assign every key to every spot. The requirement is that
                     the table size must be:
                     <ul>
                         <li>Prime number</li>
@@ -202,8 +201,8 @@
         </ol>
     </p>
 
-    <p> In summary, to avoid space complexity we use hash functions <b>but</b> time complexity increase as collision happens so 
-    final goal is to crease hash table with hash function that minimize collisions.</p>
+    <p> In summary, to avoid increase of space complexity we use hash functions <b>but</b> time complexity increases if collision happens so 
+    we must create hash table with hash function that minimizes collision.</p>
     
 
     <div id='reference' class="references">
