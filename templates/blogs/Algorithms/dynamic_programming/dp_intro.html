@@ -56,7 +56,7 @@
         a problem, that can be broken down to subproblems and answers from previous subproblems are used recursively.
         This is similar to divide and conquer technique since they both break down problem into subproblems and approach
         smaller problems one by one however in order to increase performance with dynamic programming approach
-        a problem needs to has additional condition even though with out the 
+        a problem need to have additional condition even though with out the 
         condition a problem can be solved using dynamic programming it wouldn't be efficient.
     </p>
     <p>
@@ -65,7 +65,7 @@
         <ol>
             <li>Optimal substructure:
                 <p>
-                    larger/later subproblems require answers from previous sub problem's answers.
+                    larger/later subproblems require answers from previous sub problem.
                 </p>
             </li>
 
@@ -86,17 +86,10 @@
         </ol>
     </p>
     <p>
-        The reason for storing answers in a table is because since we use dynamic programming on questions that have overlapping sub-problems
-        and sub problem depend on previous answers we do not want to calculate already solved problem again. By storing it in a table we can 
-        avoid computing same problem again.
-    </p>
-    <p>
-        So if a problem does not satisfy conditions we could still use dynamic programming approach but there is no point
-        in storing answers of subproblems into a table, it would be total waste of space since those answers will not be used to solve 
-        other subproblems.
+        Storing answers from first occuring problems and use stored answer when same problem are being encountered.
     </p>
 
-    <p>Now that you know what dynamic programming is and where to use it, let's find nth <a href="https://en.wikipedia.org/wiki/Fibonacci_number" target="_">fibonacci number</a> using recursive
+    <p>Now that you know what dynamic programming is and how to use it, let's find nth <a href="https://en.wikipedia.org/wiki/Fibonacci_number" target="_">fibonacci number</a> using recursive
         algorithm then improve its performance using two different types of dynamic programming
         <b>Memoization</b> and <b>Tabulation</b>.
     </p>
@@ -121,17 +114,20 @@ def fib(n):
     
     <h6 id="1-1">Memoization</h6>
     <p>If we look carefully at our fibonacci tree above we can see there are duplicate values and current problem
-        relies on its previous problem's answer. Doesn't this sound like conditions we've described above? Yes it does
-        in fact satisfy conditions of dynamic programming question therefore let's increase performance by using
-        Memoization dynamic programming approach. Simply you are "Memoing" already solved problem so that you can just
-        take it out of your memo whenever you need it.
+        relies on its previous problem's answer. 
+        Doesn't this sound like it satisfy conditions we've described above? Yes it does
+         therefore let's increase performance by using
+        Memoization dynamic programming approach.
+        
+        It is an approach where you are "Memoing" already solved problem so that re-occuring problem's
+        answer can be found from memo.
     </p>
     <p>
         It is referred to as top-down approach since if you want to find F(n) then we goto F(n-1), F(n-2) then find 
         their previous numbers and so on until very bottom.
 
         Even though "dynamic programming" sounds fancy it's very simple. Memoization simply compute a subproblem, store it
-        in a dictionary and return, if it already exiests return that value.
+        in a dictionary and return, if it already exists return that value.
     </p>
     <pre>
 memo = {}
@@ -145,9 +141,11 @@ memo = {}
         We've just added 3 lines of code and improved performance from O(2^n) to O(n).
     </p>
     <p>
-        Note that in fibonacci number in order to find Fn we need to compute Fn-1, Fn-2, ... and so on. In recursive 
-        algorithm we needed to compute subprolblems couple of time however in memoization if we have computed it we never have to
-        compute it again therefore we only need to compute Fn-1, Fn-2, ... and so on only once giving us O(n).    </p>
+        Note that in fibonacci number in order to find Fn we need to compute Fn-1, Fn-2, ... and so on. 
+        In recursive algorithm we needed to compute subproblems multiple times however in memoization
+        if we have computed it we never have to
+        compute it again therefore we only need to compute Fn-1, Fn-2, ... F0
+        only once giving us O(n).    </p>
 
     <h6 id="1-2">Tabulation</h6>
     This is bottom-up version of dynamic programming, this time we start by computing F1, F2, F3, and up to Fn. Starting from the
@@ -162,10 +160,12 @@ def fib(n):
         fib_table[k] = f
     return fib_table[n]</pre>
     <p>
-        As you can see we are starting from k = 1 which will satisfy the base case therefore f = 1 and we store that 
-        into our fibonacci table, next k=2 and again f = 2 and store into table. Next k = 3 and since we've already
-        stored k=2,k=1 into our fibonacci table we simply use them to find F3. Again we can see that we only need to
-        compute f1,f2, ... upto Fn once therefore giving same time complexity as our top-down approach.
+        Starting from k = 1, f = 1 stored in fibonacci table,
+        next for k=2 stores f = 2 into fibonacci table. Next k = 3 and since we've already
+        stored k=2, k=1 into our fibonacci table we simply use them to find F3. Again we can
+         see that we only need to
+        compute f1,f2, ... upto Fn once therefore giving same time complexity
+         as our top-down approach.
     </p>
     <p>
         It seems like both top-down and bottom-up give same performance boost then why is there two methods? why not just 

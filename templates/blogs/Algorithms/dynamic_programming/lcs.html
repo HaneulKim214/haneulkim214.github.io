@@ -52,18 +52,22 @@
     
     <h5 id="1">What is LCS?</h5>
     <p>LCS stands for Longest Common Subsequence. First two words pretty much explain everything
-        there is to this concept therefor let me explain what subsequence is.
-        <br>
-        We know that substring is a continous subset of a string. for example if we have a str = "hello" its substring would be "hel", "llo", and much more
+        there is to this concept therefore let me explain what subsequence is.
+        <br><br>
+        We know that substring is a continous subset of a string. for example if we
+         have a str = "hello" its substring would be "hel", "llo", and so on
         but not "hlo" since the letters are not continuous.
     </p>
     <p>
-        Subsequence is similar to substring however it does not have to be continuos yet still have to be in same relative order. <br>
+        Subsequence is similar to substring however it does not have to be continuos 
+        yet <b> still have to be in same relative order</b>. 
+        <br>
         "hlo" would be subsequence of word "hello" however "lhe" is not since "h" must come first in the word "hello". <br>
-        So longest common subsequence is, within set of subsequences one that has most common letters.
+        <br>
+        Finally longest common subsequence is, within set of subsequences one that has most common letters.
     </p>
     <p>
-        Let's further understand this concept following a simple example:
+        Let's further understand this concept following an example:
         
     <pre>s1 = "sample"
 s2 = "maples"</pre>
@@ -72,14 +76,14 @@ s2 = "maples"</pre>
         hm... I really don't think this is a good example... Let me use my drawing skills to clarify this concept.
     </p>
     <p>
-        First I will create line connecting characters of our first subsequence set {m, p, l, e} notice that there are
+        First I will create line connecting characters of our first subsequence set {m, p, l, e} 
+        notice that there are
         no lines crossing which implies that all characters are in relative order.
     </p>
     <p>
         <img src="../photos/dp_lcs_1.png" alt="">
     </p>
     <p>
-        All sets of subsequences do not have crossing lines hence they are subsequence. <br>
         One might think that since there are same characters in each string longest subsequence is
         {s, a, m, p, l, e}
     </p>
@@ -124,8 +128,10 @@ def lcs(X, Y, m, n):
     <img src="../photos/lcs_1.png" alt="">
     
     <p>
-        left box represents lcs(X,Y,m, n-1) and right box represents lcs(X,Y, m-1,n). Note that running left box gets us to elif statement
-        therefore it has a value of 1 and runs the function again but this time moving back one position for both string, because they've matched already.
+        left box represents lcs(X,Y,m, n-1) and right box represents lcs(X,Y, m-1,n).
+         Note that running left box gets us to elif statement
+        therefore add value of 1 and run the function again but this time moving 
+        back one position for both string, because they've matched already.
         For the box on the left it goes once again into else statement.
     </p>
     <img src="../photos/lcs_2.png" alt="">
@@ -136,7 +142,7 @@ def lcs(X, Y, m, n):
         people who've read my previous blog on dynamic programming probably know what do to. 
     </p>
     <p>
-        Yes, there is no need to compute same questions twice => dynamic prgramming.
+        Yes, there is no need to compute same question twice => dynamic prgramming.
     </p>
     <p>So with naive recursive function you can see in worst case, where there is no subsequence it will have time complexity of 
         <b>O(2^n)</b> since at each node there will be a split.</p>
@@ -153,19 +159,21 @@ def lcs(X, Y, m, n):
         help us get started with filling our table. 
     </p>
     <p>
-        Now let's fill the rest. Starting from 1st row we compare letters in each column and if they match we add 1 to diagonal(upper left) value.
-        Else if they do not match we take maximum value of upper and left value.
+        Now let's fill the rest. Starting from 1st row we compare letters in each column
+         and if they match we add 1 to diagonal(upper left) value.
+        Else take maximum value of upper or left value.
     </p>
     <img src="../photos/lcs_tabulation_1.png" alt="">
     <p>
-        "m" != "s", we take maximum value of upper and left value which are 0, 0 therefore we take 0. <br>
+        "m" != "s", we take maximum value from upper or left value which are 0, 0
+         therefore we take 0. <br>
         "m" != "a", same as above, we get 0.<br>
         "m" == "m", match! add 1 + digonal(upper left) value so 1+0 = 1. <br>
         Now we simple repeat the process until we fill up all the cells. 
     </p>
     <img src="../photos/lcs_tabulation_2.png" alt="">
     <p>So we can see that highest value is 4 => lcs just like value we found using recursion but with O(mxn) time complexity.</p>
-    <p>But what is are the string that form longest common subsequence? That is what the red lines are for. 
+    <p>But what is the string that form longest common subsequence? That is what the red lines are for. 
         So starting from bottom right, we got value 4 from upper cell so we move up. Next we got 4 from adding 1 + upper left value
         so we move in that direction, repeat the process.
     </p>
@@ -173,11 +181,11 @@ def lcs(X, Y, m, n):
         Every diagonal line represents words that matches therefore e, l, p, a. "aple" is the longest common subsequence.
     </p>
     <p>
-        But notice in our first example we said that our lcs was "mple". Well they both are, we at (a,m) column you can
+        But notice in our first example we said that our lcs was "mple". Well they both are, at (a,m) column you can
         see that we could've went either direction, up or to the left and if we had gone upward we would have gotten "mple".
     </p>
 
-    <p>All the process we took to create a matrix above is in python code:</p>
+    <p>All the process we took to create a matrix above is in following python code:</p>
     <pre>
 def lcs(X,Y):
     m, n = len(X), len(Y)

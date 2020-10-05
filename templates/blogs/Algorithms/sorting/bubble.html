@@ -51,7 +51,7 @@
                 Again since 6 > 1 we switch positions. Repeat this process and we 6 will be positioned at the end of list, our first iterations is done.
             </li>
             <li>
-                In second iterations we repeat same process as before but now since 6 has been sorted from
+                In second iteration we repeat same process as before but now since 6 has been sorted from
                 above iteration our list to sort is [4, 1, 2, 5]. Now with smaller list repeat the process.
                 One thing to note, in 3rd comparision, comparing
                 4 with its adjacent element 5. They are already in proper position, in such case keep the position and 
@@ -65,7 +65,7 @@
 
     <p><b>Time Complexity:</b></p>
     <p>It is important to know how fast your algorithm is and even better if you know how to prove it.</p>
-    <p>From above example we start from list of 5 elements. In bubble sort we compare pick first element and 
+    <p>From above example we start from list of 5 elements. In bubble sort we choose first element and 
         compare it with all the elements, if that element is sorted repeat process but now ignore sorted elements thus there are 
         one less elements to compare.
     </p>
@@ -78,13 +78,14 @@
     <p>(n-1)(n-1+1)/2 = n(n-1)/2</p> 
     <p>Therefore our Time complexity is n^2/2 - n/2. But as data gets infinitely large n^2 will increase in 
         such faster pace that n/2 will have no effect in our formula so finally our
-         <nobr style="background-color: thistle;">Time complexity is O(n) = n^2
+         <nobr style="background-color: thistle;">Time complexity is O(n) = n^2.
         </nobr>
+          But be wary that in real life constant terms matter.
     </p>
 
     <p><b>Proof:</b></p>
     <p>Understanding how a formula is derived is key when learning something. It will not only stay intact for a longer time 
-        however you will start to appreciate mathematics and enjoy it.
+        however you will start to appreciate mathematics behind it and hopefully enjoy it.
     </p>
 
     <p>We want to prove how (n-1) + (n-2) + ... + 2 + 1 = n(n-1)/2.</p>
@@ -100,13 +101,14 @@
             <li>adding first elements together, 1 + (n-1) = n. </li>
             <li>add next elements and again you get, 2 + (n-2) = n. </li>
             <li>if you repeat the process it becomes n+ n + n ... + n</li>
-            <li>In each formula there are n-1 elements so n+n+n+...+n = n(n-1).</li>
+            <li>In each formula there are n-1 elements so n+n+n+...+n = n(n-1). There are n-1 number of n</li>
             <li>since we got that by adding two f(n), 2f(n) = n(n-1).</li>
         </ul>
-        <b>Now</b> to get divide both sides by 2 and you will get: <br>
+        <b>Now</b> divide both sides by 2 and you will get: <br>
         <nobr style="background-color: thistle;">
-            f(n) = n(n-1)/2.
+            f(n) = n(n-1)/2.   
         </nobr>
+        &nbsp Thus we've proved that (n-1) + (n-2) + ... + 2 + 1 = n(n-1)/2.
     </p>
 
 </div>
