@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Haneul Kim's - Stationarity Testing</title>
+	<link rel="stylesheet" href="../../../../bootstrap-4.1.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../../static/css/fixed.css">
+    <link rel="stylesheet" href="../../../../static/css/blogs.css">
+	<!-- Font Awesome libarary -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+
+<body data-spy="scroll" data-target="#navbarResponsive">
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+	<a class="navbar-brand" href="../../../../index.html#my-brain">
+		Take me back.
+    </a>
+</nav>
+<div class="projects">
+
+<div class="row project">
+<div class="col-md-3 side-bar">
+</div>
+    
+<!-- ------------------------------ All Content goes here -------------------- -->
+<div class="col-md-6">
+    <h2> Stationarity Testing</h1>
+        
+    <p class="date">date posted: 2020-10-19 </p>
+    <br>
+    <div class="toc">
+        <h5>Contents</h5>
+        <ul>
+            <li>
+                <a href="#1">Time series</a>
+            </li>
+            <li>
+                <a href="#2">ARIMA</a>
+            </li>
+            <li>
+                <a href="#reference">References</a>
+            </li>
+        </ul>
+    </div>
+
+    <br>
+    <br>
+
+    <h5 id="1">Time series</h5>
+    <p>
+        Data points that are observed at specified times usually at equal intervals are referred to as time series data. Time series
+        is very important in real life since most data are measured in time consequtive manner. Ex: Stock prices being recorded every second.
+    </p>
+    <p>
+        Time series analysis are used to predict the future. For example using past 12 months sales data to predict next n month sales therefore
+        we could act accordingly.
+    </p>
+    <p>
+        Four components that explains time series data:
+        <ol>
+            <li><b>Trend</b> : Upward, downward, or stationary. If your company sales increase every year it is showing an upward trend.</li>
+            <li><b>Seaonality</b>: Repeating pattern in certain period. Ex: difference between summer and winter. Also includes special holidays</li>
+            <li><b>Irregularity</b>: External factors that affect time series data such as Covid, natural disasters.</li>
+            <li><b>Cyclic</b>: repeating up and down time series data.</li>
+        </ol>
+    </p>
+
+
+    <br><br>
+
+    <h5 id="2">ARIMA</h5>
+    <p>
+        <b>A</b>uto <b>R</b>egressive <b>I</b>ntegrated <b>M</b>oving <b>A</b>verage
+        <br>
+        a.k.a Box-Jenkins method.
+        <ul>
+            <li>It is class of models that forecase using own past values: lag values and lagged forecast errors.</li>
+            <li>AR model uses lag values to forecast</li>
+            <li>MA model uses lagged forecast errors to forecast</li>
+            <li>Two models Integrated becomes ARIMA</li>
+            <li>Consists of three parameters: <b>p</b>, <b>q</b>, <b>d</b></li>
+        </ul>
+    </p>
+    <p>
+        It is a naive model since it assumes time series data are:
+        <ul>
+            <li>"non-seasonal" meaning different seasons do not affect its values. When there exists seasonality we use SARIMA short for Seasonal ARIMA model</li>
+            <li>Has no Irregularity</li>
+        </ul>
+    </p>
+    <br>
+
+    
+    <h6 id="2-1">Parameters</h6>
+    <b>p</b> - order of AR term <br>
+    <p>
+        &emsp; Number of lags of Y to be used as predictors.
+         In other words, If you are trying to predict June's sale how many previous(lag) month's data are you going to use?
+    </p>
+    <br><hr/>
+    
+    <b>q</b> - order of MA term <br>
+    <p>
+        &emsp; Number of lagged forecast errors -> how many past forecast errors will you use?
+    </p>
+    <br><hr/>
+    
+    <b>d</b> - Minimum differncing period <br>
+    <p>
+        &emsp; Minimum number of differencing needed to make time series data <b>stationary</b>.
+         Already stationary data would have <b>d</b> = 0.
+    </p>
+    <p>
+        What is stationary?
+        <br>
+        Time series data considered stationary if it contains:
+        <ol>
+            <li>constant mean</li>
+            <li>constant variance</li>
+            <li>Autocovariance that do not depend on time</li>
+        </ol>
+    </p>
+    <p>
+        In most cases time series data increase as time progresses therefore if you take consecutive segments it will not have constant mean.
+        Below graph is Nvidia stock prices which is an example of <b>non-stationary</b> data. Segment into n periods and take means, they won't be
+        the same.
+    </p>
+    <img src="../../../blog materials/statistics/nonstationary_data_nvidia_prices.png" alt="">
+    <p>
+        Stationarity is important since we need our time series data to be stationary
+        before using models to forecast future. 
+        <br>Often times it is non-stationary therefore we <b>difference</b> it, subtract previous value from current value.
+    </p>
+    <p>
+        Since it is important to have stationary time series data, we need a way to test it.<br>
+         Common methods of testing whether time series data is stationary are:
+         <a href="https://en.wikipedia.org/wiki/Augmented_Dickey%E2%80%93Fuller_test">Augmented Dickey Fuller(ADF) Test</a>
+    </p>
+    <br><hr />
+
+    <br><br><br>
+    <div id='reference' class="references">
+        <h5>References:</h5>
+        <ul>
+            <li><a href="https://www.machinelearningplus.com/time-series/arima-model-time-series-forecasting-python/#:~:text=ARIMA%2C%20short%20for%20'Auto%20Regressive,used%20to%20forecast%20future%20values">Complete Guide to ARIMA </a></li>
+            <li><a href="https://www.youtube.com/watch?v=e8Yw4alG16Q&t=2047s&ab_channel=edureka!">Time Series Analysis in Python </a></li>
+            <li><a href="https://towardsdatascience.com/almost-everything-you-need-to-know-about-time-series-860241bdc578">Almost Everything You need to Know about time series</a></li>
+        </ul>
+
+    </div>
+</body>
+
+</html>
