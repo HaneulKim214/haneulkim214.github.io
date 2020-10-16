@@ -41,6 +41,7 @@
                 </ul>
             </li>
             <li><a href="#2">Cumulative Binomial distribution</a></li>
+            <li><a href="#3">Limitation</a></li>
             <li><a href="#reference">References</a></li>
         </ul>
     </div>
@@ -52,15 +53,16 @@
     <p>
         Even though I am a math major I find statistics more fun to study since 
         many theorems appear in real life unlike mathematics where most problems are abstract.
-        One of topic in statistics we are going to talk about is <b>Binomial distribution.</b> When young 
-        most people probably had been questioned "What is the proability of flipping 3 heads in 5 flips?" or
+        Today we will to talk about is <b>Binomial distribution</b> which is can be used to solve common problems in real life.
+         When young,
+        most people probably have been questioned "What is the proability of flipping 3 heads in 5 flips?" or
          something similar. 
         Not many knew the answer or even if they did they could not solve similar questions that involved higher number 
         of trials and successes.
     </p>
 
     <p>
-        This is exactly where <b>Binomial distribution </b>can help. It is one type of discrete probability distribution, for those of you 
+        This is exactly where <b>Binomial distribution </b>can help. It is special type of discrete probability distribution, for those of you 
         who do not know that discrete proability distribution is, refer to previous blog on <a href="geo_dist.html">Geometric distribution.</a>
     </p>
     <p>
@@ -73,7 +75,7 @@
     <p>
         Three conditions must be satisfied for probabilities of random variables to exhibit behavior of binomial distribution.
         <ol>
-            <li>All trials must be independent and all trials have equal success rate</li>
+            <li>All trials must be independent and have equal success rate</li>
             <li>Each trial is binomial experiment (having only two outcomes)</li>
             <li>Fixed number of trials.</li>
         </ol>
@@ -82,7 +84,7 @@
     <h6 id="1-1">Deriving formula for binomial distribution</h6>
     <p>
         Let's say a I have 30% chance of making a 3-pointer, which automatically assign failure percentage of 70%. 
-        I want to know the probability of making two 3-pointers in 5 tries.
+        I want to know the probability of making 2/5 3-pointers.
     </p>
     <p>
         Probability of scoring 2 shots and missing 3 shots can be interpreted as (0.3)(0.3)(0.7)(0.7)(0.7) since probability of scoring is 0.3 and missing is 0.7. 
@@ -90,9 +92,9 @@
         SMMMS, SMMSM, SMSMM, and so on... 
     </p>
     <p>
-        So probability of scoring 2/5 must be multiplied by number of ways it could be scored.
+        <b>So probability of scoring 2/5 must be multiplied by number of ways it could be scored</b>.
         <br><br>
-        Number of ways two 3-pointer could be scored can be calculated using <a href="https://www.youtube.com/watch?v=p8vIcmr_Pqo">combinatorics</a>
+        Number of ways two 3-pointer could be scored can be calculated using <a href="https://www.youtube.com/watch?v=p8vIcmr_Pqo">combinatorics</a>.
         <img src="../../../../blog materials/statistics/combination.png" alt="">
     </p>
     <p>There are 10 different ways two 3-pointers can be made in 5 tries. Now multiplying it with probability of making 2 shots and missing 3 shots
@@ -108,7 +110,7 @@
     <p>
         We know that probability of success is often denoted as <b>p</b> and failure as <b>q</b> = 1-p.
     </p>
-    <p>Combining them we get generalized formula for binomial distribution.<br>
+    <p style="color:rgb(109, 163, 109)">Combining them we get generalized formula for binomial distribution.<br>
          <img src="../../../../blog materials/statistics/binom_dist_formula.png" alt="">
     </p>
 
@@ -117,7 +119,7 @@
     <p><b>Q:</b> Find the proability of getting 2 heads in 6 coin flips?</p>
     <p>
         n = 6, total number of trials. Flipping heads is considered a success meaning flipping tail is considered failure. Each trial is independent and 
-        has equal probability of success therefore it satisfied two conditions of binomial distribution. Lastly since we are working with fixed 
+        has equal probability of success therefore it satisfies first two conditions of binomial distribution. Lastly since we are working with fixed 
         number of trials we satisfy all three conditions allowing us to use binomial distribution formula.
     </p>
     <img src="../../../../blog materials/statistics/binom_dist_example.png" alt="">
@@ -133,15 +135,20 @@
         To find probability of getting 3 heads or less we simply add all probabilities of random variable 0,1,2,and 3.<br>
         <img src="../../../../blog materials/statistics/cum_binom_dist.png" alt="">
     </p>
+
+    <h5 id="3">Limitation</h5>
     <p>Very simple right? Now we know how powerful binomial distribution is lets look at some of its limitations.</p>
     <p>
-        Let's say you want to find probability of getting less than or equal to 50 heads in 100 coin flips. It would be same as before however 
-        there are 51 different probabilities you need to calculate and sum together which can be very cumbersome and prone to error. 
-        As number of trials and successes gets larger it would be hard if not impossible to calculate without a program.
+        Let's say you want to find probability of getting less than or equal to 50 heads in 100 coin flips.
+         We could do it by applying stuff we just learned however 
+        there are 51 different probabilities you need to calculate and sum together which can be very 
+        cumbersome and prone to error. 
+        As number of trials and successes gets larger it would be hard if not impossible to calculate without a program. In 2020,
+        we have computers however they did not during developmet of statistics therefore they needed a way to solve this limitation.
     </p>
 
     <p>
-        Next, I will explain how limitation of binomial distribution can be alleviated by help of normal distribution. 
+        Next, I will explain how limitations of binomial distribution can be alleviated by help of normal distribution. 
     </p>
     <div id='reference' class="references">
         <h5>References:</h5>

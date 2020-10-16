@@ -38,12 +38,12 @@
                 <a href="#1">What is Poisson distribution?</a>
             </li>
             <li>
-                <a href="#2">Example</a>
+                <a href="#2">Example question</a>
             </li>
             <li>
                 <a href="#3">Poisson distribution to approximate binomial distribution</a>
                 <ul>
-                    <li>Example</li>
+                    <li>Example question 2</li>
                 </ul>
             </li>
             <li>
@@ -69,14 +69,14 @@
             with space range I've just mentioned. -->
     </p>
     <p>
-        Just like other distributions we've looked at in order to use poisson ditribution formula our data must create 
+        Just like other distributions we've looked at in order to use poisson distribution formula our data must create 
         poisson distribution and in order to do that two conditions must be met:
 
         <ol>
             <li>Events occurring within a range(time or space) must be independent. <br>
                 &nbsp; ex: % of machine breaking within <b>one week</b> where breaking does not affect next break.
             </li>
-            <li>Mean number of event happening within given range must be <b>known</b> <br>
+            <li>Mean number of event happening within given range must be known <br>
                 &nbsp; ex: on average machine breaks <b>3</b> times within a week.
             </li>
         </ol>
@@ -89,12 +89,12 @@
     </p>
     <p>
         One more thing to note is expected value and variance of Poisson distribution.<br>
-        E(X) refers number of event occurring in given range which is simply &lambda;. Similarily Var(X) of Poisson 
+        E(X) refers to number of event occurring in given range which is simply &lambda;. Similarily Var(X) of Poisson 
         distribution is &lambda;. <br><br>
         E(X) = Var(X) = &lambda; in Poisson distribution.
     </p>
-    <br><br>
-    <h5 id="2">Example</h5>
+    <br>
+    <h5 id="2">Example question</h5>
     <p>
         Q: Find the probability of 3 cars passing a highway checkpoint in 60 seconds where on average
         10 cars pass highway checkpoint in 60 seconds.
@@ -121,15 +121,15 @@
         As mentioned in the beginning Poisson distribution can be applied to higher dimensions which makes it very powerful tool 
         for solving real world problems.
     </p>
-    <br><br>
+    <br><hr>
     <h5 id="#3">Poisson distribution to approximate binomial distribution</h5>
     <p>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         Another use case of Poisson distribution is that we could use it to approximate value of binomial distribution.
     </p>
     <p>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Why?</b> Binomial distribution formula require calculation of high number of factorials which can be hard for calculators
-        to take in or fit in a screen.
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Why?</b> Binomial distribution formula require calculation of 
+        high number factorials making calculations hard.
         
         <br><br>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -138,14 +138,15 @@
         <br><br>
 
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <b>How?</b> In binomial distribution problem we would be given values for n and p. E(X) = np therefore we can 
-        simply substitute np with &lambda;. E(X) = np = &lambda;, expected value in Poisson distribution.
+        <b>How?</b> In binomial distribution problem we would be given values for n, p and have E(X) = np therefore we can 
+        simply substitute np with &lambda; if we want to substitute binomial distribution with
+        poisson distribution. E(X) = np = &lambda;, expected value in Poisson distribution.
     </p>
 
-    <p>Now we know why, when and how to use Poisson distribution inplace of Binomial distribution lets go over with an example.</p>
-    <h6 id="3-1">Example</h6>
+    <p>Now we know why, when and how lets go over with an example.</p>
+    <h6 id="3-1">Example question 2</h6>
     <p>
-        Q: you are given a test with 60 questions where for each question your probability of answering correctly is 0.05, What 
+        Q: you are given a test with 60 questions where for each question your probability of answering correctly is 0.05 :( , What 
         is the probability that you will get 5 questions correct? 
     </p>
     <p>
@@ -156,10 +157,10 @@
         Notice in factorial calculation numbers are pretty large and as n gets higher and higher it will become larger therefore 
         much harder to fit into calculator and definitely not easy to do by hand.
          Even though there are computers that solve factorials efficiently it is a good practice to
-        know how we could use simpler method. 
+        know how we could use simpler method :). 
     </p>
     <p>
-        This time we will solve using Poisson distribution. We know E(X) = np = &lambda; therefore E(X) = 60*0.05 = 3.
+        This using Poisson distribution. We know E(X) = np = &lambda; therefore E(X) = 60*0.05 = 3.
         <br>
         <img src="../../../../blog materials/statistics/pois_binomial_pois_ex1.png" alt="">
     </p>
@@ -170,7 +171,8 @@
         also means it will look more like Binomial distribution as n gets largers and p gets smaller. <br>
     </p>
     <p>
-        This time I didn't explain how Poisson distribution density function was derived as it require deep mathematical understanding
+        This time I didn't explain how Poisson distribution density function was 
+        derived as it requires deep mathematical understanding
         however I will try to post it for those interested (once I understand it myself).
     </p>
     <div id='reference' class="references">
